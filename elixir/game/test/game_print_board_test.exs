@@ -1,4 +1,4 @@
-defmodule GameTest do
+defmodule Game_PrintBoard_Test do
   use ExUnit.Case
   doctest Game
 
