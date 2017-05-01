@@ -4,11 +4,9 @@ defmodule Game_GoldenMaster_Test do
   import ExUnit.CaptureIO
 
   test "match error when wrong input is provided" do
-    capture_io([input: "wrong_input", capture_prompt: false], fn ->
       assert_raise MatchError, fn ->
-        Game.start_game
+        game("wrong_input")
       end
-    end)
   end
 
   test "fast game over golden master" do
