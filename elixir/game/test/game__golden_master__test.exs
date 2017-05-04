@@ -1,4 +1,4 @@
-defmodule Game_Play_Test do
+defmodule Game_GoldenMaster_Test do
   use ExUnit.Case
 
   import ExUnit.CaptureIO
