@@ -18,18 +18,18 @@ defmodule Game_Tie_Test do
       6,7,8]) == false
   end
 
-  test "tie returns false when board has free spaces" do
+  test "tie returns false when board has free spaces!" do
     assert Game.tie([
-      X,1,O,
-      3,O,5,
-      6,X,8]) == false
+      "X",1,"O",
+       3,"O",5,
+       6,"X",8]) == false
   end
 
-  test "full board real tie returns.... false!?" do
+  test "full tie board returns true" do
     assert Game.tie([
-      X,O,X,
-      X,O,X,
-      O,X,O]) == false
+      "X","O","X",
+      "X","O","X",
+      "O","X","O"]) == true
   end
 
 end
