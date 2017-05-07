@@ -77,9 +77,8 @@ defmodule Game do
     end
   end
 
-  def tie(board) do
-    free_spaces = Enum.any?(board, fn(x) -> x != "X" && x != "O" end)
-    !free_spaces
+  defp tie(board) do
+    TicTacToe.Referee.tie?(board)
   end
 
   defp game_over(board) do
