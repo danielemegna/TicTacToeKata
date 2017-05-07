@@ -45,36 +45,11 @@ defmodule Game do
   end
 
   def get_computers_turn(board) do
-    if Enum.at(board, 4) == 4 do
-      new_board = List.update_at(board, 4, fn(x) -> "O" end)
-      print_board(new_board)
-      new_board
-    else
-      comp_turn = evaluate(board)
-      new_board = List.update_at(board, comp_turn, fn(x) -> "O" end)
-      print_board(new_board)
-      new_board
-    end
-  end
+    comp_turn = TicTacToe.MediumPlayer.next_move(board)
 
-  def evaluate(board) do
-    indexed_board = Enum.with_index(board, 0)
-    filtered = Enum.filter(indexed_board, fn({value, _}) -> value != "X" && value != "O" end)
-    #choose a space for next move
-    available_moves = Enum.map(filtered, fn({value, index}) -> index end)
-    get_best_move(available_moves, board)
-  end
-
-  def get_best_move([first|[]], board) do
-    first
-  end
-
-  def get_best_move([first_index|rest], board) do
-    cond do
-      game_over(List.update_at(board, first_index, fn(x) -> "O" end)) -> first_index
-      game_over(List.update_at(board, first_index, fn(x) -> "X" end)) -> first_index
-      true -> get_best_move(rest, board)
-    end
+    new_board = List.update_at(board, comp_turn, fn(x) -> "O" end)
+    print_board(new_board)
+    new_board
   end
 
   defp tie(board) do
