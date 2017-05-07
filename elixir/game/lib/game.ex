@@ -1,14 +1,10 @@
 defmodule Game do
+  alias TicTacToe.ConsoleBoardPrinter, as: BoardPrinter
+
   def start_game do
     b = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     print_board(b)
     play_moves(b, "X")
-  end
-
-  def print_board(b) do
-    IO.write("\n--------------\n\n")
-    IO.write("  #{Enum.at(b, 0)}   #{Enum.at(b, 1)}   #{Enum.at(b, 2)}\n ===+===+=== \n  #{Enum.at(b, 3)}   #{Enum.at(b, 4)}   #{Enum.at(b, 5)}\n ===+===+=== \n  #{Enum.at(b, 6)}   #{Enum.at(b, 7)}   #{Enum.at(b, 8)}\n")
-    IO.write("\n--------------\n\n")
   end
 
   def play_moves(board, player) do
@@ -97,4 +93,9 @@ defmodule Game do
     Enum.at(board, 0) == Enum.at(board, 4) && Enum.at(board, 4) == Enum.at(board, 8) ||
     Enum.at(board, 2) == Enum.at(board, 4) && Enum.at(board, 4) == Enum.at(board, 6)
   end
+
+  defp print_board(b) do
+    BoardPrinter.print(b)
+  end
+
 end

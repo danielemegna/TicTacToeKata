@@ -1,6 +1,5 @@
-defmodule Game_PrintBoard_Test do
+defmodule ConsoleBoardPrinter_Test do
   use ExUnit.Case
-  doctest Game
 
   import ExUnit.CaptureIO
 
@@ -17,7 +16,7 @@ defmodule Game_PrintBoard_Test do
       "\n--------------\n\n"
 
     assert capture_io(fn ->
-      Game.print_board([])
+      TicTacToe.ConsoleBoardPrinter.print([])
     end) == expected
   end
 
@@ -34,7 +33,7 @@ defmodule Game_PrintBoard_Test do
       "\n--------------\n\n"
 
     assert capture_io(fn ->
-      Game.print_board([0, 1, 2, 3, 4, 5, 6, 7, 8])
+      TicTacToe.ConsoleBoardPrinter.print([0, 1, 2, 3, 4, 5, 6, 7, 8])
     end) == expected
   end
 end
