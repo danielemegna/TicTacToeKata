@@ -1,5 +1,7 @@
 # Game
 
+[![Build Status](https://travis-ci.org/danielemegna/TicTacToeKata.svg?branch=master)](https://travis-ci.org/danielemegna/TicTacToeKata)
+
 Play the game with iex -S mix
 > Game.start_game
 

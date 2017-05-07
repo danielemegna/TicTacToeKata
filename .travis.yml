@@ -1,0 +1,4 @@
+language: elixir
+elixir:
+  - 1.4.2
+before_install: cd $TRAVIS_BUILD_DIR
