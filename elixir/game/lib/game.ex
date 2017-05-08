@@ -32,17 +32,17 @@ defmodule Game do
   defp get_humans_turn(board) do
     move = TicTacToe.HumanPlayer.next_move(board)
 
-    new_board = List.update_at(board, move, fn(x) -> "X" end)
-    print_board(new_board)
-    new_board
+    updated_board = List.update_at(board, move, fn(x) -> "X" end)
+    print_board(updated_board)
+    updated_board
   end
 
   defp get_computers_turn(board) do
-    comp_turn = TicTacToe.MediumPlayer.next_move(board)
+    move = TicTacToe.MediumPlayer.next_move(board)
 
-    new_board = List.update_at(board, comp_turn, fn(x) -> "O" end)
-    print_board(new_board)
-    new_board
+    updated_board = List.update_at(board, move, fn(x) -> "O" end)
+    print_board(updated_board)
+    updated_board
   end
 
   defp tie(board) do
