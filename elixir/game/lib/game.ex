@@ -29,7 +29,7 @@ defmodule Game do
     end
   end
 
-  def get_humans_turn(board) do
+  defp get_humans_turn(board) do
     move = TicTacToe.HumanPlayer.next_move(board)
 
     new_board = List.update_at(board, move, fn(x) -> "X" end)
@@ -37,7 +37,7 @@ defmodule Game do
     new_board
   end
 
-  def get_computers_turn(board) do
+  defp get_computers_turn(board) do
     comp_turn = TicTacToe.MediumPlayer.next_move(board)
 
     new_board = List.update_at(board, comp_turn, fn(x) -> "O" end)
