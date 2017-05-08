@@ -30,18 +30,11 @@ defmodule Game do
   end
 
   def get_humans_turn(board) do
-    IO.write("Enter [0-8]")
-    next_move = IO.gets(">")
-    {num, _} = Integer.parse(next_move)
+    move = TicTacToe.HumanPlayer.next_move(board)
 
-    # if its a free space
-    if Enum.at(board, num) != "X" && Enum.at(board, num) != "O" do
-      updated_board = List.update_at(board, num, fn(x) -> "X" end)
-      print_board(updated_board)
-      updated_board
-    else
-      get_humans_turn(board)
-    end
+    new_board = List.update_at(board, move, fn(x) -> "X" end)
+    print_board(new_board)
+    new_board
   end
 
   def get_computers_turn(board) do
