@@ -1,6 +1,11 @@
 defmodule Game do
   alias TicTacToe.ConsoleBoardPrinter, as: BoardPrinter
 
+  @players %{
+    "X" => TicTacToe.HumanPlayer,
+    "O" => TicTacToe.MediumPlayer
+  }
+
   def start_game do
     b = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     print_board(b)
@@ -16,10 +21,11 @@ defmodule Game do
   end
 
   def choose_move(board, player) do
-    cond do
-      player == "X" -> get_humans_turn(board)
-      player == "O" -> get_computers_turn(board)
-    end
+    move = @players[player].next_move(board)
+
+    updated_board = List.replace_at(board, move, player)
+    print_board(updated_board)
+    updated_board
   end
 
   def toggle_player(player) do
@@ -27,22 +33,6 @@ defmodule Game do
       "O"
     else "X"
     end
-  end
-
-  defp get_humans_turn(board) do
-    move = TicTacToe.HumanPlayer.next_move(board)
-
-    updated_board = List.update_at(board, move, fn(x) -> "X" end)
-    print_board(updated_board)
-    updated_board
-  end
-
-  defp get_computers_turn(board) do
-    move = TicTacToe.MediumPlayer.next_move(board)
-
-    updated_board = List.update_at(board, move, fn(x) -> "O" end)
-    print_board(updated_board)
-    updated_board
   end
 
   defp tie(board) do
