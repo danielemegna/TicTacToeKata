@@ -1,8 +1,19 @@
 defmodule TicTacToe.ConsoleBoardPrinter do
+  alias TicTacToe.Board
 
   def print(board) do
     IO.write("\n--------------\n\n")
-    IO.write("  #{Enum.at(board, 0)}   #{Enum.at(board, 1)}   #{Enum.at(board, 2)}\n ===+===+=== \n  #{Enum.at(board, 3)}   #{Enum.at(board, 4)}   #{Enum.at(board, 5)}\n ===+===+=== \n  #{Enum.at(board, 6)}   #{Enum.at(board, 7)}   #{Enum.at(board, 8)}\n")
+    IO.write("  #{Board.at(board, 0)}   ")
+    IO.write("#{Board.at(board, 1)}   ")
+    IO.write("#{Board.at(board, 2)}")
+    IO.write("\n ===+===+=== \n  ")
+    IO.write("#{Board.at(board, 3)}   ")
+    IO.write("#{Board.at(board, 4)}   ")
+    IO.write("#{Board.at(board, 5)}")
+    IO.write("\n ===+===+=== \n  ")
+    IO.write("#{Board.at(board, 6)}   ")
+    IO.write("#{Board.at(board, 7)}   ")
+    IO.write("#{Board.at(board, 8)}\n")
     IO.write("\n--------------\n\n")
   end
 
