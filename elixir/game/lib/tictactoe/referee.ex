@@ -2,8 +2,7 @@ defmodule TicTacToe.Referee do
   alias TicTacToe.Board
 
   def tie?(board) do
-    free_spaces = Enum.any?(board, fn(x) -> x != "X" && x != "O" end)
-    !free_spaces
+    Board.full?(board)
   end
 
   def game_over?(board) do
