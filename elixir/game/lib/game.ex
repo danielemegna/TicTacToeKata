@@ -1,5 +1,6 @@
 defmodule Game do
   alias TicTacToe.ConsoleBoardPrinter, as: BoardPrinter
+  alias TicTacToe.Board
 
   @players %{
     "X" => TicTacToe.HumanPlayer,
@@ -36,15 +37,15 @@ defmodule Game do
   end
 
   defp tie(board) do
-    TicTacToe.Referee.tie?(board)
+    TicTacToe.Referee.tie?(%Board{cells: board})
   end
 
   defp game_over(board) do
-    TicTacToe.Referee.game_over?(board)
+    TicTacToe.Referee.game_over?(%Board{cells: board})
   end
 
   defp print_board(b) do
-    BoardPrinter.print(b)
+    BoardPrinter.print(%Board{cells: b})
   end
 
 end
