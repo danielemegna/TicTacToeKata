@@ -14,4 +14,12 @@ defmodule TicTacToe.Board do
     Enum.at(board.cells, index)
   end
 
+  def full?(board) do
+    !has_free_cells?(board)
+  end
+
+  defp has_free_cells?(board) do
+    Enum.any?(board.cells, fn(x) -> is_integer(x) end)
+  end
+
 end

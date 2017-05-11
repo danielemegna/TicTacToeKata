@@ -30,4 +30,26 @@ defmodule Board_Test do
     assert Board.at(board, 2) == 2
   end
 
+  test 'empty board is not full' do
+    assert Board.full?(%Board{}) == false
+  end
+
+  test 'not full marked board should.. not be full' do
+    board = %Board{}
+      |> Board.mark(0, "X")
+      |> Board.mark(2, "O")
+      |> Board.mark(4, "X")
+
+    assert Board.full?(board) == false
+  end
+
+  test 'full board should.. be full' do
+    board = %Board{cells: [
+      "X","O","X",
+      "O","X","O",
+      "O","X","O"]}
+
+    assert Board.full?(board) == true
+  end
+
 end
