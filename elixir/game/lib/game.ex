@@ -14,7 +14,7 @@ defmodule Game do
     play_moves(board, "X")
   end
 
-  def play_moves(board, player) do
+  defp play_moves(board, player) do
     if(Referee.game_over?(board) || Referee.tie?(board)) do
       IO.write("Game Over")
     else
@@ -22,7 +22,7 @@ defmodule Game do
     end
   end
 
-  def choose_move(board, player) do
+  defp choose_move(board, player) do
     move = @players[player].next_move(board)
 
     updated_board = Board.mark(board, move, player)
@@ -30,7 +30,7 @@ defmodule Game do
     updated_board
   end
 
-  def toggle_player(player) do
+  defp toggle_player(player) do
     if(player == "X") do
       "O"
     else "X"
