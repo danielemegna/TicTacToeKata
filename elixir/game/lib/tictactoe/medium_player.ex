@@ -9,10 +9,6 @@ defmodule TicTacToe.MediumPlayer do
     end
   end
 
-  defp center_move_available?(board) do
-    Enum.at(board, 4) == 4
-  end
-
   defp evaluate(board) do
     available_moves = available_moves_in(board)
     get_best_move(available_moves, board)
