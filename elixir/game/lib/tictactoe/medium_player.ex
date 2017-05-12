@@ -10,14 +10,8 @@ defmodule TicTacToe.MediumPlayer do
   end
 
   defp evaluate(board) do
-    available_moves = available_moves_in(board)
+    available_moves = Board.available_moves(%Board{cells: board})
     get_best_move(available_moves, board)
-  end
-
-  defp available_moves_in(board) do
-    Enum.with_index(board)
-      |> Enum.filter(fn {value, _} -> value != "X" && value != "O" end)
-      |> Enum.map(fn {_, index} -> index end)
   end
 
   defp get_best_move([first|[]], _) do
