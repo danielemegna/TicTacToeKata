@@ -8,7 +8,7 @@ defmodule Game do
   }
 
   def start_game do
-    b = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    b = %Board{}
     print_board(b)
     play_moves(b, "X")
   end
@@ -22,9 +22,9 @@ defmodule Game do
   end
 
   def choose_move(board, player) do
-    move = @players[player].next_move(%Board{cells: board })
+    move = @players[player].next_move(board)
 
-    updated_board = List.replace_at(board, move, player)
+    updated_board = Board.mark(board, move, player)
     print_board(updated_board)
     updated_board
   end
@@ -37,15 +37,15 @@ defmodule Game do
   end
 
   defp tie(board) do
-    TicTacToe.Referee.tie?(%Board{cells: board})
+    TicTacToe.Referee.tie?(board)
   end
 
   defp game_over(board) do
-    TicTacToe.Referee.game_over?(%Board{cells: board})
+    TicTacToe.Referee.game_over?(board)
   end
 
   defp print_board(b) do
-    BoardPrinter.print(%Board{cells: b})
+    BoardPrinter.print(b)
   end
 
 end
