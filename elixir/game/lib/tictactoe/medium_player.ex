@@ -4,13 +4,13 @@ defmodule TicTacToe.MediumPlayer do
 
   def next_move(board) do
     cond do
-      Board.free?(%Board{cells: board}, 4) -> 4
+      Board.free?(board, 4) -> 4
       true -> evaluate(board)
     end
   end
 
   defp evaluate(board) do
-    available_moves = Board.available_moves(%Board{cells: board})
+    available_moves = Board.available_moves(board)
     get_best_move(available_moves, board)
   end
 
@@ -20,8 +20,8 @@ defmodule TicTacToe.MediumPlayer do
 
   defp get_best_move([first_index|rest], board) do
     cond do
-      Referee.game_over?(%Board{cells: List.update_at(board, first_index, fn(_) -> "O" end)}) -> first_index
-      Referee.game_over?(%Board{cells: List.update_at(board, first_index, fn(_) -> "X" end)}) -> first_index
+      Referee.game_over?(Board.mark(board, first_index, "O")) -> first_index
+      Referee.game_over?(Board.mark(board, first_index, "X")) -> first_index
       true -> get_best_move(rest, board)
     end
   end

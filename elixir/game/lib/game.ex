@@ -22,7 +22,7 @@ defmodule Game do
   end
 
   def choose_move(board, player) do
-    move = @players[player].next_move(board)
+    move = @players[player].next_move(%Board{cells: board })
 
     updated_board = List.replace_at(board, move, player)
     print_board(updated_board)
