@@ -1,6 +1,7 @@
 defmodule Game do
   alias TicTacToe.ConsoleBoardPrinter, as: BoardPrinter
   alias TicTacToe.Board
+  alias TicTacToe.Referee
 
   @players %{
     "X" => TicTacToe.HumanPlayer,
@@ -8,13 +9,13 @@ defmodule Game do
   }
 
   def start_game do
-    b = %Board{}
-    print_board(b)
-    play_moves(b, "X")
+    board = %Board{}
+    BoardPrinter.print(board)
+    play_moves(board, "X")
   end
 
   def play_moves(board, player) do
-    if(game_over(board) || tie(board)) do
+    if(Referee.game_over?(board) || Referee.tie?(board)) do
       IO.write("Game Over")
     else
       play_moves(choose_move(board, player), toggle_player(player))
@@ -25,7 +26,7 @@ defmodule Game do
     move = @players[player].next_move(board)
 
     updated_board = Board.mark(board, move, player)
-    print_board(updated_board)
+    BoardPrinter.print(updated_board)
     updated_board
   end
 
@@ -34,18 +35,6 @@ defmodule Game do
       "O"
     else "X"
     end
-  end
-
-  defp tie(board) do
-    TicTacToe.Referee.tie?(board)
-  end
-
-  defp game_over(board) do
-    TicTacToe.Referee.game_over?(board)
-  end
-
-  defp print_board(b) do
-    BoardPrinter.print(b)
   end
 
 end
