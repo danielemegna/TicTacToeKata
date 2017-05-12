@@ -18,6 +18,12 @@ defmodule TicTacToe.Board do
     !has_free_cells?(board)
   end
 
+  def available_moves(board) do
+    Enum.with_index(board.cells)
+      |> Enum.filter(fn {value, _} -> is_integer(value) end)
+      |> Enum.map(fn {_, index} -> index end)
+  end
+
   defp has_free_cells?(board) do
     Enum.any?(board.cells, fn(x) -> is_integer(x) end)
   end

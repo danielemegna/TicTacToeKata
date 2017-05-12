@@ -52,4 +52,26 @@ defmodule Board_Test do
     assert Board.full?(board) == true
   end
 
+  test 'available moves of empty board' do
+    assert Board.available_moves(%Board{}) == [0,1,2,3,4,5,6,7,8]
+  end
+
+  test 'available moves of full board' do
+    board = %Board{cells: [
+      "X","O","X",
+      "O","X","O",
+      "O","X","O"]}
+
+    assert Board.available_moves(board) == []
+  end
+
+  test 'available moves of marked board' do
+    board = %Board{}
+      |> Board.mark(0, "X")
+      |> Board.mark(2, "O")
+      |> Board.mark(4, "X")
+
+    assert Board.available_moves(board) == [1,3,5,6,7,8]
+  end
+
 end
