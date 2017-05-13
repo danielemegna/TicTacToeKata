@@ -1,4 +1,4 @@
-defmodule TicTacToe.MediumPlayer do
+defmodule TicTacToe.Player.Strategy.Medium do
   alias TicTacToe.Referee
   alias TicTacToe.Board
 

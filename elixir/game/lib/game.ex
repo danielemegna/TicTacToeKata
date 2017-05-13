@@ -2,15 +2,13 @@ defmodule Game do
   alias TicTacToe.ConsoleBoardPrinter, as: BoardPrinter
   alias TicTacToe.Board
   alias TicTacToe.Referee
-  alias TicTacToe.HumanPlayer
-  alias TicTacToe.MediumPlayer
   alias TicTacToe.Player
 
 
   def start_game do
     players = [
-      %Player{ sign: "X", strategy: HumanPlayer },
-      %Player{ sign: "O", strategy: MediumPlayer }
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Medium }
     ]
 
     board = %Board{}

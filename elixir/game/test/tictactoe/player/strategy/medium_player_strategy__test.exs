@@ -1,7 +1,7 @@
-defmodule MediumPlayer_Test do
-use ExUnit.Case
+defmodule TicTacToe.Player.Strategy.Medium_Test do
+  use ExUnit.Case
   alias TicTacToe.Board
-  alias TicTacToe.MediumPlayer
+  alias TicTacToe.Player
 
   test "next_move returns cell 4 if available" do
     assert next_move([
@@ -48,7 +48,7 @@ use ExUnit.Case
   end
 
   defp next_move(board) do
-    MediumPlayer.next_move(%Board{cells: board})
+    Player.Strategy.Medium.next_move(%Board{cells: board})
   end
 
 end

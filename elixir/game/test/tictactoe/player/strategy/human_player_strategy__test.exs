@@ -1,8 +1,8 @@
-defmodule HumanPlayer_Test do
+defmodule TicTacToe.Player.Strategy.Human_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   alias TicTacToe.Board
-  alias TicTacToe.HumanPlayer
+  alias TicTacToe.Player
 
   test "mark first cell" do
     user_choice = "0"
@@ -22,7 +22,7 @@ defmodule HumanPlayer_Test do
 
   defp next_move(board, input) do
     capture_io([input: input], fn ->
-      chosen_move = HumanPlayer.next_move(board)
+      chosen_move = Player.Strategy.Human.next_move(board)
       send self(), {:chosen_move, chosen_move}
     end)
   end

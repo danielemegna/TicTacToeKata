@@ -1,4 +1,4 @@
-defmodule TicTacToe.HumanPlayer do
+defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.Board
 
   def next_move(board) do
