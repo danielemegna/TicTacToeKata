@@ -3,38 +3,34 @@ defmodule Game do
   alias TicTacToe.Board
   alias TicTacToe.Referee
 
-  @players %{
-    "X" => TicTacToe.HumanPlayer,
-    "O" => TicTacToe.MediumPlayer
-  }
 
   def start_game do
+    players = [
+      %{ sign: "X", strategy: TicTacToe.HumanPlayer },
+      %{ sign: "O", strategy: TicTacToe.MediumPlayer }
+    ]
+
     board = %Board{}
     BoardPrinter.print(board)
-    play_moves(board, "X")
+    play_moves(board, players)
   end
 
-  defp play_moves(board, player) do
+  defp play_moves(board, players) do
     if(Referee.game_over?(board) || Referee.tie?(board)) do
       IO.write("Game Over")
     else
-      play_moves(choose_move(board, player), toggle_player(player))
+      current_player = List.first(players)
+      updated_board = choose_move(board, current_player)
+      play_moves(updated_board, Enum.reverse(players))
     end
   end
 
   defp choose_move(board, player) do
-    move = @players[player].next_move(board)
+    move = player.strategy.next_move(board)
 
-    updated_board = Board.mark(board, move, player)
+    updated_board = Board.mark(board, move, player.sign)
     BoardPrinter.print(updated_board)
     updated_board
-  end
-
-  defp toggle_player(player) do
-    if(player == "X") do
-      "O"
-    else "X"
-    end
   end
 
 end
