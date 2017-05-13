@@ -1,4 +1,4 @@
-defmodule Game_Tie_Test do
+defmodule TicTacToe.Game_Tie_Test do
   use ExUnit.Case
   alias TicTacToe.Board
 

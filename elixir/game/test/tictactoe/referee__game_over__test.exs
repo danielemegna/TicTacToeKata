@@ -1,4 +1,4 @@
-defmodule Referee_GameOver_Test do
+defmodule TicTacToe.Referee_GameOver_Test do
   use ExUnit.Case
   alias TicTacToe.Board
 

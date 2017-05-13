@@ -1,4 +1,4 @@
-defmodule ConsoleBoardPrinter_Test do
+defmodule TicTacToe.ConsoleBoardPrinter_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   alias TicTacToe.ConsoleBoardPrinter
