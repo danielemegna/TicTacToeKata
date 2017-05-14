@@ -42,4 +42,11 @@ defmodule TicTacToe.ConsoleBoardPrinter_Test do
       ConsoleBoardPrinter.print(marked_board)
     end) == expected
   end
+
+  test 'print function returns given board' do
+    capture_io(fn ->
+      board = %Board{cells: [0,1,2,"X", 4,5,6,7,"O"]}
+      assert ConsoleBoardPrinter.print(board) == board
+    end)
+  end
 end

@@ -15,6 +15,7 @@ defmodule TicTacToe.ConsoleBoardPrinter do
     IO.write("#{Board.at(board, 7)}   ")
     IO.write("#{Board.at(board, 8)}\n")
     IO.write("\n--------------\n\n")
+    board
   end
 
 end
