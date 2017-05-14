@@ -15,23 +15,16 @@ defmodule Game do
       |> play(players)
   end
 
-  defp play(board, players) do
-    current_player = List.first(players)
-    updated_board = choose_move(board, current_player)
-    BoardPrinter.print(updated_board)
+  defp play(board, [current_player | other_players]) do
+    new_board = board
+      |> Player.play(current_player)
+      |> BoardPrinter.print
 
-    if(Referee.game_over?(updated_board) || Referee.tie?(updated_board)) do
+    if(Referee.game_over?(new_board) || Referee.tie?(new_board)) do
       IO.write("Game Over")
     else
-      play(updated_board, Enum.reverse(players))
+      play(new_board, other_players ++ [current_player])
     end
-  end
-
-  defp choose_move(board, player) do
-    board |> Board.mark(
-      player.strategy.next_move(board),
-      player.sign
-    )
   end
 
 end
