@@ -4,34 +4,34 @@ defmodule Game do
   alias TicTacToe.Referee
   alias TicTacToe.Player
 
-
   def start_game do
     players = [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Medium }
     ]
 
-    board = %Board{}
-    BoardPrinter.print(board)
-    play_moves(board, players)
+    %Board{}
+      |> BoardPrinter.print
+      |> play(players)
   end
 
-  defp play_moves(board, players) do
-    if(Referee.game_over?(board) || Referee.tie?(board)) do
+  defp play(board, players) do
+    current_player = List.first(players)
+    updated_board = choose_move(board, current_player)
+    BoardPrinter.print(updated_board)
+
+    if(Referee.game_over?(updated_board) || Referee.tie?(updated_board)) do
       IO.write("Game Over")
     else
-      current_player = List.first(players)
-      updated_board = choose_move(board, current_player)
-      play_moves(updated_board, Enum.reverse(players))
+      play(updated_board, Enum.reverse(players))
     end
   end
 
   defp choose_move(board, player) do
-    move = player.strategy.next_move(board)
-
-    updated_board = Board.mark(board, move, player.sign)
-    BoardPrinter.print(updated_board)
-    updated_board
+    board |> Board.mark(
+      player.strategy.next_move(board),
+      player.sign
+    )
   end
 
 end
