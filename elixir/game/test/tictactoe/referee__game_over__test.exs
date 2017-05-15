@@ -10,7 +10,7 @@ defmodule TicTacToe.Referee_GameOver_Test do
     assert evaluate(%Board{cells: [
       "X","O","X",
       "O","X","O",
-      "O","X","O"]}) == false
+      "O","X","O"]}) == true
   end
 
   test "X is the winner" do
@@ -25,6 +25,13 @@ defmodule TicTacToe.Referee_GameOver_Test do
       "X","X","O",
       "X","O","X",
       "O", 7,  8]}) == true
+  end
+
+  test "no winner and free spaces!" do
+    assert evaluate(%Board{cells: [
+      "X",1,"O",
+       3,"O",5,
+       6,"X",8]}) == false
   end
 
   defp evaluate(board) do

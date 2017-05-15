@@ -20,7 +20,7 @@ defmodule Game do
       |> Player.play(current_player)
       |> BoardPrinter.print
 
-    if(Referee.game_over?(new_board) || Referee.tie?(new_board)) do
+    if(Referee.game_over?(new_board)) do
       IO.write("Game Over")
     else
       play(new_board, other_players ++ [current_player])
