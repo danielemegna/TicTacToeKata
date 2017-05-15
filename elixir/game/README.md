@@ -5,6 +5,20 @@
 Play the game with iex -S mix
 > Game.start_game
 
+### Todo list
+
+First iteration
+- [ ] The game does not gracefully handle bad user input.
+- [ ] In its current form, it’s supposed to be played at a difficulty level of “hard”, meaning the computer player cannot be beaten, but in reality you can beat it with the right moves.
+- [ ] The game play left a lot to be desired. The user messages are lacking in many ways, which I’m sure you can tell.
+
+Second iteration
+- [ ] Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
+- [ ] Allow the user to choose the game type (human v. human, computer v. computer, human v. computer).
+- [ ] Allow the user to choose which player goes first.
+- [ ] Allow the user to choose with what “symbol” the players will mark their selections on the board (traditionally it’s “X” and “O”).
+
+
 ### Notes
 
 Docker dev-ready environment
