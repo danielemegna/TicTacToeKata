@@ -25,7 +25,9 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
 
     assert next_move(board, user_choices) ==
       "Enter [0-8]>"<>
+      "Cell 0 already marked! Retry..\n"<>
       "Enter [0-8]>"<>
+      "Cell 3 already marked! Retry..\n"<>
       "Enter [0-8]>"
     assert_received {:chosen_move, 4}
   end

@@ -9,6 +9,7 @@ defmodule TicTacToe.Player.Strategy.Human do
     if Board.free?(board, num) do
       num
     else
+      IO.puts("Cell #{num} already marked! Retry..")
       next_move(board)
     end
   end
