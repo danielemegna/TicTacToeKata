@@ -3,15 +3,22 @@ defmodule TicTacToe.Player.Strategy.Human do
 
   def next_move(board) do
     IO.write("Enter [0-8]")
-    next_move = IO.gets(">")
-    {num, _} = Integer.parse(next_move)
+    Integer.parse(IO.gets(">"))
+      |> evaluate(board)
+  end
 
-    if Board.free?(board, num) do
-      num
-    else
-      IO.puts("Cell #{num} already marked! Retry..")
+  defp evaluate({move, _}, board) do
+    unless Board.free?(board, move) do
+      IO.puts("Cell #{move} already marked! Retry..")
       next_move(board)
+    else
+      move
     end
+  end
+
+  defp evaluate(:error, board) do
+      IO.puts("Bad input! Retry..")
+      next_move(board)
   end
 
 end

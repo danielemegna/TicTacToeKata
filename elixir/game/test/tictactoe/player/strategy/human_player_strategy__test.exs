@@ -12,6 +12,17 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     assert_received {:chosen_move, 0}
   end
 
+  test "bad user input" do
+    board = %Board{}
+    user_choices = "bad\n" <> "6"
+
+    assert next_move(board, user_choices) ==
+      "Enter [0-8]>"<>
+      "Bad input! Retry..\n"<>
+      "Enter [0-8]>"
+    assert_received {:chosen_move, 6}
+  end
+
   test "trying to mark a marked cell, player can choose another one" do
     board = %Board{cells: [
       "O", 1 , 2,
