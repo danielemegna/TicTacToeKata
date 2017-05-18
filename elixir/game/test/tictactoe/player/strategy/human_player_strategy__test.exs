@@ -23,6 +23,21 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     assert_received {:chosen_move, 6}
   end
 
+  test "move index out of board" do
+    board = %Board{}
+    user_choices = "9\n" <> "11\n" <> "-1\n" <> "5"
+
+    assert next_move(board, user_choices) ==
+      "Enter [0-8]>"<>
+      "Bad input! Retry..\n"<>
+      "Enter [0-8]>"<>
+      "Bad input! Retry..\n"<>
+      "Enter [0-8]>"<>
+      "Bad input! Retry..\n"<>
+      "Enter [0-8]>"
+    assert_received {:chosen_move, 5}
+  end
+
   test "trying to mark a marked cell, player can choose another one" do
     board = %Board{cells: [
       "O", 1 , 2,
