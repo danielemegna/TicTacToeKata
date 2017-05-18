@@ -3,7 +3,7 @@ defmodule TicTacToe.Board_Test do
   alias TicTacToe.Board
 
   test 'empty board has free indexes' do
-    board = %Board{}
+    board = Board.new
     assert Board.free?(board, 0)
     assert Board.free?(board, 1)
     assert Board.free?(board, 5)
@@ -11,7 +11,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'mark board and check free result' do
-    board = %Board{}
+    board = Board.new
 
     board = Board.mark(board, 0, "X")
     assert Board.free?(board, 0) == false
@@ -21,7 +21,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'get value at index' do
-    board = %Board{}
+    board = Board.new
     assert Board.at(board, 0) == 0
     assert Board.at(board, 2) == 2
 
@@ -31,11 +31,11 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'empty board is not full' do
-    assert Board.full?(%Board{}) == false
+    assert Board.full?(Board.new) == false
   end
 
   test 'not full marked board should.. not be full' do
-    board = %Board{}
+    board = Board.new
       |> Board.mark(0, "X")
       |> Board.mark(2, "O")
       |> Board.mark(4, "X")
@@ -53,7 +53,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'available moves of empty board' do
-    assert Board.available_moves(%Board{}) == [0,1,2,3,4,5,6,7,8]
+    assert Board.available_moves(Board.new) == [0,1,2,3,4,5,6,7,8]
   end
 
   test 'available moves of full board' do
@@ -66,7 +66,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'available moves of marked board' do
-    board = %Board{}
+    board = Board.new
       |> Board.mark(0, "X")
       |> Board.mark(2, "O")
       |> Board.mark(4, "X")

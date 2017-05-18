@@ -5,7 +5,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   alias TicTacToe.Player
 
   test "mark first cell" do
-    board = %Board{}
+    board = Board.new
     user_choice = "0"
 
     assert next_move(board, user_choice) == "Enter [0-8]>"
@@ -13,7 +13,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   end
 
   test "bad user input" do
-    board = %Board{}
+    board = Board.new
     user_choices = "bad\n" <> "6"
 
     assert next_move(board, user_choices) ==
@@ -24,7 +24,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   end
 
   test "move index out of board" do
-    board = %Board{}
+    board = Board.new
     user_choices = "9\n" <> "11\n" <> "-1\n" <> "5"
 
     assert next_move(board, user_choices) ==

@@ -17,7 +17,7 @@ defmodule TicTacToe.ConsoleBoardPrinter_Test do
       "\n--------------\n\n"
 
     assert capture_io(fn ->
-      ConsoleBoardPrinter.print(%Board{})
+      ConsoleBoardPrinter.print(Board.new)
     end) == expected
   end
 

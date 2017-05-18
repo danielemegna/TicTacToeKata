@@ -10,7 +10,7 @@ defmodule Game do
       %Player{ sign: "O", strategy: Player.Strategy.Medium }
     ]
 
-    %Board{}
+    Board.new
       |> BoardPrinter.print
       |> play(players)
   end

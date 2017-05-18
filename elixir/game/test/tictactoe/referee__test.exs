@@ -3,7 +3,7 @@ defmodule TicTacToe.Referee_Test do
   alias TicTacToe.Board
 
   test "game is not over with an empty board" do
-    assert evaluate_game_over(%Board{}) == false
+    assert evaluate_game_over(Board.new) == false
   end
 
   test "full board but no winner" do
