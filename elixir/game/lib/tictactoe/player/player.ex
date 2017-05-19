@@ -6,7 +6,7 @@ defmodule TicTacToe.Player do
 
   def play(board, player) do
     board |> Board.mark(
-      player.strategy.next_move(board),
+      player.strategy.next_move(board, player.sign),
       player.sign
     )
   end

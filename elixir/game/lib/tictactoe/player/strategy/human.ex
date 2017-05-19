@@ -1,7 +1,11 @@
 defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.Board
 
-  def next_move(board) do
+  def next_move(board, _) do
+    next_move(board)
+  end
+
+  defp next_move(board) do
     "Enter [0-8]>"
       |> IO.gets
       |> Integer.parse

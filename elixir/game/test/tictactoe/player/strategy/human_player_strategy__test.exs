@@ -60,7 +60,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
 
   defp next_move(board, input) do
     capture_io(input, fn ->
-      chosen_move = Player.Strategy.Human.next_move(board)
+      chosen_move = Player.Strategy.Human.next_move(board, "X")
       send self(), {:chosen_move, chosen_move}
     end)
   end
