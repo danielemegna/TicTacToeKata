@@ -4,23 +4,23 @@ defmodule TicTacToe.Player.Strategy.Minimax_Test do
   alias TicTacToe.Player.Strategy.Minimax
 
   test 'last tie move worth zero' do
-    board = %Board{cells: [
+    assert evaluate([
       "X","O","X",
       "O","X", 5 ,
       "O","X","O"
-    ]}
-
-    assert Minimax.value(5, "O", board) == 0
+    ], 5) == 0
   end
 
   test 'win move worth two' do
-    board = %Board{cells: [
-      "X","O", 2 ,
+    assert evaluate([
+       0 ,"O","X",
       "O","X","O",
       "O","X","O"
-    ]}
+    ], 0) == 2
+  end
 
-    assert Minimax.value(2, "O", board) == 2
+  defp evaluate(cells, move) do
+    Minimax.value(move, "O", %Board{cells: cells})
   end
 
 end
