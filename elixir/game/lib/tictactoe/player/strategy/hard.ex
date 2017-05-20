@@ -13,9 +13,10 @@ defmodule TicTacToe.Player.Strategy.Hard do
   end
 
   defp get_best_move([move|rest], board, my_sign) do
-    cond do
-      Referee.game_over?(Board.mark(board, move, my_sign)) == {:yes, my_sign} -> move
-      true -> get_best_move(rest, board, my_sign)
+    marked_board = Board.mark(board, move, my_sign)
+    case Referee.game_over?(marked_board) do
+      {:yes, ^my_sign} -> move
+      _ -> get_best_move(rest, board, my_sign)
     end
   end
 
