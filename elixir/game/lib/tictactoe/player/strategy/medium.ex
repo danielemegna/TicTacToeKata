@@ -3,32 +3,38 @@ defmodule TicTacToe.Player.Strategy.Medium do
   alias TicTacToe.Board
 
   def next_move(board, my_sign) do
-    cond do
-      Board.free?(board, 4) -> 4
-      true -> evaluate(board, my_sign)
+    board 
+      |> Board.available_moves
+      |> get_best_move(board, my_sign)
+  end
+
+  defp get_best_move([move|[]], _, _) do
+    move
+  end
+
+  defp get_best_move([4|_], _, _) do
+    4
+  end
+
+  defp get_best_move([move|rest], board, my_sign) do
+    can_game_over? = 
+      Referee.game_over?(
+        board |> Board.mark(move, my_sign)
+      ) == {:yes, my_sign}
+      ||
+      Referee.game_over?(
+        board |> Board.mark(move, opponent(my_sign))
+      ) == {:yes, opponent(my_sign)}
+  
+    if can_game_over? do
+      move
+    else
+      get_best_move(rest, board, my_sign)
     end
   end
 
-  defp evaluate(board, my_sign) do
-    available_moves = Board.available_moves(board)
-    get_best_move(available_moves, board, my_sign)
-  end
-
-  defp get_best_move([first|[]], _, _) do
-    first
-  end
-
-  defp get_best_move([first_index|rest], board, my_sign) do
-    opponent_sign = opponent_sign(my_sign)
-    cond do
-      Referee.game_over?(Board.mark(board, first_index, my_sign)) == {:yes, my_sign} -> first_index
-      Referee.game_over?(Board.mark(board, first_index, opponent_sign)) == {:yes, opponent_sign} -> first_index
-      true -> get_best_move(rest, board, my_sign)
-    end
-  end
-
-  defp opponent_sign(my_sign) do
-    case my_sign, do: ("X"->"O"; _->"X")
+  defp opponent(sign) do
+    case sign, do: ("X"->"O"; _->"X")
   end
 
 end
