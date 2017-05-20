@@ -19,9 +19,10 @@ defmodule TicTacToe.Player.Strategy.Medium do
   end
 
   defp get_best_move([first_index|rest], board, my_sign) do
+    opponent_sign = opponent_sign(my_sign)
     cond do
-      Referee.game_over?(Board.mark(board, first_index, my_sign)) -> first_index
-      Referee.game_over?(Board.mark(board, first_index, opponent_sign(my_sign))) -> first_index
+      Referee.game_over?(Board.mark(board, first_index, my_sign)) == {:yes, my_sign} -> first_index
+      Referee.game_over?(Board.mark(board, first_index, opponent_sign)) == {:yes, opponent_sign} -> first_index
       true -> get_best_move(rest, board, my_sign)
     end
   end
