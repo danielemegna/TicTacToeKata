@@ -13,7 +13,6 @@ defmodule TicTacToe.Player.Strategy.Minimax_Test do
     assert Minimax.value(5, "O", board) == 0
   end
 
-  @tag :skip
   test 'win move worth two' do
     board = %Board{cells: [
       "X","O", 2 ,
