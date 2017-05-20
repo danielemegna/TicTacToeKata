@@ -18,6 +18,14 @@ defmodule TicTacToe.Player.Strategy.Minimax_Test do
       "O","X","O"
     ], 0) == 2
   end
+  
+  test 'let opponent win at next move worth minus one' do
+    assert evaluate([
+       0 , 1 ,"O",
+      "X","X","O",
+      "X","O","X"
+    ], 1) == -1
+  end
 
   defp evaluate(cells, move) do
     Minimax.value(move, "O", %Board{cells: cells})
