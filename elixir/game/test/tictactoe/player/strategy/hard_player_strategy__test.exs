@@ -35,7 +35,6 @@ defmodule TicTacToe.Player.Strategy.Hard_Test do
     ]) == 6
   end
   
-  @tag :skip
   test "center cell is the best second move" do
     assert next_move([
       "X", 1 , 2 ,
