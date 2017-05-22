@@ -8,13 +8,13 @@ defmodule TicTacToe.Player.Strategy.Minimax do
     case Referee.game_over?(marked) do
       {:yes, ^sign} -> 2
       {:yes, :none} -> 0
-      _ -> max_possible_value(marked, opponent(sign)) |> revert
+      _ -> max_value(marked, opponent(sign)) |> revert
 
     end
 
   end
 
-  def max_possible_value(board, sign) do
+  defp max_value(board, sign) do
     board
       |> Board.available_moves
       |> Enum.map(fn(move) -> value(move, sign, board) end)
@@ -26,7 +26,10 @@ defmodule TicTacToe.Player.Strategy.Minimax do
   end
 
   defp revert(value) do
-    case value, do: (2-> -1; _-> -value)
+    case value do
+      2 -> -1
+      _ -> -value
+    end
   end
 
 end
