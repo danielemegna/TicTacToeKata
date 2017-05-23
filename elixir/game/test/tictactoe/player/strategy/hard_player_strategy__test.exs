@@ -43,6 +43,14 @@ defmodule TicTacToe.Player.Strategy.Hard_Test do
     ]) == 4
   end
 
+  test "corner cell is the best first move" do
+    assert next_move([
+       0 , 1 , 2 ,
+       3 , 4 , 5 ,
+       6 , 7 , 8
+    ]) == 0
+  end
+
   defp next_move(board) do
     Player.Strategy.Hard.next_move(%Board{cells: board}, "O")
   end
