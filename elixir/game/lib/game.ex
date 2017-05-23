@@ -7,7 +7,7 @@ defmodule Game do
   def start_game do
     players = [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Medium }
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ]
 
     Board.new
