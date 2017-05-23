@@ -11,7 +11,7 @@ First iteration
 - [x] The game does not gracefully handle bad user input.
   - [x] Handle not integer bad input
   - [x] Handle out of board index input
-- [ ] In its current form, it’s supposed to be played at a difficulty level of “hard”, meaning the computer player cannot be beaten, but in reality you can beat it with the right moves.
+- [x] In its current form, it’s supposed to be played at a difficulty level of “hard”, meaning the computer player cannot be beaten, but in reality you can beat it with the right moves.
 - [ ] The game play left a lot to be desired. The user messages are lacking in many ways, which I’m sure you can tell.
   - [ ] Announce correctly tie game over
   - [ ] Announce correctly winner symbol / player
