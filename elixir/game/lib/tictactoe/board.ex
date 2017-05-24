@@ -11,7 +11,7 @@ defmodule TicTacToe.Board do
 
   def mark(board, index, sign) do
     new_cells = List.replace_at(board.cells, index, sign)
-    %__MODULE__{board | cells: new_cells}
+    %__MODULE__{cells: new_cells}
   end
 
   def at(board, index) do
