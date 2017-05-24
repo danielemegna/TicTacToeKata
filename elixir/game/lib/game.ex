@@ -21,7 +21,8 @@ defmodule Game do
       |> BoardPrinter.print
 
     case Referee.game_over?(new_board) do
-      {:yes, _} -> IO.write("Game Over")
+      {:yes, :none} -> IO.write("Tie! Game Over")
+      {:yes, winner} -> IO.write("#{winner} wins! Game Over")
       _ -> play(new_board, other_players ++ [current_player])
     end
   end

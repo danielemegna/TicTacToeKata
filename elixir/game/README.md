@@ -12,9 +12,9 @@ First iteration
   - [x] Handle not integer bad input
   - [x] Handle out of board index input
 - [x] In its current form, it’s supposed to be played at a difficulty level of “hard”, meaning the computer player cannot be beaten, but in reality you can beat it with the right moves.
-- [ ] The game play left a lot to be desired. The user messages are lacking in many ways, which I’m sure you can tell.
-  - [ ] Announce correctly tie game over
-  - [ ] Announce correctly winner symbol / player
+- [x] The game play left a lot to be desired. The user messages are lacking in many ways, which I’m sure you can tell.
+  - [x] Announce correctly tie game over
+  - [x] Announce correctly winner symbol / player
 
 Second iteration
 - [ ] Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
