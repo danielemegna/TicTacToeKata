@@ -28,6 +28,23 @@ defmodule TicTacToe.Board do
       |> Enum.map(fn {_, index} -> index end)
   end
 
+  def print(board) do
+    IO.write("\n--------------\n\n  ")
+    IO.write("#{at(board, 0)}   ")
+    IO.write("#{at(board, 1)}   ")
+    IO.write("#{at(board, 2)}")
+    IO.write("\n ===+===+=== \n  ")
+    IO.write("#{at(board, 3)}   ")
+    IO.write("#{at(board, 4)}   ")
+    IO.write("#{at(board, 5)}")
+    IO.write("\n ===+===+=== \n  ")
+    IO.write("#{at(board, 6)}   ")
+    IO.write("#{at(board, 7)}   ")
+    IO.write("#{at(board, 8)}\n")
+    IO.write("\n--------------\n\n")
+    board
+  end
+
   defp has_free_cells?(board) do
     Enum.any?(board.cells, fn(x) -> is_integer(x) end)
   end
