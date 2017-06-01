@@ -3,30 +3,40 @@ defmodule Game_GoldenMaster_Test do
 
   import ExUnit.CaptureIO
 
-  test "fast game over golden master" do
-    assert game("0\n1\n3\n") ==
-      "\n--------------\n\n  0   1   2\n ===+===+=== \n  3   4   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  X   1   2\n ===+===+=== \n  3   4   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   1   2\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  X   X   2\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   X   O\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  X   X   O\n ===+===+=== \n  X   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   X   O\n ===+===+=== \n  X   O   5\n ===+===+=== \n  O   7   8\n\n--------------\n\nO wins! Game Over"
+  test "fast game over smoke test" do
+    output = game("0\n1\n3\n")
 
-    assert_received {:game_result, :ok}
+    assert_contains(output, "Enter [0-8]>")
+    assert_contains(output, "X")
+    assert_contains(output, "O wins! Game Over")
   end
 
-  test "tie game golden master" do
-    assert game("4\n2\n3\n1\n8") ==
-    "\n--------------\n\n  0   1   2\n ===+===+=== \n  3   4   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  0   1   2\n ===+===+=== \n  3   X   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  O   1   2\n ===+===+=== \n  3   X   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  O   1   X\n ===+===+=== \n  3   X   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  O   1   X\n ===+===+=== \n  3   X   5\n ===+===+=== \n  O   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  O   1   X\n ===+===+=== \n  X   X   5\n ===+===+=== \n  O   7   8\n\n--------------\n\n\n--------------\n\n  O   1   X\n ===+===+=== \n  X   X   O\n ===+===+=== \n  O   7   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  O   X   X\n ===+===+=== \n  X   X   O\n ===+===+=== \n  O   7   8\n\n--------------\n\n\n--------------\n\n  O   X   X\n ===+===+=== \n  X   X   O\n ===+===+=== \n  O   O   8\n\n--------------\n\nEnter [0-8]>\n--------------\n\n  O   X   X\n ===+===+=== \n  X   X   O\n ===+===+=== \n  O   O   X\n\n--------------\n\nTie! Game Over"
+  test "tie game smoke test" do
+    output = game("4\n2\n3\n1\n8")
 
-    assert_received {:game_result, :ok}
+    assert_contains(output, "X")
+    assert_contains(output, "O")
+    assert_contains(output, "Tie! Game Over")
   end
 
-  test "wrong inputs golden master" do
-    assert game("bad\n9\n0\n-1\n4\n1\n2\n5") ==
-      "\n--------------\n\n  0   1   2\n ===+===+=== \n  3   4   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>Bad input! Retry..\nEnter [0-8]>Bad input! Retry..\nEnter [0-8]>\n--------------\n\n  X   1   2\n ===+===+=== \n  3   4   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   1   2\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>Bad input! Retry..\nEnter [0-8]>Cell 4 already marked! Retry..\nEnter [0-8]>\n--------------\n\n  X   X   2\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   X   O\n ===+===+=== \n  3   O   5\n ===+===+=== \n  6   7   8\n\n--------------\n\nEnter [0-8]>Cell 2 already marked! Retry..\nEnter [0-8]>\n--------------\n\n  X   X   O\n ===+===+=== \n  3   O   X\n ===+===+=== \n  6   7   8\n\n--------------\n\n\n--------------\n\n  X   X   O\n ===+===+=== \n  3   O   X\n ===+===+=== \n  O   7   8\n\n--------------\n\nO wins! Game Over"
+  test "wrong inputs smoke test" do
+    output = game("bad\n9\n0\n-1\n4\n1\n2\n5")
+
+    assert_contains(output, "Bad input! Retry..")
+    assert_contains(output, "Cell 4 already marked! Retry..")
+    assert_contains(output, "Cell 2 already marked! Retry..")
+    assert_contains(output, "O wins! Game Over")
   end
 
   defp game(input) do
     capture_io(input, fn ->
-      game_result = Game.start_game
-      send self(), {:game_result, game_result}
+      assert Game.start_game == :ok
     end)
+  end
+
+  defp assert_contains(string, substring) do
+    assert String.contains?(string, substring),
+      "Expected #{inspect string} to contain #{inspect substring}"
   end
 
 end
