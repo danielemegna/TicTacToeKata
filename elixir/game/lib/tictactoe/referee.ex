@@ -2,15 +2,9 @@ defmodule TicTacToe.Referee do
   alias TicTacToe.Board
 
   def game_over?(board) do
-    { end?(board), winner(board) }
-  end
-
-  defp end?(board) do
-    cond do
-      winner(board) != :none -> :yes
-      tie?(board) -> :yes
-      true -> :no
-    end
+    winner = winner(board)
+    tie? = tie?(board)
+    { end?(winner, tie?), winner }
   end
 
   defp winner(board) do
@@ -26,15 +20,6 @@ defmodule TicTacToe.Referee do
       |> winner_sign
   end
 
-  defp keep_only_winner_signs(signs_in_combinations) do
-    signs_in_combinations
-      |> Enum.filter(&(Enum.count(&1) == 1))
-      |> List.flatten
-  end
-
-  defp winner_sign([]), do: :none
-  defp winner_sign([winner|_]), do: winner
-
   defp signs_in_combinations(combinations, board) do
     Enum.map(combinations, &(signs_in_combination(&1, board)))
   end
@@ -45,8 +30,19 @@ defmodule TicTacToe.Referee do
       |> Enum.uniq
   end
 
-  defp tie?(board) do
-    Board.full?(board)
+  defp keep_only_winner_signs(signs_in_combinations) do
+    signs_in_combinations
+      |> Enum.filter(&(Enum.count(&1) == 1))
+      |> List.flatten
   end
+
+  defp winner_sign([]), do: :none
+  defp winner_sign([winner|_]), do: winner
+
+  defp end?(_, true), do: :yes
+  defp end?(:none, _), do: :no
+  defp end?(_, _), do: :yes
+
+  defp tie?(board), do: Board.full?(board)
 
 end
