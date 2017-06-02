@@ -4,7 +4,7 @@ defmodule TicTacToe.Player.Strategy.Hard do
 
   def next_move(board, my_sign) do
     cond do
-      fist_move?(board) -> 0
+      first_move?(board) -> 0
       second_move?(board) and Board.free?(board, 4) -> 4
       second_move?(board) and !Board.free?(board, 4) -> 0
       true -> minimax(board, my_sign)
@@ -19,7 +19,7 @@ defmodule TicTacToe.Player.Strategy.Hard do
       |> elem(0)
   end
 
-  defp fist_move?(board) do
+  defp first_move?(board) do
     board |> Board.available_moves |> Enum.count == 9
   end
 
