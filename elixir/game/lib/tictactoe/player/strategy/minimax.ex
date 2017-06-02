@@ -9,7 +9,6 @@ defmodule TicTacToe.Player.Strategy.Minimax do
       {:yes, ^sign} -> 2
       {:yes, :none} -> 0
       _ -> max_value(marked, opponent(sign)) |> revert
-
     end
 
   end
