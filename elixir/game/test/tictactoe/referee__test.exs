@@ -44,12 +44,12 @@ defmodule TicTacToe.Referee_Test do
 
   test "announce X winner" do
     assert evaluate_announce_or({:yes, "X"})
-      == "X wins! Game Over"
+      == "X wins! Game Over\n"
   end
 
   test "announce tie game" do
     assert evaluate_announce_or({:yes, :none})
-      == "Tie! Game Over"
+      == "Tie! Game Over\n"
   end
 
   test "continue game when it is not over" do

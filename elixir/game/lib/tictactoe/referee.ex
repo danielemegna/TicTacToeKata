@@ -9,8 +9,8 @@ defmodule TicTacToe.Referee do
 
   def announce_or(game_over?, continuefn) do
     case game_over? do
-      {:yes, :none} -> IO.write("Tie! Game Over")
-      {:yes, winner} -> IO.write("#{winner} wins! Game Over")
+      {:yes, :none} -> "Tie! Game Over" |> IO.puts
+      {:yes, winner} -> "#{winner} wins! Game Over" |> IO.puts
       _ -> continuefn.()
     end
   end
