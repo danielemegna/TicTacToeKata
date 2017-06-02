@@ -43,31 +43,36 @@ defmodule TicTacToe.Referee_Test do
   end
 
   test "announce X winner" do
-    assert capture_io(fn ->
-      TicTacToe.Referee.announce_or({:yes, "X"}, fn() ->
-        flunk("Unexpected continue fn call!")
-      end)
-    end) == "X wins! Game Over"
+    assert evaluate_announce_or({:yes, "X"})
+      == "X wins! Game Over"
   end
 
   test "announce tie game" do
-    assert capture_io(fn ->
-      TicTacToe.Referee.announce_or({:yes, :none}, fn() ->
-        flunk("Unexpected continue fn call!")
-      end)
-    end) == "Tie! Game Over"
+    assert evaluate_announce_or({:yes, :none})
+      == "Tie! Game Over"
   end
 
   test "continue game when it is not over" do
-    assert capture_io(fn ->
-      TicTacToe.Referee.announce_or({:no, :none}, fn() ->
-        IO.write("The game is continuing properly..")
-      end)
-    end) == "The game is continuing properly.."
+    continue_write = "The game is continuing properly.."
+    assert evaluate_announce_or({:no, :none}, fn() ->
+      IO.write(continue_write)
+    end) == continue_write
   end
 
   defp evaluate_game_over(board) do
     TicTacToe.Referee.game_over? board
+  end
+
+  defp evaluate_announce_or(game_over?) do
+    evaluate_announce_or(game_over?, fn() ->
+      flunk("Unexpected continue fn call!")
+    end)
+  end
+
+  defp evaluate_announce_or(game_over?, continuefn) do
+    capture_io(fn ->
+      TicTacToe.Referee.announce_or(game_over?, continuefn)
+    end)
   end
 
 end
