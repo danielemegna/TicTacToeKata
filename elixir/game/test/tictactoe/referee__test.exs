@@ -1,5 +1,6 @@
 defmodule TicTacToe.Referee_Test do
   use ExUnit.Case
+  import ExUnit.CaptureIO
   alias TicTacToe.Board
 
   test "game is not over with an empty board" do
@@ -39,6 +40,30 @@ defmodule TicTacToe.Referee_Test do
       "X",1,"O",
        3,"O",5,
        6,"X",8]}) == {:no, :none}
+  end
+
+  test "announce X winner" do
+    assert capture_io(fn ->
+      TicTacToe.Referee.announce_or({:yes, "X"}, fn() ->
+        flunk("Unexpected continue fn call!")
+      end)
+    end) == "X wins! Game Over"
+  end
+
+  test "announce tie game" do
+    assert capture_io(fn ->
+      TicTacToe.Referee.announce_or({:yes, :none}, fn() ->
+        flunk("Unexpected continue fn call!")
+      end)
+    end) == "Tie! Game Over"
+  end
+
+  test "continue game when it is not over" do
+    assert capture_io(fn ->
+      TicTacToe.Referee.announce_or({:no, :none}, fn() ->
+        IO.write("The game is continuing properly..")
+      end)
+    end) == "The game is continuing properly.."
   end
 
   defp evaluate_game_over(board) do
