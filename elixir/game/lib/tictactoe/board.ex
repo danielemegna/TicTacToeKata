@@ -5,6 +5,10 @@ defmodule TicTacToe.Board do
     %__MODULE__{}
   end
 
+  def at(board, index) do
+    Enum.at(board.cells, index)
+  end
+
   def free?(board, index) do
     at(board, index) == index
   end
@@ -14,18 +18,8 @@ defmodule TicTacToe.Board do
     %__MODULE__{cells: new_cells}
   end
 
-  def at(board, index) do
-    Enum.at(board.cells, index)
-  end
-
   def full?(board) do
     !has_free_cells?(board)
-  end
-
-  def available_moves(board) do
-    Enum.with_index(board.cells)
-      |> Enum.filter(fn {value, _} -> is_integer(value) end)
-      |> Enum.map(fn {_, index} -> index end)
   end
 
   def print(board) do
@@ -43,6 +37,25 @@ defmodule TicTacToe.Board do
     IO.write("#{at(board, 8)}\n")
     IO.write("\n--------------\n\n")
     board
+  end
+
+  def available_moves(board) do
+    board
+      |> cells_with_index
+      |> only_available
+      |> extract_indexes
+  end
+
+  defp cells_with_index(board) do
+    Enum.with_index(board.cells)
+  end
+
+  defp only_available(cells_with_index) do
+    cells_with_index |> Enum.filter(fn {value, _} -> is_integer(value) end)
+  end
+
+  defp extract_indexes(cells_with_index) do
+    cells_with_index |> Enum.map(fn {_, index} -> index end)
   end
 
   defp has_free_cells?(board) do
