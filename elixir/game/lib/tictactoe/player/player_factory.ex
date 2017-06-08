@@ -23,6 +23,11 @@ defmodule TicTacToe.PlayerFactory do
     %Player{ sign: "O", strategy: computer_strategy_for(type) }
   end
 
+  defp computer_player_for(_) do
+    "Bad input! Retry..\n" |> IO.puts
+    choose_computer_player()
+  end
+
   defp computer_strategy_for(type) do
     case type do
       2 -> Player.Strategy.Medium
