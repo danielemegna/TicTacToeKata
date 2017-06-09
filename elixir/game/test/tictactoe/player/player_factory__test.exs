@@ -24,6 +24,13 @@ defmodule TicTacToe.PlayerFactory_Test do
     ])
   end
 
+  test 'easy player choosen' do
+    assert_pair(1, [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Easy },
+    ])
+  end
+
   test 'medium player choosen' do
     assert_pair(2, [
       %Player{ sign: "X", strategy: Player.Strategy.Human },

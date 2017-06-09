@@ -30,6 +30,7 @@ defmodule TicTacToe.PlayerFactory do
 
   defp computer_strategy_for(type) do
     case type do
+      1 -> Player.Strategy.Easy
       2 -> Player.Strategy.Medium
       _ -> Player.Strategy.Hard
     end
