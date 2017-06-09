@@ -1,17 +1,10 @@
 defmodule Game do
-  alias TicTacToe.Board
-  alias TicTacToe.Referee
-  alias TicTacToe.Player
+  alias TicTacToe.{Board,Referee,Player,PlayerFactory}
 
   def start_game do
-    players = [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Hard },
-    ]
-
     Board.new
       |> Board.print
-      |> play(players)
+      |> play(PlayerFactory.pair)
   end
 
   defp play(board, [current_player | other_players]) do
