@@ -3,9 +3,12 @@ defmodule Game_Test do
   import ExUnit.CaptureIO
 
   @human_vs_computer 3
+  
+  @easy_computer_player 1
+  @medium_computer_player 2
   @hard_computer_player 3
 
-  test "fast game over smoke test" do
+  test "fast hard game over smoke test" do
     players_choice = [@human_vs_computer,@hard_computer_player]
     game_moves = [0,1,3]
     user_inputs = players_choice ++ game_moves
@@ -20,7 +23,7 @@ defmodule Game_Test do
     assert_contains(output, "O wins! Game Over")
   end
 
-  test "tie game smoke test" do
+  test "tie hard game smoke test" do
     players_choice = [@human_vs_computer,@hard_computer_player]
     game_moves = [4,2,3,1,8]
     user_inputs = players_choice ++ game_moves
@@ -32,7 +35,7 @@ defmodule Game_Test do
     assert_contains(output, "Tie! Game Over")
   end
 
-  test "wrong inputs smoke test" do
+  test "wrong inputs and game over smoke test" do
     players_choice = [5,@human_vs_computer,4,"bad",@hard_computer_player]
     game_moves = ["bad",0,4,1,2,5]
     user_inputs = players_choice ++ game_moves
@@ -43,6 +46,26 @@ defmodule Game_Test do
     assert_contains(output, "Cell 4 already marked! Retry..")
     assert_contains(output, "Cell 2 already marked! Retry..")
     assert_contains(output, "O wins! Game Over")
+  end
+
+  test "win easy game smoke test" do
+    players_choice = [@human_vs_computer,@easy_computer_player]
+    game_moves = [6,7,8]
+    user_inputs = players_choice ++ game_moves
+
+    output = game(user_inputs)
+
+    assert_contains(output, "X wins! Game Over")
+  end
+
+  test "win medium game smoke test" do
+    players_choice = [@human_vs_computer,@medium_computer_player]
+    game_moves = [6,2,0,3]
+    user_inputs = players_choice ++ game_moves
+
+    output = game(user_inputs)
+
+    assert_contains(output, "X wins! Game Over")
   end
 
   defp game(user_inputs) do
