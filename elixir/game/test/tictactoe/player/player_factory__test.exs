@@ -4,55 +4,81 @@ defmodule TicTacToe.PlayerFactory_Test do
   alias TicTacToe.Player
   alias TicTacToe.PlayerFactory
 
-  test 'pair writes out menu to choose the difficulty' do
-    output = capture_io("3", fn ->
+  @human_vs_human 1
+  @human_vs_computer 3
+
+  @easy_computer_player 1
+  @medium_computer_player 2
+  @hard_computer_player 3
+
+  test 'pair writes out menu to choose game type' do
+    valid_user_inputs = user_input([@human_vs_computer,@easy_computer_player])
+    output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
 
-    assert output ==
+    assert_contains(output,
+      "Choose game type\n"<>
+      " 1. Human v. Human\n"<>
+      " 2. Computer v. Computer\n"<>
+      " 3. Human v. Computer\n"<>
+      "Enter [1-3]>")
+  end
+
+  test 'pair writes out menu to choose the difficulty' do
+    valid_user_inputs = user_input([@human_vs_computer,@medium_computer_player])
+    output = capture_io(valid_user_inputs, fn ->
+      PlayerFactory.pair
+    end)
+
+    assert_contains(output,
       "Choose computer level of difficulty\n"<>
       " 1. Easy\n"<>
       " 2. Medium\n"<>
       " 3. Hard (unbeatable)\n"<>
-      "Enter [1-3]>"
+      "Enter [1-3]>")
   end
 
-  test 'hard player choosen' do
-    assert_pair(3, [
+  test 'human vs human choosen' do
+    assert_pair([@human_vs_human], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Human },
+    ])
+  end
+
+  test 'human vs hard player choosen' do
+    assert_pair([@human_vs_computer,@hard_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])
   end
 
-  test 'easy player choosen' do
-    assert_pair(1, [
+  test 'human vs easy player choosen' do
+    assert_pair([@human_vs_computer,@easy_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Easy },
     ])
   end
 
-  test 'medium player choosen' do
-    assert_pair(2, [
+  test 'human vs medium player choosen' do
+    assert_pair([@human_vs_computer,@medium_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Medium },
     ])
   end
 
   test 'bad input provided' do
-    output = assert_pair(["bad", 3], [
+    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])
-
     assert_contains(output, "Bad input! Retry..")
   end
 
+  defp user_input(list), do: Enum.join(list, "\n")
+
   defp assert_pair(list, expected) when is_list(list), do:
-    assert_pair(Enum.join(list, "\n"), expected)
-
-  defp assert_pair(integer, expected) when is_integer(integer), do:
-    assert_pair(Integer.to_string(integer), expected)
-
+    assert_pair(user_input(list), expected)
   defp assert_pair(input, expected) do
     capture_io(input, fn ->
       assert PlayerFactory.pair == expected
