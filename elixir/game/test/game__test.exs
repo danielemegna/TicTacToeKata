@@ -22,6 +22,9 @@ defmodule Game_Test do
     assert_contains(output, "Enter [0-8]>")
     assert_contains(output, "X")
     assert_contains(output, "O wins! Game Over")
+
+    assert_not_contains(output, "Bad input! Retry..")
+    assert_not_contains(output, "already marked")
   end
 
   test "tie hard game smoke test" do
