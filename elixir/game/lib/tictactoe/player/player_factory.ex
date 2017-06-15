@@ -28,12 +28,16 @@ defmodule TicTacToe.PlayerFactory do
       %Player{ sign: "O", strategy: Player.Strategy.Human }]
   end
 
-  defp pair_for_game_type(3) do
-    [ %Player{ sign: "X", strategy: Player.Strategy.Human },
-      computer_player()]
+  defp pair_for_game_type(2) do
+    [ computer_player("X"), computer_player("O") ]
   end
 
-  defp computer_player do
+  defp pair_for_game_type(3) do
+    [ %Player{ sign: "X", strategy: Player.Strategy.Human },
+      computer_player("O")]
+  end
+
+  defp computer_player(sign) do
     "Choose computer level of difficulty\n"<>
     " 1. Easy\n"<>
     " 2. Medium\n"<>
@@ -41,16 +45,16 @@ defmodule TicTacToe.PlayerFactory do
     "Enter [1-3]>"
       |> IO.gets
       |> Integer.parse
-      |> computer_player_for
+      |> computer_player_for(sign)
   end
 
-  defp computer_player_for({type, _}) when type >= 1 and type <= 3 do
-    %Player{ sign: "O", strategy: computer_strategy_for(type) }
+  defp computer_player_for({type, _},sign) when type >= 1 and type <= 3 do
+    %Player{ sign: sign, strategy: computer_strategy_for(type) }
   end
 
-  defp computer_player_for(_) do
+  defp computer_player_for(_,sign) do
     "Bad input! Retry..\n" |> IO.puts
-    computer_player()
+    computer_player(sign)
   end
 
   defp computer_strategy_for(type) do

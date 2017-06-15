@@ -5,6 +5,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   alias TicTacToe.PlayerFactory
 
   @human_vs_human 1
+  @computer_vs_computer 2
   @human_vs_computer 3
 
   @easy_computer_player 1
@@ -43,6 +44,14 @@ defmodule TicTacToe.PlayerFactory_Test do
     assert_pair([@human_vs_human], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Human },
+    ])
+  end
+
+  test 'medium computer vs hard computer choosen' do
+    user_input = [@computer_vs_computer,@medium_computer_player,@hard_computer_player]
+    assert_pair(user_input, [
+      %Player{ sign: "X", strategy: Player.Strategy.Medium },
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])
   end
 
