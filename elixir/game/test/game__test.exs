@@ -3,6 +3,7 @@ defmodule Game_Test do
   import ExUnit.CaptureIO
 
   @human_vs_human 1
+  @computer_vs_computer 2
   @human_vs_computer 3
   
   @easy_computer_player 1
@@ -81,6 +82,19 @@ defmodule Game_Test do
 
     assert_not_contains(output, "Choose computer level of difficulty")
     assert_contains(output, "Tie! Game Over")
+  end
+
+  test "hard computer vs hard computer tie game smoke test" do
+    players_choice = [@computer_vs_computer,@hard_computer_player, @hard_computer_player]
+    game_moves = []
+    user_inputs = players_choice ++ game_moves
+
+    output = game(user_inputs)
+
+    assert_contains(output, "Tie! Game Over")
+    assert_not_contains(output, "Enter [0-8]>")
+    assert_not_contains(output, "Bad input! Retry..")
+    assert_not_contains(output, "already marked")
   end
 
   defp game(user_inputs) do
