@@ -23,19 +23,16 @@ defmodule TicTacToe.PlayerFactory do
     choose_game_type()
   end
 
-  defp pair_for_game_type(1) do
-    [ %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Human }]
+  defp pair_for_game_type(type) do
+    case type do
+      1 -> [ human_player("X"),     human_player("O")     ]
+      2 -> [ computer_player("X"),  computer_player("O")  ]
+      3 -> [ human_player("X"),     computer_player("O")  ]
+    end
   end
 
-  defp pair_for_game_type(2) do
-    [ computer_player("X"), computer_player("O") ]
-  end
-
-  defp pair_for_game_type(3) do
-    [ %Player{ sign: "X", strategy: Player.Strategy.Human },
-      computer_player("O")]
-  end
+  defp human_player(sign), do:
+    %Player{ sign: sign, strategy: Player.Strategy.Human }
 
   defp computer_player(sign) do
     "Choose computer level of difficulty\n"<>
@@ -61,7 +58,7 @@ defmodule TicTacToe.PlayerFactory do
     case type do
       1 -> Player.Strategy.Easy
       2 -> Player.Strategy.Medium
-      _ -> Player.Strategy.Hard
+      3 -> Player.Strategy.Hard
     end
   end
 
