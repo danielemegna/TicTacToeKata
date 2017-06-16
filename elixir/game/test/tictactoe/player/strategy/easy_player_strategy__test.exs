@@ -60,6 +60,10 @@ defmodule TicTacToe.Player.Strategy.Easy_Test do
     ]) == 6
   end
 
+  test "to_str function describes the strategy" do
+    assert Player.Strategy.Easy.to_str == "Easy computer"
+  end
+
   defp next_move(board) do
     Player.Strategy.Easy.next_move(%Board{cells: board}, "O")
   end

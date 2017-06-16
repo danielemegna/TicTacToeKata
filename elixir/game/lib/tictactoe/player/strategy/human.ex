@@ -1,6 +1,8 @@
 defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.Board
 
+  def to_str, do: "Human"
+
   def next_move(board, _) do
     next_move(board)
   end

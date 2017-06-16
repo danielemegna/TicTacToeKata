@@ -51,6 +51,10 @@ defmodule TicTacToe.Player.Strategy.Hard_Test do
     ]) == 0
   end
 
+  test "to_str function describes the strategy" do
+    assert Player.Strategy.Hard.to_str == "Hard computer"
+  end
+
   defp next_move(board) do
     Player.Strategy.Hard.next_move(%Board{cells: board}, "O")
   end
