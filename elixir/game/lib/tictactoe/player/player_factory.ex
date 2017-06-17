@@ -24,6 +24,11 @@ defmodule TicTacToe.PlayerFactory do
     end
   end
 
+  defp player_order_for(_, players) do
+    "Bad input! Retry..\n" |> IO.puts
+    who_go_first?(players)
+  end
+
   defp choose_game_type do
     "Choose game type\n"<>
     " 1. Human v. Human\n"<>
