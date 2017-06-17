@@ -40,7 +40,7 @@ defmodule TicTacToe.PlayerFactory do
       |> game_type_for
   end
 
-  defp game_type_for({type, _}) when type >= 1 and type <= 3, do: type
+  defp game_type_for({type, _}) when type in 1..3, do: type
   defp game_type_for(_) do
     "Bad input! Retry..\n" |> IO.puts
     choose_game_type()
@@ -68,7 +68,7 @@ defmodule TicTacToe.PlayerFactory do
       |> computer_player_for(sign)
   end
 
-  defp computer_player_for({type, _},sign) when type >= 1 and type <= 3 do
+  defp computer_player_for({type, _},sign) when type in 1..3 do
     %Player{ sign: sign, strategy: computer_strategy_for(type) }
   end
 

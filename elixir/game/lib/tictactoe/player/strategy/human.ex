@@ -14,7 +14,7 @@ defmodule TicTacToe.Player.Strategy.Human do
       |> evaluate(board)
   end
 
-  defp evaluate({move, _}, board) when move >= 0 and move <= 8 do
+  defp evaluate({move, _}, board) when move in 0..8 do
     unless Board.free?(board, move) do
       "Cell #{move} already marked! Retry.." |> IO.puts
       next_move(board)
