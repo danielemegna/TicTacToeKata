@@ -20,6 +20,7 @@ defmodule Game_Test do
     assert_contains(output, "Choose game type")
     assert_contains(output, "Choose computer level of difficulty")
     assert_contains(output, "Enter [1-3]>")
+    assert_contains(output, "Enter [1-2]>")
     assert_contains(output, "Enter [0-8]>")
     assert_contains(output, "X")
     assert_contains(output, "O wins! Game Over")

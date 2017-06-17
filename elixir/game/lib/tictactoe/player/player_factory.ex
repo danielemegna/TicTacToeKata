@@ -4,6 +4,17 @@ defmodule TicTacToe.PlayerFactory do
   def pair do
     choose_game_type()
       |> pair_for_game_type
+      |> who_go_first?
+  end
+
+  defp who_go_first?(players) do
+    "Who go first?\n"<>
+    " 1. #{Enum.at(players,0)}\n"<>
+    " 2. #{Enum.at(players,1)}\n"<>
+    "Enter [1-2]>"
+      |> IO.puts
+
+    players
   end
 
   defp choose_game_type do

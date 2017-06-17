@@ -12,8 +12,13 @@ defmodule TicTacToe.PlayerFactory_Test do
   @medium_computer_player 2
   @hard_computer_player 3
 
+  @valid_human_vs_medium_computer [
+    @human_vs_computer,
+    @medium_computer_player
+  ]
+
   test 'pair writes out menu to choose game type' do
-    valid_user_inputs = user_input([@human_vs_computer,@easy_computer_player])
+    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -27,7 +32,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose the difficulty' do
-    valid_user_inputs = user_input([@human_vs_computer,@medium_computer_player])
+    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -38,6 +43,19 @@ defmodule TicTacToe.PlayerFactory_Test do
       " 2. Medium\n"<>
       " 3. Hard (unbeatable)\n"<>
       "Enter [1-3]>")
+  end
+
+  test 'pair writes out menu to choose players order' do
+    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
+    output = capture_io(valid_user_inputs, fn ->
+      PlayerFactory.pair
+    end)
+
+    assert_contains(output,
+      "Who go first?\n"<>
+      " 1. Human player (X)\n"<>
+      " 2. Medium computer player (O)\n"<>
+      "Enter [1-2]>")
   end
 
   test 'human vs human choosen' do
