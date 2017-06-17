@@ -13,6 +13,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   @hard_computer_player 3
 
   @first_player_before 1
+  @second_player_before 2
 
   @valid_human_vs_medium_computer [
     @human_vs_computer,
@@ -100,8 +101,15 @@ defmodule TicTacToe.PlayerFactory_Test do
     ])
   end
 
+  test 'human vs hard player and computer first choosen' do
+    assert_pair([@human_vs_computer,@hard_computer_player,@second_player_before], [
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+    ])
+  end
+
   test 'bad input provided' do
-    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player,3,@first_player_before], [
+    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])

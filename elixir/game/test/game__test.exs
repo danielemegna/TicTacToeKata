@@ -44,7 +44,7 @@ defmodule Game_Test do
   end
 
   test "wrong inputs and game over smoke test" do
-    players_choice = [5,@human_vs_computer,4,"bad",@hard_computer_player,4,@first_player_before]
+    players_choice = [5,@human_vs_computer,4,"bad",@hard_computer_player,@first_player_before]
     game_moves = ["bad",0,4,1,2,5]
     user_inputs = players_choice ++ game_moves
 

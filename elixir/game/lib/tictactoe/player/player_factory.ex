@@ -13,8 +13,15 @@ defmodule TicTacToe.PlayerFactory do
     " 2. #{Enum.at(players,1)}\n"<>
     "Enter [1-2]>"
       |> IO.gets
+      |> Integer.parse
+      |> player_order_for(players)
+  end
 
-    players
+  defp player_order_for({order, _}, players) when order in 1..2 do
+    case order do
+      1 -> players
+      2 -> Enum.reverse(players)
+    end
   end
 
   defp choose_game_type do
