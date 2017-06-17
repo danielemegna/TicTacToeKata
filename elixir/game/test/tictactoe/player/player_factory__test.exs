@@ -12,9 +12,12 @@ defmodule TicTacToe.PlayerFactory_Test do
   @medium_computer_player 2
   @hard_computer_player 3
 
+  @first_player_before 1
+
   @valid_human_vs_medium_computer [
     @human_vs_computer,
-    @medium_computer_player
+    @medium_computer_player,
+    @first_player_before
   ]
 
   test 'pair writes out menu to choose game type' do
@@ -59,14 +62,17 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'human vs human choosen' do
-    assert_pair([@human_vs_human], [
+    assert_pair([@human_vs_human,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Human },
     ])
   end
 
   test 'medium computer vs hard computer choosen' do
-    user_input = [@computer_vs_computer,@medium_computer_player,@hard_computer_player]
+    user_input = [
+      @computer_vs_computer,@medium_computer_player,
+      @hard_computer_player,@first_player_before
+    ]
     assert_pair(user_input, [
       %Player{ sign: "X", strategy: Player.Strategy.Medium },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
@@ -74,28 +80,28 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'human vs hard player choosen' do
-    assert_pair([@human_vs_computer,@hard_computer_player], [
+    assert_pair([@human_vs_computer,@hard_computer_player,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])
   end
 
   test 'human vs easy player choosen' do
-    assert_pair([@human_vs_computer,@easy_computer_player], [
+    assert_pair([@human_vs_computer,@easy_computer_player,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Easy },
     ])
   end
 
   test 'human vs medium player choosen' do
-    assert_pair([@human_vs_computer,@medium_computer_player], [
+    assert_pair([@human_vs_computer,@medium_computer_player,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Medium },
     ])
   end
 
   test 'bad input provided' do
-    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player], [
+    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player,3,@first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])

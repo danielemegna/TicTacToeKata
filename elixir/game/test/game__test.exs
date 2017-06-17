@@ -10,8 +10,10 @@ defmodule Game_Test do
   @medium_computer_player 2
   @hard_computer_player 3
 
+  @first_player_before 1
+
   test "fast hard game over smoke test" do
-    players_choice = [@human_vs_computer,@hard_computer_player]
+    players_choice = [@human_vs_computer,@hard_computer_player,@first_player_before]
     game_moves = [0,1,3]
     user_inputs = players_choice ++ game_moves
 
@@ -30,7 +32,7 @@ defmodule Game_Test do
   end
 
   test "tie hard game smoke test" do
-    players_choice = [@human_vs_computer,@hard_computer_player]
+    players_choice = [@human_vs_computer,@hard_computer_player,@first_player_before]
     game_moves = [4,2,3,1,8]
     user_inputs = players_choice ++ game_moves
 
@@ -42,7 +44,7 @@ defmodule Game_Test do
   end
 
   test "wrong inputs and game over smoke test" do
-    players_choice = [5,@human_vs_computer,4,"bad",@hard_computer_player]
+    players_choice = [5,@human_vs_computer,4,"bad",@hard_computer_player,4,@first_player_before]
     game_moves = ["bad",0,4,1,2,5]
     user_inputs = players_choice ++ game_moves
 
@@ -55,7 +57,7 @@ defmodule Game_Test do
   end
 
   test "win easy game smoke test" do
-    players_choice = [@human_vs_computer,@easy_computer_player]
+    players_choice = [@human_vs_computer,@easy_computer_player,@first_player_before]
     game_moves = [6,7,8]
     user_inputs = players_choice ++ game_moves
 
@@ -65,7 +67,7 @@ defmodule Game_Test do
   end
 
   test "win medium game smoke test" do
-    players_choice = [@human_vs_computer,@medium_computer_player]
+    players_choice = [@human_vs_computer,@medium_computer_player,@first_player_before]
     game_moves = [6,2,0,3]
     user_inputs = players_choice ++ game_moves
 
@@ -75,7 +77,7 @@ defmodule Game_Test do
   end
 
   test "human vs human tie game smoke test" do
-    players_choice = [@human_vs_human]
+    players_choice = [@human_vs_human,@first_player_before]
     game_moves = [4,0,2,6,3,5,1,7,8]
     user_inputs = players_choice ++ game_moves
 
@@ -86,7 +88,7 @@ defmodule Game_Test do
   end
 
   test "hard computer vs hard computer tie game smoke test" do
-    players_choice = [@computer_vs_computer,@hard_computer_player, @hard_computer_player]
+    players_choice = [@computer_vs_computer,@hard_computer_player,@hard_computer_player,@first_player_before]
     game_moves = []
     user_inputs = players_choice ++ game_moves
 

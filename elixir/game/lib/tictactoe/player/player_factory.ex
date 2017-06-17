@@ -12,7 +12,7 @@ defmodule TicTacToe.PlayerFactory do
     " 1. #{Enum.at(players,0)}\n"<>
     " 2. #{Enum.at(players,1)}\n"<>
     "Enter [1-2]>"
-      |> IO.puts
+      |> IO.gets
 
     players
   end
