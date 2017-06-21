@@ -4,12 +4,6 @@ defmodule TicTacToe.PlayerFactory_Test do
   import TestCommons
   alias TicTacToe.{Player,PlayerFactory}
 
-  @valid_human_vs_computer [
-    :human_vs_computer,
-    :medium_computer_player,
-    :first_player_before
-  ]
-
   test 'human vs human choosen' do
     assert_pair([:human_vs_human,:first_player_before], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
@@ -65,7 +59,9 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose game type' do
-    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for([
+      :human_vs_computer,:medium_computer_player,:first_player_before
+    ])
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -79,7 +75,9 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose the difficulty' do
-    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for([
+      :human_vs_computer,:medium_computer_player,:first_player_before
+    ])
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -93,7 +91,9 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose players order' do
-    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for([
+      :human_vs_computer,:medium_computer_player,:first_player_before
+    ])
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
