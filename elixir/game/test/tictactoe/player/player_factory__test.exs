@@ -2,8 +2,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   import TestCommons
-  alias TicTacToe.Player
-  alias TicTacToe.PlayerFactory
+  alias TicTacToe.{Player,PlayerFactory}
 
   @valid_human_vs_computer [
     :human_vs_computer,
