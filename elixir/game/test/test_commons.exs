@@ -10,9 +10,10 @@ defmodule TestCommons do
     hard_computer_player: 3,
 
     first_player_before: 1,
+    second_player_before: 2
   }
 
-  def user_inputs_for(players_choice, game_moves) do
+  def user_inputs_for(players_choice, game_moves \\ []) do
     players_choice = players_choice |>
       Enum.map(&Map.get(@user_inputs_map, &1, &1))
 

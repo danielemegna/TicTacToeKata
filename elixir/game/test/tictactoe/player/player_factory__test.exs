@@ -4,25 +4,68 @@ defmodule TicTacToe.PlayerFactory_Test do
   alias TicTacToe.Player
   alias TicTacToe.PlayerFactory
 
-  @human_vs_human 1
-  @computer_vs_computer 2
-  @human_vs_computer 3
-
-  @easy_computer_player 1
-  @medium_computer_player 2
-  @hard_computer_player 3
-
-  @first_player_before 1
-  @second_player_before 2
-
-  @valid_human_vs_medium_computer [
-    @human_vs_computer,
-    @medium_computer_player,
-    @first_player_before
+  @valid_human_vs_computer [
+    :human_vs_computer,
+    :medium_computer_player,
+    :first_player_before
   ]
 
+  test 'human vs human choosen' do
+    assert_pair([:human_vs_human,:first_player_before], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Human },
+    ])
+  end
+
+  test 'medium computer vs hard computer choosen' do
+    user_input = [
+      :computer_vs_computer,:medium_computer_player,
+      :hard_computer_player,:first_player_before
+    ]
+    assert_pair(user_input, [
+      %Player{ sign: "X", strategy: Player.Strategy.Medium },
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
+    ])
+  end
+
+  test 'human vs hard player choosen' do
+    assert_pair([:human_vs_computer,:hard_computer_player,:first_player_before], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
+    ])
+  end
+
+  test 'human vs easy player choosen' do
+    assert_pair([:human_vs_computer,:easy_computer_player,:first_player_before], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Easy },
+    ])
+  end
+
+  test 'human vs medium player choosen' do
+    assert_pair([:human_vs_computer,:medium_computer_player,:first_player_before], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Medium },
+    ])
+  end
+
+  test 'human vs hard player and computer first choosen' do
+    assert_pair([:human_vs_computer,:hard_computer_player,:second_player_before], [
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+    ])
+  end
+
+  test 'bad input provided' do
+    output = assert_pair(["bad",:human_vs_computer,5,:hard_computer_player,3,:first_player_before], [
+      %Player{ sign: "X", strategy: Player.Strategy.Human },
+      %Player{ sign: "O", strategy: Player.Strategy.Hard },
+    ])
+    assert_contains(output, "Bad input! Retry..")
+  end
+
   test 'pair writes out menu to choose game type' do
-    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
+    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -36,7 +79,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose the difficulty' do
-    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
+    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -50,7 +93,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose players order' do
-    valid_user_inputs = user_input(@valid_human_vs_medium_computer)
+    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -62,65 +105,8 @@ defmodule TicTacToe.PlayerFactory_Test do
       "Enter [1-2]>")
   end
 
-  test 'human vs human choosen' do
-    assert_pair([@human_vs_human,@first_player_before], [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Human },
-    ])
-  end
-
-  test 'medium computer vs hard computer choosen' do
-    user_input = [
-      @computer_vs_computer,@medium_computer_player,
-      @hard_computer_player,@first_player_before
-    ]
-    assert_pair(user_input, [
-      %Player{ sign: "X", strategy: Player.Strategy.Medium },
-      %Player{ sign: "O", strategy: Player.Strategy.Hard },
-    ])
-  end
-
-  test 'human vs hard player choosen' do
-    assert_pair([@human_vs_computer,@hard_computer_player,@first_player_before], [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Hard },
-    ])
-  end
-
-  test 'human vs easy player choosen' do
-    assert_pair([@human_vs_computer,@easy_computer_player,@first_player_before], [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Easy },
-    ])
-  end
-
-  test 'human vs medium player choosen' do
-    assert_pair([@human_vs_computer,@medium_computer_player,@first_player_before], [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Medium },
-    ])
-  end
-
-  test 'human vs hard player and computer first choosen' do
-    assert_pair([@human_vs_computer,@hard_computer_player,@second_player_before], [
-      %Player{ sign: "O", strategy: Player.Strategy.Hard },
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-    ])
-  end
-
-  test 'bad input provided' do
-    output = assert_pair(["bad",@human_vs_computer,5,@hard_computer_player,3,@first_player_before], [
-      %Player{ sign: "X", strategy: Player.Strategy.Human },
-      %Player{ sign: "O", strategy: Player.Strategy.Hard },
-    ])
-    assert_contains(output, "Bad input! Retry..")
-  end
-
-  defp user_input(list), do: Enum.join(list, "\n")
-
-  defp assert_pair(list, expected) when is_list(list), do:
-    assert_pair(user_input(list), expected)
-  defp assert_pair(input, expected) do
+  defp assert_pair(user_input, expected) do
+    input = TestCommons.user_inputs_for(user_input)
     capture_io(input, fn ->
       assert PlayerFactory.pair == expected
     end)
