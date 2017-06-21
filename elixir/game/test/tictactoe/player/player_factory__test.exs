@@ -1,6 +1,7 @@
 defmodule TicTacToe.PlayerFactory_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import TestCommons
   alias TicTacToe.Player
   alias TicTacToe.PlayerFactory
 
@@ -65,7 +66,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose game type' do
-    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -79,7 +80,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose the difficulty' do
-    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -93,7 +94,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'pair writes out menu to choose players order' do
-    valid_user_inputs = TestCommons.user_inputs_for(@valid_human_vs_computer)
+    valid_user_inputs = user_inputs_for(@valid_human_vs_computer)
     output = capture_io(valid_user_inputs, fn ->
       PlayerFactory.pair
     end)
@@ -106,15 +107,10 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   defp assert_pair(user_input, expected) do
-    input = TestCommons.user_inputs_for(user_input)
+    input = user_inputs_for(user_input)
     capture_io(input, fn ->
       assert PlayerFactory.pair == expected
     end)
-  end
-
-  defp assert_contains(string, substring) do
-    assert String.contains?(string, substring),
-      "Expected #{inspect string} to contain #{inspect substring}"
   end
 
 end

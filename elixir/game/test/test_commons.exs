@@ -1,4 +1,5 @@
 defmodule TestCommons do
+  use ExUnit.Case
 
   @user_inputs_map %{
     human_vs_human: 1,
@@ -19,6 +20,16 @@ defmodule TestCommons do
 
     user_inputs = players_choice ++ game_moves
     Enum.join(user_inputs, "\n")
+  end
+
+  def assert_contains(string, substring) do
+    assert String.contains?(string, substring),
+      "Expected #{inspect string} to contain #{inspect substring}"
+  end
+
+  def assert_not_contains(string, substring) do
+    assert !String.contains?(string, substring),
+      "Expected #{inspect string} to NOT contain #{inspect substring}"
   end
 
 end

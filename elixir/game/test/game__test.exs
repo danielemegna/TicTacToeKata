@@ -1,6 +1,7 @@
 defmodule Game_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import TestCommons
 
   test "fast hard game over smoke test" do
     players_choice = [:human_vs_computer, :hard_computer_player, :first_player_before]
@@ -84,20 +85,10 @@ defmodule Game_Test do
   end
 
   defp game(players_choice, game_moves) do
-    input = TestCommons.user_inputs_for(players_choice, game_moves)
+    input = user_inputs_for(players_choice, game_moves)
     capture_io(input, fn ->
       assert Game.start_game == :ok
     end)
-  end
-
-  defp assert_contains(string, substring) do
-    assert String.contains?(string, substring),
-      "Expected #{inspect string} to contain #{inspect substring}"
-  end
-
-  defp assert_not_contains(string, substring) do
-    assert !String.contains?(string, substring),
-      "Expected #{inspect string} to NOT contain #{inspect substring}"
   end
 
 end
