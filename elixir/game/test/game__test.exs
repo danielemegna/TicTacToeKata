@@ -84,6 +84,16 @@ defmodule Game_Test do
     assert_not_contains(output, "already marked")
   end
 
+  test "human vs human second player first smoke test" do
+    players_choice = [:human_vs_human,:second_player_before]
+    game_moves = [0,8,6,3,2,4,1]
+
+    output = game(players_choice, game_moves)
+
+    assert_contains(output, "O   O   O")
+    assert_contains(output, "O wins! Game Over")
+  end
+
   defp game(players_choice, game_moves) do
     input = user_inputs_for(players_choice, game_moves)
     capture_io(input, fn ->
