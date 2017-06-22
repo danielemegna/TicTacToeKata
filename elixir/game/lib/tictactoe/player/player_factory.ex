@@ -7,28 +7,6 @@ defmodule TicTacToe.PlayerFactory do
       |> who_go_first?
   end
 
-  defp who_go_first?(players) do
-    "Who go first?\n"<>
-    " 1. #{Enum.at(players,0)}\n"<>
-    " 2. #{Enum.at(players,1)}\n"<>
-    "Enter [1-2]>"
-      |> IO.gets
-      |> Integer.parse
-      |> player_order_for(players)
-  end
-
-  defp player_order_for({order, _}, players) when order in 1..2 do
-    case order do
-      1 -> players
-      2 -> Enum.reverse(players)
-    end
-  end
-
-  defp player_order_for(_, players) do
-    "Bad input! Retry..\n" |> IO.puts
-    who_go_first?(players)
-  end
-
   defp choose_game_type do
     "Choose game type\n"<>
     " 1. Human v. Human\n"<>
@@ -83,6 +61,28 @@ defmodule TicTacToe.PlayerFactory do
       2 -> Player.Strategy.Medium
       3 -> Player.Strategy.Hard
     end
+  end
+
+  defp who_go_first?(players) do
+    "Who go first?\n"<>
+    " 1. #{Enum.at(players,0)}\n"<>
+    " 2. #{Enum.at(players,1)}\n"<>
+    "Enter [1-2]>"
+      |> IO.gets
+      |> Integer.parse
+      |> player_order_for(players)
+  end
+
+  defp player_order_for({order, _}, players) when order in 1..2 do
+    case order do
+      1 -> players
+      2 -> Enum.reverse(players)
+    end
+  end
+
+  defp player_order_for(_, players) do
+    "Bad input! Retry..\n" |> IO.puts
+    who_go_first?(players)
   end
 
 end
