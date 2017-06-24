@@ -11,7 +11,7 @@ defmodule Game_Test do
 
     assert_contains(output, "Choose game type")
     assert_contains(output, "Enter [1-4]>")
-    assert_contains(output, "Choose computer level of difficulty")
+    assert_contains(output, "Choose computer level of difficulty ('O' symbol player)")
     assert_contains(output, "Enter [1-3]>")
     assert_contains(output, "Enter [0-8]>")
     assert_contains(output, "X")
@@ -78,6 +78,8 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
+    assert_contains(output, "Choose computer level of difficulty ('X' symbol player)")
+    assert_contains(output, "Choose computer level of difficulty ('O' symbol player)")
     assert_contains(output, "Tie! Game Over")
     assert_not_contains(output, "Enter [0-8]>")
     assert_not_contains(output, "Bad input! Retry..")
@@ -92,6 +94,7 @@ defmodule Game_Test do
 
     assert_contains(output, "X   X   X")
     assert_contains(output, "X wins! Game Over")
+    assert_not_contains(output, "Choose computer level")
   end
 
   defp game(players_choice, game_moves) do

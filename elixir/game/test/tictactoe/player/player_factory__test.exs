@@ -84,7 +84,7 @@ defmodule TicTacToe.PlayerFactory_Test do
     end)
 
     assert_contains(output,
-      "Choose computer level of difficulty\n"<>
+      "Choose computer level of difficulty ('O' symbol player)\n"<>
       " 1. Easy\n"<>
       " 2. Medium\n"<>
       " 3. Hard (unbeatable)\n"<>

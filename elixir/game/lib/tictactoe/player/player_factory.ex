@@ -37,7 +37,7 @@ defmodule TicTacToe.PlayerFactory do
     %Player{ sign: sign, strategy: Player.Strategy.Human }
 
   defp computer_player(sign) do
-    "Choose computer level of difficulty\n"<>
+    "Choose computer level of difficulty ('#{sign}' symbol player)\n"<>
     " 1. Easy\n"<>
     " 2. Medium\n"<>
     " 3. Hard (unbeatable)\n" <>
