@@ -5,9 +5,10 @@ defmodule TicTacToe.Player do
   defstruct @enforce_keys
 
   def play(board, player) do
-    board |> Board.mark(
-      player.strategy.next_move(board, player.sign),
-      player.sign
-    )
+    player_sign = player.sign
+    next_move = player.strategy.next_move(board, player_sign)
+
+    "'#{player_sign}' marked #{next_move} position" |> IO.puts
+    board |> Board.mark(next_move, player_sign)
   end
 end
