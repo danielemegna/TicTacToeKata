@@ -11,7 +11,7 @@ defmodule TicTacToe.Player.Strategy.Human do
 
   defp evaluate({move, _}, board, sign) when move in 0..8 do
     unless Board.free?(board, move) do
-      "Cell #{move} already marked! Retry.." |> IO.puts
+      "Cell #{move} already marked! Retry..\n" |> IO.puts
       next_move(board, sign)
     else
       move
@@ -19,7 +19,7 @@ defmodule TicTacToe.Player.Strategy.Human do
   end
 
   defp evaluate(_, board, sign) do
-    "Bad input! Retry.." |> IO.puts
+    "Bad input! Retry..\n" |> IO.puts
     next_move(board, sign)
   end
 
