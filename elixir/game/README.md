@@ -24,6 +24,8 @@ Second iteration
 - [x] Print out computer player symbol during difficulty choice
 - [x] Print out last move information
 - [ ] Print "Choose your next move" message ?
+- [ ] Player module unit tests ?
+- [ ] Assert multiple contains in tests ?
 
 
 ### Notes
