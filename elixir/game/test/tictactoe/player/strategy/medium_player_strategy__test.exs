@@ -47,10 +47,6 @@ defmodule TicTacToe.Player.Strategy.Medium_Test do
     ]) == 5
   end
 
-  test "to_str function describes the strategy" do
-    assert Player.Strategy.Medium.to_str == "Medium computer"
-  end
-
   defp next_move(board) do
     Player.Strategy.Medium.next_move(%Board{cells: board}, "O")
   end

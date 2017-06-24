@@ -2,8 +2,6 @@ defmodule TicTacToe.Player.Strategy.Medium do
   alias TicTacToe.Referee
   alias TicTacToe.Board
 
-  def to_str, do: "Medium computer"
-
   def next_move(board, _) do
     board 
       |> Board.available_moves

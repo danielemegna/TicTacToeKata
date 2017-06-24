@@ -2,8 +2,6 @@ defmodule TicTacToe.Player.Strategy.Hard do
   alias TicTacToe.Board
   alias TicTacToe.Player.Strategy.Minimax
 
-  def to_str, do: "Hard computer"
-
   def next_move(board, my_sign) do
     cond do
       first_move?(board) -> 0

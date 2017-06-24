@@ -58,10 +58,6 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     assert_received {:chosen_move, 4}
   end
 
-  test "to_str function describes the strategy" do
-    assert Player.Strategy.Human.to_str == "Human"
-  end
-
   defp next_move(board, input) do
     capture_io(input, fn ->
       chosen_move = Player.Strategy.Human.next_move(board, "X")
