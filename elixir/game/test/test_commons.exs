@@ -3,15 +3,13 @@ defmodule TestCommons do
 
   @user_inputs_map %{
     human_vs_human: 1,
-    computer_vs_computer: 2,
-    human_vs_computer: 3,
+    human_vs_computer: 2,
+    computer_vs_human: 3,
+    computer_vs_computer: 4,
     
     easy_computer_player: 1,
     medium_computer_player: 2,
     hard_computer_player: 3,
-
-    first_player_before: 1,
-    second_player_before: 2
   }
 
   def user_inputs_for(players_choice, game_moves \\ []) do

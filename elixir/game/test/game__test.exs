@@ -4,15 +4,15 @@ defmodule Game_Test do
   import TestCommons
 
   test "fast hard game over smoke test" do
-    players_choice = [:human_vs_computer, :hard_computer_player, :first_player_before]
+    players_choice = [:human_vs_computer, :hard_computer_player]
     game_moves = [0,1,3]
 
     output = game(players_choice, game_moves)
 
     assert_contains(output, "Choose game type")
+    assert_contains(output, "Enter [1-4]>")
     assert_contains(output, "Choose computer level of difficulty")
     assert_contains(output, "Enter [1-3]>")
-    assert_contains(output, "Enter [1-2]>")
     assert_contains(output, "Enter [0-8]>")
     assert_contains(output, "X")
     assert_contains(output, "O wins! Game Over")
@@ -22,7 +22,7 @@ defmodule Game_Test do
   end
 
   test "tie hard game smoke test" do
-    players_choice = [:human_vs_computer,:hard_computer_player,:first_player_before]
+    players_choice = [:human_vs_computer,:hard_computer_player]
     game_moves = [4,2,3,1,8]
 
     output = game(players_choice, game_moves)
@@ -33,7 +33,7 @@ defmodule Game_Test do
   end
 
   test "wrong inputs and game over smoke test" do
-    players_choice = [5,:human_vs_computer,4,"bad",:hard_computer_player,4,:first_player_before]
+    players_choice = [5,:human_vs_computer,4,"bad",:hard_computer_player]
     game_moves = ["bad",0,4,1,2,5]
 
     output = game(players_choice, game_moves)
@@ -45,7 +45,7 @@ defmodule Game_Test do
   end
 
   test "win easy game smoke test" do
-    players_choice = [:human_vs_computer,:easy_computer_player,:first_player_before]
+    players_choice = [:human_vs_computer,:easy_computer_player]
     game_moves = [6,7,8]
 
     output = game(players_choice, game_moves)
@@ -54,7 +54,7 @@ defmodule Game_Test do
   end
 
   test "win medium game smoke test" do
-    players_choice = [:human_vs_computer,:medium_computer_player,:first_player_before]
+    players_choice = [:human_vs_computer,:medium_computer_player]
     game_moves = [6,2,0,3]
 
     output = game(players_choice, game_moves)
@@ -63,7 +63,7 @@ defmodule Game_Test do
   end
 
   test "human vs human tie game smoke test" do
-    players_choice = [:human_vs_human,:first_player_before]
+    players_choice = [:human_vs_human]
     game_moves = [4,0,2,6,3,5,1,7,8]
 
     output = game(players_choice, game_moves)
@@ -73,7 +73,7 @@ defmodule Game_Test do
   end
 
   test "hard computer vs hard computer tie game smoke test" do
-    players_choice = [:computer_vs_computer,:hard_computer_player,:hard_computer_player,:first_player_before]
+    players_choice = [:computer_vs_computer,:hard_computer_player,:hard_computer_player]
     game_moves = []
 
     output = game(players_choice, game_moves)
@@ -84,14 +84,14 @@ defmodule Game_Test do
     assert_not_contains(output, "already marked")
   end
 
-  test "human vs human second player first smoke test" do
-    players_choice = [:human_vs_human,:second_player_before]
+  test "human vs human first player win smoke test" do
+    players_choice = [:human_vs_human]
     game_moves = [0,8,6,3,2,4,1]
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "O   O   O")
-    assert_contains(output, "O wins! Game Over")
+    assert_contains(output, "X   X   X")
+    assert_contains(output, "X wins! Game Over")
   end
 
   defp game(players_choice, game_moves) do

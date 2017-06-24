@@ -20,7 +20,10 @@ Second iteration
 - [x] Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
 - [x] Allow the user to choose the game type (human v. human, computer v. computer, human v. computer).
 - [x] Allow the user to choose which player goes first.
-- [ ] Allow the user to choose with what “symbol” the players will mark their selections on the board (traditionally it’s “X” and “O”).
+- [x] Allow the user to choose with what “symbol” the players will mark their selections on the board (traditionally it’s “X” and “O”).
+- [ ] Print out computer player symbol during difficulty choice ?
+- [ ] Print out last move information ?
+- [ ] Print "Choose your next move" message ?
 
 
 ### Notes

@@ -11,7 +11,3 @@ defmodule TicTacToe.Player do
     )
   end
 end
-
-defimpl String.Chars, for: TicTacToe.Player do
-  def to_string(player), do: "#{player.strategy.to_str} player (#{player.sign})"
-end
