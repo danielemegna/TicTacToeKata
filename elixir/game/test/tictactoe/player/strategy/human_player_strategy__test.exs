@@ -8,7 +8,10 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     board = Board.new
     user_choice = "0"
 
-    assert next_move(board, user_choice) == "Enter [0-8]>"
+    assert next_move(board, user_choice) ==
+      "'X' player, choose your next move!\n"<>
+      "Enter [0-8]>"
+
     assert_received {:chosen_move, 0}
   end
 
@@ -17,8 +20,10 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     user_choices = "bad\n" <> "6"
 
     assert next_move(board, user_choices) ==
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Bad input! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"
     assert_received {:chosen_move, 6}
   end
@@ -28,12 +33,16 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
     user_choices = "9\n" <> "11\n" <> "-1\n" <> "5"
 
     assert next_move(board, user_choices) ==
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Bad input! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Bad input! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Bad input! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"
     assert_received {:chosen_move, 5}
   end
@@ -50,10 +59,13 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "4"
 
     assert next_move(board, user_choices) ==
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Cell 0 already marked! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"<>
       "Cell 3 already marked! Retry..\n"<>
+      "'X' player, choose your next move!\n"<>
       "Enter [0-8]>"
     assert_received {:chosen_move, 4}
   end

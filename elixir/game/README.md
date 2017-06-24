@@ -23,7 +23,7 @@ Second iteration
 - [x] Allow the user to choose with what “symbol” the players will mark their selections on the board (traditionally it’s “X” and “O”).
 - [x] Print out computer player symbol during difficulty choice
 - [x] Print out last move information
-- [ ] Print "Choose your next move" message ?
+- [x] Print "Choose your next move" message
 - [ ] Player module unit tests ?
 - [ ] Assert multiple contains in tests ?
 

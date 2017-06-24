@@ -13,16 +13,16 @@ defmodule Game_Test do
     assert_contains(output, "Enter [1-4]>")
     assert_contains(output, "Choose computer level of difficulty ('O' symbol player)")
     assert_contains(output, "Enter [1-3]>")
+    assert_contains(output, "'X' player, choose your next move!")
     assert_contains(output, "Enter [0-8]>")
     assert_contains(output, "0   1   2")
     assert_contains(output, "'X' marked 0 position")
-    assert_contains(output, "'X' marked 3 position")
-    assert_contains(output, "'O' marked 4 position")
     assert_contains(output, "'O' marked 6 position")
     assert_contains(output, "X   X   O")
     assert_contains(output, "O wins! Game Over")
 
-    assert_not_contains(output, "Bad input! Retry..")
+    assert_not_contains(output, "'O' player, choose your next move!")
+    assert_not_contains(output, "Bad input")
     assert_not_contains(output, "already marked")
   end
 
@@ -74,6 +74,8 @@ defmodule Game_Test do
     output = game(players_choice, game_moves)
 
     assert_not_contains(output, "Choose computer level of difficulty")
+    assert_contains(output, "'X' player, choose your next move!")
+    assert_contains(output, "'O' player, choose your next move!")
     assert_contains(output, "Tie! Game Over")
   end
 
@@ -88,6 +90,7 @@ defmodule Game_Test do
     assert_contains(output, "Tie! Game Over")
     assert_not_contains(output, "Enter [0-8]>")
     assert_not_contains(output, "Bad input! Retry..")
+    assert_not_contains(output, "choose your next move")
     assert_not_contains(output, "already marked")
   end
 
