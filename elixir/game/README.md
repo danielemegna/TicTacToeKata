@@ -29,6 +29,7 @@ Final improvements
 - [ ] Human player unit tests seem too flaky ..
 - [ ] Player module unit tests ?
 - [ ] Assert multiple contains in tests ?
+- [ ] Duplication of opposite sign calculation
 
 
 ### Notes
