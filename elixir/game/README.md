@@ -26,7 +26,7 @@ Final improvements
 - [x] Print out computer player symbol during difficulty choice
 - [x] Print out last move information
 - [x] Print "Choose your next move" message
-- [ ] Human player unit tests seem too flaky ..
+- [x] Human player tests could be improved
 - [ ] Player module unit tests ?
 - [ ] Assert multiple contains in tests ?
 - [ ] Duplication of opposite sign calculation

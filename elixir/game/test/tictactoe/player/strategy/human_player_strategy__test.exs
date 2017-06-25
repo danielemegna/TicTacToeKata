@@ -32,7 +32,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "Enter [0-8]>"
   end
 
-  test "move index out of board" do
+  test "on index out of board player can retry" do
     board = Board.new
     user_choices = [9,11,-1,5]
     expected = 5
@@ -53,7 +53,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "Enter [0-8]>"
   end
 
-  test "trying to mark a marked cell, player can choose another one" do
+  test "on already marked cell player can retry" do
     board = %Board{cells: [
       "O", 1 , 2,
       "X", 4 , 5,
