@@ -27,9 +27,8 @@ Final improvements
 - [x] Print out last move information
 - [x] Print "Choose your next move" message
 - [x] Human player tests could be improved
-- [ ] Player module unit tests ?
+- [x] Player module unit tests ?
 - [x] Assert multiple contains in tests ?
-- [ ] Duplication of opposite sign calculation
 
 
 ### Notes
