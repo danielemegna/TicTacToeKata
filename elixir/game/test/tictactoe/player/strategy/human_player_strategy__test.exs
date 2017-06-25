@@ -1,12 +1,13 @@
 defmodule TicTacToe.Player.Strategy.Human_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import TestCommons
   alias TicTacToe.Board
   alias TicTacToe.Player
 
   test "mark first cell" do
     board = Board.new
-    user_choice = "0"
+    user_choice = ["0"]
     expected = 0
 
     output = next_move(board, user_choice, expected)
@@ -16,9 +17,9 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "Enter [0-8]>"
   end
 
-  test "bad user input" do
+  test "on bad user input player can retry" do
     board = Board.new
-    user_choices = "bad\n" <> "6"
+    user_choices = ["bad", "6"]
     expected = 6
 
     output = next_move(board, user_choices, expected)
@@ -33,7 +34,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
 
   test "move index out of board" do
     board = Board.new
-    user_choices = "9\n" <> "11\n" <> "-1\n" <> "5"
+    user_choices = [9,11,-1,5]
     expected = 5
 
     output = next_move(board, user_choices, expected)
@@ -58,7 +59,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "X", 4 , 5,
        6 , 7 , 8
     ]}
-    user_choices = "0\n"<> "3\n"<> "4"
+    user_choices = [0,3,4]
     expected = 4
 
     output = next_move(board, user_choices, expected)
@@ -74,7 +75,8 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
       "Enter [0-8]>"
   end
 
-  defp next_move(board, input, expected_move) do
+  defp next_move(board, choices, expected_move) do
+    input = user_inputs_for(choices)
     capture_io(input, fn ->
       chosen_move = Player.Strategy.Human.next_move(board, "X")
       assert expected_move == chosen_move
