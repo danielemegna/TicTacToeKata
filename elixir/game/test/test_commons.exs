@@ -18,11 +18,21 @@ defmodule TestCommons do
       |> Enum.join("\n")
   end
 
+  def assert_contains(_, []), do: :ok
+  def assert_contains(string, [first|rest]) do
+    assert_contains(string, first)
+    assert_contains(string, rest)
+  end
   def assert_contains(string, substring) do
     assert String.contains?(string, substring),
       "Expected #{inspect string} to contain #{inspect substring}"
   end
 
+  def assert_not_contains(_, []), do: :ok
+  def assert_not_contains(string, [first|rest]) do
+    assert_not_contains(string, first)
+    assert_not_contains(string, rest)
+  end
   def assert_not_contains(string, substring) do
     assert !String.contains?(string, substring),
       "Expected #{inspect string} to NOT contain #{inspect substring}"

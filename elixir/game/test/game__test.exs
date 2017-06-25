@@ -9,21 +9,25 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "Choose game type")
-    assert_contains(output, "Enter [1-4]>")
-    assert_contains(output, "Choose computer level of difficulty ('O' symbol player)")
-    assert_contains(output, "Enter [1-3]>")
-    assert_contains(output, "'X' player, choose your next move!")
-    assert_contains(output, "Enter [0-8]>")
-    assert_contains(output, "0   1   2")
-    assert_contains(output, "'X' marked 0 position")
-    assert_contains(output, "'O' marked 6 position")
-    assert_contains(output, "X   X   O")
-    assert_contains(output, "O wins! Game Over")
+    assert_contains(output,[
+      "Choose game type",
+      "Enter [1-4]>",
+      "Choose computer level of difficulty ('O' symbol player)",
+      "Enter [1-3]>",
+      "'X' player, choose your next move!",
+      "Enter [0-8]>",
+      "0   1   2",
+      "'X' marked 0 position",
+      "'O' marked 6 position",
+      "X   X   O",
+      "O wins! Game Over"
+    ])
 
-    assert_not_contains(output, "'O' player, choose your next move!")
-    assert_not_contains(output, "Bad input")
-    assert_not_contains(output, "already marked")
+    assert_not_contains(output,[
+      "'O' player, choose your next move!",
+      "Bad input",
+      "already marked"
+    ])
   end
 
   test "tie hard game smoke test" do
@@ -32,9 +36,7 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "X")
-    assert_contains(output, "O")
-    assert_contains(output, "Tie! Game Over")
+    assert_contains(output, ["X","O","Tie! Game Over"])
   end
 
   test "wrong inputs and game over smoke test" do
@@ -43,10 +45,12 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "Bad input! Retry..")
-    assert_contains(output, "Cell 4 already marked! Retry..")
-    assert_contains(output, "Cell 2 already marked! Retry..")
-    assert_contains(output, "O wins! Game Over")
+    assert_contains(output,[
+      "Bad input! Retry..",
+      "Cell 4 already marked! Retry..",
+      "Cell 2 already marked! Retry..",
+      "O wins! Game Over"
+    ])
   end
 
   test "win easy game smoke test" do
@@ -73,10 +77,12 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
+    assert_contains(output,[
+      "'X' player, choose your next move!",
+      "'O' player, choose your next move!",
+      "Tie! Game Over"
+    ])
     assert_not_contains(output, "Choose computer level of difficulty")
-    assert_contains(output, "'X' player, choose your next move!")
-    assert_contains(output, "'O' player, choose your next move!")
-    assert_contains(output, "Tie! Game Over")
   end
 
   test "hard computer vs hard computer tie game smoke test" do
@@ -85,13 +91,17 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "Choose computer level of difficulty ('X' symbol player)")
-    assert_contains(output, "Choose computer level of difficulty ('O' symbol player)")
-    assert_contains(output, "Tie! Game Over")
-    assert_not_contains(output, "Enter [0-8]>")
-    assert_not_contains(output, "Bad input! Retry..")
-    assert_not_contains(output, "choose your next move")
-    assert_not_contains(output, "already marked")
+    assert_contains(output,[
+      "Choose computer level of difficulty ('X' symbol player)",
+      "Choose computer level of difficulty ('O' symbol player)",
+      "Tie! Game Over"
+    ])
+    assert_not_contains(output,[
+      "Enter [0-8]>",
+      "Bad input! Retry..",
+      "choose your next move",
+      "already marked"
+    ])
   end
 
   test "human vs human first player win smoke test" do
@@ -100,8 +110,7 @@ defmodule Game_Test do
 
     output = game(players_choice, game_moves)
 
-    assert_contains(output, "X   X   X")
-    assert_contains(output, "X wins! Game Over")
+    assert_contains(output, ["X   X   X", "X wins! Game Over"])
     assert_not_contains(output, "Choose computer level")
   end
 
