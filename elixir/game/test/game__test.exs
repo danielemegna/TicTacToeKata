@@ -106,7 +106,7 @@ defmodule Game_Test do
   end
 
   defp game(players_choice, game_moves) do
-    input = user_inputs_for(players_choice, game_moves)
+    input = user_inputs_for(players_choice ++ game_moves)
     capture_io(input, fn ->
       assert Game.start_game == :ok
     end)

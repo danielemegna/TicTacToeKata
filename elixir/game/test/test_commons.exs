@@ -12,12 +12,10 @@ defmodule TestCommons do
     hard_computer_player: 3,
   }
 
-  def user_inputs_for(players_choice, game_moves \\ []) do
-    players_choice = players_choice |>
-      Enum.map(&Map.get(@user_inputs_map, &1, &1))
-
-    user_inputs = players_choice ++ game_moves
-    Enum.join(user_inputs, "\n")
+  def user_inputs_for(choices) do
+    choices
+      |> Enum.map(&Map.get(@user_inputs_map, &1, &1))
+      |> Enum.join("\n")
   end
 
   def assert_contains(string, substring) do
