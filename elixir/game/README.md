@@ -1,9 +1,51 @@
-# Game
+# TicTacToe Game
 
 [![Build Status](https://travis-ci.org/danielemegna/TicTacToeKata.svg?branch=master)](https://travis-ci.org/danielemegna/TicTacToeKata)
 
-Play the game with iex -S mix
+## Requirements
+
+`Elixir ~1.4.5`
+or
+`Docker ~17.06`
+
+## How to start a new game
+
+Start the Elixir's interactive shell with
+```
+iex -S mix
+```
+and start the game with
+```
 > Game.start_game
+```
+
+## Run with docker
+
+Build a new docker image `ttt` with
+```
+$ docker build -t ttt
+```
+run it with
+```
+$ docker run --rm -it ttt
+```
+Elixir's interactive shell is already opened,
+start the game with
+```
+> Game.start_game
+```
+
+## Run tests
+
+```
+$ mix test
+```
+or with docker (after a `docker build -t ttt`)
+```
+$ docker run --rm -it ttt mix test
+```
+
+_________
 
 ### Todo list
 
@@ -31,7 +73,7 @@ Final improvements
 - [x] Assert multiple contains in tests ?
 
 Third iteration (code review)
-- [ ] Specify Elixir supported version
+- [x] Specify Elixir supported version
 - [ ] Remove IO dependecy from game logic modules
 - [ ] Remove duplication of knowledge about the board dimension
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
@@ -41,9 +83,9 @@ Third iteration (code review)
 
 ### Notes
 
-Docker dev-ready environment
+Docker dev-ready environment with code mounted as volume
 ```
-$ docker run --rm -itv $(pwd):/app elixir:slim bash
+$ docker run --rm -itv $(pwd):/app elixir:1.4.5-slim bash
 ```
 
 Run tests into the container with
