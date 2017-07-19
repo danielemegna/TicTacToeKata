@@ -25,4 +25,8 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
+  def cell_marked(sign, position) do
+    "'#{sign}' marked #{position} position" |> IO.puts
+  end
+
 end

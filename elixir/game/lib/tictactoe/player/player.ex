@@ -1,5 +1,6 @@
 defmodule TicTacToe.Player do
   alias TicTacToe.Board
+  alias TicTacToe.IOAdapter
 
   @enforce_keys [:sign, :strategy]
   defstruct @enforce_keys
@@ -8,7 +9,7 @@ defmodule TicTacToe.Player do
     player_sign = player.sign
     next_move = player.strategy.next_move(board, player_sign)
 
-    "'#{player_sign}' marked #{next_move} position" |> IO.puts
+    IOAdapter.cell_marked(player_sign, next_move)
     board |> Board.mark(next_move, player_sign)
   end
 end
