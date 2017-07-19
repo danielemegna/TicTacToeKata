@@ -8,7 +8,7 @@ defmodule TicTacToe.PlayerFactory do
   defp choose_game_type, do: IOAdapter.game_type? |> game_type_for
   defp game_type_for({type, _}) when type in 1..4, do: type
   defp game_type_for(_) do
-    IOAdapter.bad_input
+    IOAdapter.bad_input()
     choose_game_type()
   end
 
@@ -31,7 +31,7 @@ defmodule TicTacToe.PlayerFactory do
     %Player{ sign: sign, strategy: computer_strategy_for(type) }
 
   defp computer_player_for(_,sign) do
-    IOAdapter.bad_input
+    IOAdapter.bad_input()
     computer_player(sign)
   end
 

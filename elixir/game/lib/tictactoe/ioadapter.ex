@@ -11,10 +11,6 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
-  def bad_input do
-    "Bad input! Retry..\n" |> IO.puts
-  end
-
   def difficulty_level?(sign) do
     "Choose computer level of difficulty ('#{sign}' symbol player)\n"<>
     " 1. Easy\n"<>
@@ -25,9 +21,11 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
-  def cell_marked(sign, position) do
+  def bad_input, do:
+    "Bad input! Retry..\n" |> IO.puts
+
+  def cell_marked(sign, position), do:
     "'#{sign}' marked #{position} position" |> IO.puts
-  end
 
   def cell_already_marked(position), do:
     "Cell #{position} already marked! Retry..\n" |> IO.puts
