@@ -51,7 +51,7 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'bad input provided' do
-    output = assert_pair(["bad",:human_vs_computer,5,:hard_computer_player,3], [
+    output = assert_pair(["bad",:human_vs_computer,5,:hard_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
     ])
