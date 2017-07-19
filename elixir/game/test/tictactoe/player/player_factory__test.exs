@@ -51,9 +51,15 @@ defmodule TicTacToe.PlayerFactory_Test do
   end
 
   test 'bad input provided' do
-    output = assert_pair(["bad",:human_vs_computer,5,:hard_computer_player], [
+    output = assert_pair(["bad",:human_vs_computer,:hard_computer_player], [
       %Player{ sign: "X", strategy: Player.Strategy.Human },
       %Player{ sign: "O", strategy: Player.Strategy.Hard },
+    ])
+    assert_contains(output, "Bad input! Retry..")
+
+    output = assert_pair([:computer_vs_human,5,:easy_computer_player], [
+      %Player{ sign: "X", strategy: Player.Strategy.Easy },
+      %Player{ sign: "O", strategy: Player.Strategy.Human },
     ])
     assert_contains(output, "Bad input! Retry..")
   end
