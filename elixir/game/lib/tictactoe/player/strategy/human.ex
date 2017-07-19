@@ -1,5 +1,6 @@
 defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.Board
+  alias TicTacToe.IOAdapter
 
   def next_move(board, sign) do
     "'#{sign}' player, choose your next move!\n"<>
@@ -11,7 +12,7 @@ defmodule TicTacToe.Player.Strategy.Human do
 
   defp evaluate({move, _}, board, sign) when move in 0..8 do
     unless Board.free?(board, move) do
-      "Cell #{move} already marked! Retry..\n" |> IO.puts
+      IOAdapter.cell_already_marked(move)
       next_move(board, sign)
     else
       move
@@ -19,7 +20,7 @@ defmodule TicTacToe.Player.Strategy.Human do
   end
 
   defp evaluate(_, board, sign) do
-    "Bad input! Retry..\n" |> IO.puts
+    IOAdapter.bad_input()
     next_move(board, sign)
   end
 

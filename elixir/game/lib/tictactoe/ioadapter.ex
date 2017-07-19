@@ -29,4 +29,7 @@ defmodule TicTacToe.IOAdapter do
     "'#{sign}' marked #{position} position" |> IO.puts
   end
 
+  def cell_already_marked(position), do:
+    "Cell #{position} already marked! Retry..\n" |> IO.puts
+
 end
