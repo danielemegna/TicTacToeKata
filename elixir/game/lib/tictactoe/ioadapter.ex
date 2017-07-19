@@ -21,6 +21,13 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
+  def next_move?(sign) do
+    "'#{sign}' player, choose your next move!\n"<>
+    "Enter [0-8]>"
+      |> IO.gets
+      |> Integer.parse
+  end
+
   def bad_input, do:
     "Bad input! Retry..\n" |> IO.puts
 

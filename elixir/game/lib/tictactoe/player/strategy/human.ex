@@ -2,13 +2,8 @@ defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.Board
   alias TicTacToe.IOAdapter
 
-  def next_move(board, sign) do
-    "'#{sign}' player, choose your next move!\n"<>
-    "Enter [0-8]>"
-      |> IO.gets
-      |> Integer.parse
-      |> evaluate(board,sign)
-  end
+  def next_move(board, sign), do:
+    IOAdapter.next_move?(sign) |> evaluate(board,sign)
 
   defp evaluate({move, _}, board, sign) when move in 0..8 do
     unless Board.free?(board, move) do
