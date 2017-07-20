@@ -1,4 +1,5 @@
 defmodule TicTacToe.IOAdapter do
+  alias TicTacToe.Board
 
   def game_type? do
     "Choose game type\n"<>
@@ -26,6 +27,22 @@ defmodule TicTacToe.IOAdapter do
     "Enter [0-8]>"
       |> IO.gets
       |> Integer.parse
+  end
+
+  def print_board(board) do
+    "\n--------------\n\n  " |> IO.write
+    "#{Board.at(board, 0)}   " |> IO.write
+    "#{Board.at(board, 1)}   " |> IO.write
+    "#{Board.at(board, 2)}" |> IO.write
+    "\n ===+===+=== \n  " |> IO.write
+    "#{Board.at(board, 3)}   " |> IO.write
+    "#{Board.at(board, 4)}   " |> IO.write
+    "#{Board.at(board, 5)}" |> IO.write
+    "\n ===+===+=== \n  " |> IO.write
+    "#{Board.at(board, 6)}   " |> IO.write
+    "#{Board.at(board, 7)}   " |> IO.write
+    "#{Board.at(board, 8)}\n" |> IO.write
+    "\n--------------\n\n" |> IO.write
   end
 
   def cell_marked(sign, position), do:

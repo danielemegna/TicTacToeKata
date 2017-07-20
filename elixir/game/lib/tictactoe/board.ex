@@ -1,5 +1,6 @@
 defmodule TicTacToe.Board do
   defstruct cells: [0,1,2,3,4,5,6,7,8]
+  alias TicTacToe.IOAdapter
 
   def new do
     %__MODULE__{}
@@ -23,19 +24,7 @@ defmodule TicTacToe.Board do
   end
 
   def print(board) do
-    IO.write("\n--------------\n\n  ")
-    IO.write("#{at(board, 0)}   ")
-    IO.write("#{at(board, 1)}   ")
-    IO.write("#{at(board, 2)}")
-    IO.write("\n ===+===+=== \n  ")
-    IO.write("#{at(board, 3)}   ")
-    IO.write("#{at(board, 4)}   ")
-    IO.write("#{at(board, 5)}")
-    IO.write("\n ===+===+=== \n  ")
-    IO.write("#{at(board, 6)}   ")
-    IO.write("#{at(board, 7)}   ")
-    IO.write("#{at(board, 8)}\n")
-    IO.write("\n--------------\n\n")
+    IOAdapter.print_board(board)
     board
   end
 
