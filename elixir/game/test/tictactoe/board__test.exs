@@ -75,45 +75,6 @@ defmodule TicTacToe.Board_Test do
     assert Board.available_moves(board) == [1,3,5,6,7,8]
   end
 
-  test "print an empty board" do
-    expected =
-      "\n--------------"<>
-      "\n"<>
-      "\n  0   1   2"<>
-      "\n ===+===+=== "<>
-      "\n  3   4   5"<>
-      "\n ===+===+=== "<>
-      "\n  6   7   8"<>
-      "\n"<>
-      "\n--------------\n\n"
-
-    assert capture_io(fn ->
-      Board.print(Board.new)
-    end) == expected
-  end
-
-  test "print marked board" do
-    expected =
-      "\n--------------"<>
-      "\n"<>
-      "\n  X   X   2"<>
-      "\n ===+===+=== "<>
-      "\n  3   O   5"<>
-      "\n ===+===+=== "<>
-      "\n  X   7   O"<>
-      "\n"<>
-      "\n--------------\n\n"
-
-    marked_board = %Board{cells: [
-      "X","X", 2 ,
-       3 ,"O", 5 ,
-      "X", 7 ,"O"]}
-
-    assert capture_io(fn ->
-      Board.print(marked_board)
-    end) == expected
-  end
-
   test 'print function returns given board' do
     capture_io(fn ->
       board = %Board{cells: [0,1,2,"X", 4,5,6,7,"O"]}
