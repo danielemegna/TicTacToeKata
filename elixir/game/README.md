@@ -85,7 +85,7 @@ Third iteration (code review)
 
 Docker dev-ready environment with code mounted as volume
 ```
-$ docker run --rm -itv $(pwd):/app elixir:1.4.5-slim bash
+$ docker run --rm -itv $(pwd):/app -w /app elixir:1.4.5-slim bash
 ```
 
 Run tests into the container with
