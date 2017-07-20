@@ -1,5 +1,5 @@
 defmodule Game do
-  alias TicTacToe.{Board,Referee,Player,PlayerFactory}
+  alias TicTacToe.{Board,Referee,Player,PlayerFactory,IOAdapter}
 
   def start_game do
     players = PlayerFactory.pair
@@ -15,8 +15,8 @@ defmodule Game do
       |> Board.print
 
     case Referee.game_over?(new_board) do
-      {:yes, :none} -> "Tie! Game Over" |> IO.puts
-      {:yes, winner} -> "#{winner} wins! Game Over" |> IO.puts
+      {:yes, :none} -> IOAdapter.tie_game
+      {:yes, winner} -> IOAdapter.win_game(winner) 
       {:no, _} -> play(new_board, other_players ++ [current_player])
     end
   end

@@ -36,5 +36,8 @@ defmodule TicTacToe.IOAdapter do
 
   def cell_already_marked(position), do:
     "Cell #{position} already marked! Retry..\n" |> IO.puts
+    
+  def tie_game, do: "Tie! Game Over" |> IO.puts
+  def win_game(winner), do: "#{winner} wins! Game Over" |> IO.puts
 
 end
