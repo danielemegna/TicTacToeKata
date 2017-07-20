@@ -74,12 +74,13 @@ Final improvements
 
 Third iteration (code review)
 - [x] Specify Elixir supported version
-- [ ] Remove IO dependecy from game logic modules
+- [x] Remove IO dependecy from game logic modules
 - [ ] Remove duplication of knowledge about the board dimension
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
 - [x] Remove from refree "announce_or" logic: keep game flow logic in Game module
-- [ ] Mock Minimax module in Player.Strategy.Hard_Test ?
 - [ ] Board.at should not return index when cell is not marked
+- [ ] Mock Minimax module in Player.Strategy.Hard_Test ?
+- [ ] Mock IOAdapter where CaptureIO is used in tests ?
 
 ### Notes
 
