@@ -28,15 +28,13 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
-  def bad_input, do:
-    "Bad input! Retry..\n" |> IO.puts
-
   def cell_marked(sign, position), do:
     "'#{sign}' marked #{position} position" |> IO.puts
 
   def cell_already_marked(position), do:
     "Cell #{position} already marked! Retry..\n" |> IO.puts
     
+  def bad_input, do: "Bad input! Retry..\n" |> IO.puts
   def tie_game, do: "Tie! Game Over" |> IO.puts
   def win_game(winner), do: "#{winner} wins! Game Over" |> IO.puts
 
