@@ -7,10 +7,6 @@ defmodule TicTacToe.Referee do
     { end?(winner, tie?), winner }
   end
 
-  def announce_or(_game_over? = {:no, _}, continuefn), do: continuefn.()
-  def announce_or(_game_over? = {:yes, :none}, _), do: "Tie! Game Over" |> IO.puts
-  def announce_or(_game_over? = {:yes, winner}, _), do: "#{winner} wins! Game Over" |> IO.puts
-
   defp winner(board) do
     win_combinations = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8],

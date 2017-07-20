@@ -14,10 +14,11 @@ defmodule Game do
       |> Player.play(current_player)
       |> Board.print
 
-    Referee.game_over?(new_board)
-      |> Referee.announce_or(fn() ->
-          play(new_board, other_players ++ [current_player])
-        end)
+    case Referee.game_over?(new_board) do
+      {:yes, :none} -> "Tie! Game Over" |> IO.puts
+      {:yes, winner} -> "#{winner} wins! Game Over" |> IO.puts
+      {:no, _} -> play(new_board, other_players ++ [current_player])
+    end
   end
 
 end
