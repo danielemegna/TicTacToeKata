@@ -45,4 +45,16 @@ defmodule TicTacToe.NewBoard_Test do
     assert Board.full?(board) == true
   end
 
+  test 'init board with occupied list works properly' do
+    board = Board.new [
+      "X", 1 ,"X",
+      "O", 4 , 5 ,
+       6 , 7 ,"O"]
+
+    assert Board.at(board, 1) == :empty
+    assert Board.at(board, 2) == "X"
+    assert Board.at(board, 5) == :empty
+    assert Board.at(board, 8) == "O"
+  end
+
 end

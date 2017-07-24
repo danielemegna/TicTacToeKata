@@ -10,6 +10,7 @@ defmodule TicTacToe.NewBoard do
     size = Math.sqrt(Enum.count(values))
     occupied = values
       |> Enum.with_index()
+      |> Enum.filter(fn {value,_}-> !is_integer(value) end)
       |> Enum.map(fn {v,i}->{i,v} end)
       |> Map.new
 
