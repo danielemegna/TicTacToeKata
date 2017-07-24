@@ -26,8 +26,7 @@ defmodule TicTacToe.NewBoard do
   end
 
   def at(board, index) do
-    if free?(board, index), do: :empty,
-    else: board.occupied[index]
+    board.occupied[index] || :empty
   end
 
   def full?(board) do
