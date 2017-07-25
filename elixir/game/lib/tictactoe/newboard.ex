@@ -7,7 +7,7 @@ defmodule TicTacToe.NewBoard do
   end
 
   def new(values) do
-    size = Math.sqrt(Enum.count(values))
+    size = round(Math.sqrt(Enum.count(values)))
     occupied = values
       |> Enum.with_index()
       |> Enum.filter(fn {value,_}-> !is_integer(value) end)
@@ -32,6 +32,12 @@ defmodule TicTacToe.NewBoard do
 
   def full?(board) do
     Enum.count(Map.keys(board.occupied)) == (board.size*board.size)
+  end
+ 
+  def available_moves(board) do
+    last_index = round(board.size*board.size)-1
+    Enum.to_list 0..last_index
+      |> Enum.filter(&(free?(board, &1)))
   end
 
 end
