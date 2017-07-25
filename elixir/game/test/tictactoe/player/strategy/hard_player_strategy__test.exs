@@ -52,7 +52,7 @@ defmodule TicTacToe.Player.Strategy.Hard_Test do
   end
 
   defp next_move(board) do
-    Player.Strategy.Hard.next_move(%Board{cells: board}, "O")
+    Player.Strategy.Hard.next_move(Board.new(board), "O")
   end
 
 end

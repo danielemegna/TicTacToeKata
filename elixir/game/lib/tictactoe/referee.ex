@@ -32,7 +32,7 @@ defmodule TicTacToe.Referee do
 
   defp keep_only_winner_signs(signs_in_combinations) do
     signs_in_combinations
-      |> Enum.filter(&(Enum.count(&1) == 1))
+      |> Enum.filter(&(Enum.count(&1) == 1 && List.first(&1) != :empty))
       |> List.flatten
   end
 

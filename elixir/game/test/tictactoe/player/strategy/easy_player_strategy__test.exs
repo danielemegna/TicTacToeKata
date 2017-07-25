@@ -61,7 +61,7 @@ defmodule TicTacToe.Player.Strategy.Easy_Test do
   end
 
   defp next_move(board) do
-    Player.Strategy.Easy.next_move(%Board{cells: board}, "O")
+    Player.Strategy.Easy.next_move(Board.new(board), "O")
   end
 
 end

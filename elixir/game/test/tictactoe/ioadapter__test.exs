@@ -33,14 +33,22 @@ defmodule TicTacToe.IOAdapter_Test do
       "\n"<>
       "\n--------------\n\n"
 
-    marked_board = %Board{cells: [
+    marked_board = Board.new [
       "X","X", 2 ,
        3 ,"O", 5 ,
-      "X", 7 ,"O"]}
+      "X", 7 ,"O"]
 
     assert capture_io(fn ->
       IOAdapter.print_board(marked_board)
     end) == expected
   end
+
+  test 'print function returns given board' do
+    capture_io(fn ->
+      board = Board.new [0,1,2,"X", 4,5,6,7,"O"]
+      assert IOAdapter.print_board(board) == board
+    end)
+  end
+
 
 end

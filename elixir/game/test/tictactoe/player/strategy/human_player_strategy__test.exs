@@ -54,11 +54,11 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   end
 
   test "on already marked cell player can retry" do
-    board = %Board{cells: [
+    board = Board.new [
       "O", 1 , 2,
       "X", 4 , 5,
        6 , 7 , 8
-    ]}
+    ]
     user_choices = [0,3,4]
     expected = 4
 

@@ -1,54 +1,43 @@
 defmodule TicTacToe.Board do
-  defstruct cells: [0,1,2,3,4,5,6,7,8]
-  alias TicTacToe.IOAdapter
+  alias :math, as: Math
+  defstruct size: 3, occupied: %{}
 
   def new do
     %__MODULE__{}
   end
 
-  def at(board, index) do
-    Enum.at(board.cells, index)
+  def new(values) do
+    size = round(Math.sqrt(Enum.count(values)))
+    occupied = values
+      |> Enum.with_index()
+      |> Enum.filter(fn {value,_}-> !is_integer(value) end)
+      |> Enum.map(fn {v,i}->{i,v} end)
+      |> Map.new
+
+    %__MODULE__{size: size, occupied: occupied}
   end
 
   def free?(board, index) do
-    at(board, index) == index
+    !Map.has_key?(board.occupied, index)
   end
 
   def mark(board, index, sign) do
-    new_cells = List.replace_at(board.cells, index, sign)
-    %__MODULE__{cells: new_cells}
+    new_occupied = Map.put(board.occupied, index, sign)
+    %__MODULE__{size: board.size, occupied: new_occupied}
+  end
+
+  def at(board, index) do
+    board.occupied[index] || :empty
   end
 
   def full?(board) do
-    !has_free_cells?(board)
+    Enum.count(Map.keys(board.occupied)) == (board.size*board.size)
   end
-
-  def print(board) do
-    IOAdapter.print_board(board)
-    board
-  end
-
+ 
   def available_moves(board) do
-    board
-      |> cells_with_index
-      |> only_available
-      |> extract_indexes
-  end
-
-  defp cells_with_index(board) do
-    Enum.with_index(board.cells)
-  end
-
-  defp only_available(cells_with_index) do
-    cells_with_index |> Enum.filter(fn {value, _} -> is_integer(value) end)
-  end
-
-  defp extract_indexes(cells_with_index) do
-    cells_with_index |> Enum.map(fn {_, index} -> index end)
-  end
-
-  defp has_free_cells?(board) do
-    Enum.any?(board.cells, fn(x) -> is_integer(x) end)
+    last_index = round(board.size*board.size)-1
+    Enum.to_list 0..last_index
+      |> Enum.filter(&(free?(board, &1)))
   end
 
 end

@@ -47,8 +47,8 @@ defmodule TicTacToe.Player.Strategy.Medium_Test do
     ]) == 5
   end
 
-  defp next_move(board) do
-    Player.Strategy.Medium.next_move(%Board{cells: board}, "O")
+  defp next_move(cells) do
+    Player.Strategy.Medium.next_move(Board.new(cells), "O")
   end
 
 end

@@ -5,14 +5,14 @@ defmodule Game do
     players = PlayerFactory.pair
 
     Board.new
-      |> Board.print
+      |> IOAdapter.print_board
       |> play(players)
   end
 
   defp play(board, [current_player | other_players]) do
     new_board = board
       |> Player.play(current_player)
-      |> Board.print
+      |> IOAdapter.print_board
 
     case Referee.game_over?(new_board) do
       {:yes, :none} -> IOAdapter.tie_game

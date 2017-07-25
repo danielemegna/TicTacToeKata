@@ -31,18 +31,20 @@ defmodule TicTacToe.IOAdapter do
 
   def print_board(board) do
     "\n--------------\n\n  " |> IO.write
-    "#{Board.at(board, 0)}   " |> IO.write
-    "#{Board.at(board, 1)}   " |> IO.write
-    "#{Board.at(board, 2)}" |> IO.write
+    "#{board_cell_string(board, 0)}   " |> IO.write
+    "#{board_cell_string(board, 1)}   " |> IO.write
+    "#{board_cell_string(board, 2)}" |> IO.write
     "\n ===+===+=== \n  " |> IO.write
-    "#{Board.at(board, 3)}   " |> IO.write
-    "#{Board.at(board, 4)}   " |> IO.write
-    "#{Board.at(board, 5)}" |> IO.write
+    "#{board_cell_string(board, 3)}   " |> IO.write
+    "#{board_cell_string(board, 4)}   " |> IO.write
+    "#{board_cell_string(board, 5)}" |> IO.write
     "\n ===+===+=== \n  " |> IO.write
-    "#{Board.at(board, 6)}   " |> IO.write
-    "#{Board.at(board, 7)}   " |> IO.write
-    "#{Board.at(board, 8)}\n" |> IO.write
+    "#{board_cell_string(board, 6)}   " |> IO.write
+    "#{board_cell_string(board, 7)}   " |> IO.write
+    "#{board_cell_string(board, 8)}\n" |> IO.write
     "\n--------------\n\n" |> IO.write
+
+    board
   end
 
   def cell_marked(sign, position), do:
@@ -54,5 +56,12 @@ defmodule TicTacToe.IOAdapter do
   def bad_input, do: "Bad input! Retry..\n" |> IO.puts
   def tie_game, do: "Tie! Game Over" |> IO.puts
   def win_game(winner), do: "#{winner} wins! Game Over" |> IO.puts
+
+  defp board_cell_string(board, index) do
+    case Board.at(board, index) do
+      :empty -> index
+      value -> value
+    end
+  end
 
 end

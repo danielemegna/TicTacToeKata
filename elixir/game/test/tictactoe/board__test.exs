@@ -1,6 +1,5 @@
 defmodule TicTacToe.Board_Test do
   use ExUnit.Case
-  import ExUnit.CaptureIO
   alias TicTacToe.Board
 
   test 'empty board has free indexes' do
@@ -19,38 +18,43 @@ defmodule TicTacToe.Board_Test do
 
     board = Board.mark(board, 2, "O")
     assert Board.free?(board, 2) == false
+
+    assert Board.free?(board, 1)
   end
 
   test 'get value at index' do
     board = Board.new
-    assert Board.at(board, 0) == 0
-    assert Board.at(board, 2) == 2
+    assert Board.at(board, 1) == :empty
+    assert Board.at(board, 4) == :empty
 
-    board = Board.mark(board, 0, "X")
-    assert Board.at(board, 0) == "X" 
-    assert Board.at(board, 2) == 2
+    board = Board.mark(board, 1, "X")
+    assert Board.at(board, 1) == "X"
+    assert Board.at(board, 4) == :empty
   end
 
   test 'empty board is not full' do
     assert Board.full?(Board.new) == false
   end
 
-  test 'not full marked board should.. not be full' do
-    board = Board.new
-      |> Board.mark(0, "X")
-      |> Board.mark(2, "O")
-      |> Board.mark(4, "X")
-
-    assert Board.full?(board) == false
-  end
-
   test 'full board should.. be full' do
-    board = %Board{cells: [
+    board = Board.new [
       "X","O","X",
       "O","X","O",
-      "O","X","O"]}
+      "O","X","O"]
 
     assert Board.full?(board) == true
+  end
+
+  test 'init board with occupied list works properly' do
+    board = Board.new [
+      "X", 1 ,"X",
+      "O", 4 , 5 ,
+       6 , 7 ,"O"]
+
+    assert Board.at(board, 1) == :empty
+    assert Board.at(board, 2) == "X"
+    assert Board.at(board, 5) == :empty
+    assert Board.at(board, 8) == "O"
   end
 
   test 'available moves of empty board' do
@@ -58,10 +62,10 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'available moves of full board' do
-    board = %Board{cells: [
+    board = Board.new [
       "X","O","X",
       "O","X","O",
-      "O","X","O"]}
+      "O","X","O"]
 
     assert Board.available_moves(board) == []
   end
@@ -73,13 +77,13 @@ defmodule TicTacToe.Board_Test do
       |> Board.mark(4, "X")
 
     assert Board.available_moves(board) == [1,3,5,6,7,8]
-  end
 
-  test 'print function returns given board' do
-    capture_io(fn ->
-      board = %Board{cells: [0,1,2,"X", 4,5,6,7,"O"]}
-      assert Board.print(board) == board
-    end)
+    board = Board.new [
+      "X","O","X",
+      "O", 4 ,"O",
+       6 ,"X", 8 ]
+
+    assert Board.available_moves(board) == [4,6,8]
   end
 
 end

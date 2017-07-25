@@ -75,8 +75,8 @@ defmodule TicTacToe.Player.Strategy.Minimax_Test do
     assert evaluate(board, 5) == -1
   end
 
-  defp evaluate(cells, move) do
-    Minimax.value(move, "O", %Board{cells: cells})
+  defp evaluate(board, move) do
+    Minimax.value(move, "O", Board.new(board))
   end
 
 end

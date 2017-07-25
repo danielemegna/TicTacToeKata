@@ -10,11 +10,11 @@ defmodule TicTacToe.Player_Test do
 
   test 'play function marks board with strategy next move' do
     board = Board.new
-    expected_board = %Board{cells: [
+    expected_board = Board.new [
        0 , 1 , 2,
        3 ,"S", 5,
        6 , 7 , 8
-    ]}
+    ]
 
     capture_io(fn ->
       assert Player.play(board, @stub_player) == expected_board
