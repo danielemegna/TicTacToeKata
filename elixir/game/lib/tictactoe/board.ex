@@ -15,6 +15,10 @@ defmodule TicTacToe.Board do
   end
 
   def at(board, index) do
+    unless(index <= last_index(board), do:
+      raise(ArgumentError, "Out of board bound error")
+    )
+
     board.occupied[index] || :empty
   end
 

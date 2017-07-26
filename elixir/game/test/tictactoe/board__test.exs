@@ -33,6 +33,13 @@ defmodule TicTacToe.Board_Test do
     assert Board.at(board, 4) == :empty
   end
 
+  test 'get value at outbound index should raise an error' do
+    board = Board.new
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.at(board, 9)
+    end)
+  end
+
   test 'empty board is not full' do
     assert Board.full?(Board.new) == false
   end
