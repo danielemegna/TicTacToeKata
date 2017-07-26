@@ -1,5 +1,6 @@
 defmodule TestCommons do
   use ExUnit.Case
+  alias TicTacToe.Board
 
   @user_inputs_map %{
     human_vs_human: 1,
@@ -16,6 +17,15 @@ defmodule TestCommons do
     choices
       |> Enum.map(&Map.get(@user_inputs_map, &1, &1))
       |> Enum.join("\n")
+  end
+
+  def board_from(list) do
+    list
+      |> Enum.with_index
+      |> Enum.filter(fn({sign,_}) -> !is_integer(sign) end)
+      |> Enum.reduce(Board.new, fn({sign,index}, board) ->
+          Board.mark(board, index, sign)
+        end)
   end
 
   def assert_contains(_, []), do: :ok

@@ -1,5 +1,6 @@
 defmodule TicTacToe.Board_Test do
   use ExUnit.Case
+  import TestCommons
   alias TicTacToe.Board
 
   test 'empty board has free indexes' do
@@ -37,7 +38,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'full board should.. be full' do
-    board = Board.new [
+    board = board_from [
       "X","O","X",
       "O","X","O",
       "O","X","O"]
@@ -46,7 +47,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'init board with occupied list works properly' do
-    board = Board.new [
+    board = board_from [
       "X", 1 ,"X",
       "O", 4 , 5 ,
        6 , 7 ,"O"]
@@ -62,7 +63,7 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'available moves of full board' do
-    board = Board.new [
+    board = board_from [
       "X","O","X",
       "O","X","O",
       "O","X","O"]
@@ -78,7 +79,7 @@ defmodule TicTacToe.Board_Test do
 
     assert Board.available_moves(board) == [1,3,5,6,7,8]
 
-    board = Board.new [
+    board = board_from [
       "X","O","X",
       "O", 4 ,"O",
        6 ,"X", 8 ]

@@ -1,6 +1,6 @@
 defmodule TicTacToe.Player.Strategy.Easy_Test do
   use ExUnit.Case
-  alias TicTacToe.Board
+  import TestCommons
   alias TicTacToe.Player
 
   test "chooses first no gameover move" do
@@ -61,7 +61,7 @@ defmodule TicTacToe.Player.Strategy.Easy_Test do
   end
 
   defp next_move(board) do
-    Player.Strategy.Easy.next_move(Board.new(board), "O")
+    Player.Strategy.Easy.next_move(board_from(board), "O")
   end
 
 end

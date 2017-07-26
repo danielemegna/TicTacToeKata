@@ -1,6 +1,7 @@
 defmodule TicTacToe.Referee_Test do
   use ExUnit.Case
   alias TicTacToe.Board
+  import TestCommons
 
   test "game is not over with an empty board" do
     assert TicTacToe.Referee.game_over?(Board.new) == {:no, :none}
@@ -42,7 +43,7 @@ defmodule TicTacToe.Referee_Test do
   end
 
   defp evaluate_game_over(cells) do
-    Board.new(cells) |> TicTacToe.Referee.game_over?
+    board_from(cells) |> TicTacToe.Referee.game_over?
   end
 
 end

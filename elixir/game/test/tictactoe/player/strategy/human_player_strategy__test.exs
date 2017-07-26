@@ -2,8 +2,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   import TestCommons
-  alias TicTacToe.Board
-  alias TicTacToe.Player
+  alias TicTacToe.{Player,Board}
 
   test "mark first cell" do
     board = Board.new
@@ -54,7 +53,7 @@ defmodule TicTacToe.Player.Strategy.Human_Test do
   end
 
   test "on already marked cell player can retry" do
-    board = Board.new [
+    board = board_from [
       "O", 1 , 2,
       "X", 4 , 5,
        6 , 7 , 8

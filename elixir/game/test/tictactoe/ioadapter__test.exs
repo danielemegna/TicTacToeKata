@@ -1,6 +1,7 @@
 defmodule TicTacToe.IOAdapter_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import TestCommons
   alias TicTacToe.IOAdapter
   alias TicTacToe.Board
 
@@ -33,7 +34,7 @@ defmodule TicTacToe.IOAdapter_Test do
       "\n"<>
       "\n--------------\n\n"
 
-    marked_board = Board.new [
+    marked_board = board_from [
       "X","X", 2 ,
        3 ,"O", 5 ,
       "X", 7 ,"O"]
@@ -45,7 +46,7 @@ defmodule TicTacToe.IOAdapter_Test do
 
   test 'print function returns given board' do
     capture_io(fn ->
-      board = Board.new [0,1,2,"X", 4,5,6,7,"O"]
+      board = board_from [0,1,2,"X", 4,5,6,7,"O"]
       assert IOAdapter.print_board(board) == board
     end)
   end

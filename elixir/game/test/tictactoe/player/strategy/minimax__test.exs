@@ -1,6 +1,6 @@
 defmodule TicTacToe.Player.Strategy.Minimax_Test do
   use ExUnit.Case
-  alias TicTacToe.Board
+  import TestCommons
   alias TicTacToe.Player.Strategy.Minimax
 
   test 'last tie move worth zero' do
@@ -76,7 +76,7 @@ defmodule TicTacToe.Player.Strategy.Minimax_Test do
   end
 
   defp evaluate(board, move) do
-    Minimax.value(move, "O", Board.new(board))
+    Minimax.value(move, "O", board_from(board))
   end
 
 end

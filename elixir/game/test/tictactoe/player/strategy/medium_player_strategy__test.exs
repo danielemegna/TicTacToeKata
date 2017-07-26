@@ -1,6 +1,6 @@
 defmodule TicTacToe.Player.Strategy.Medium_Test do
   use ExUnit.Case
-  alias TicTacToe.Board
+  import TestCommons
   alias TicTacToe.Player
 
   test "next_move returns cell 4 if available" do
@@ -48,7 +48,7 @@ defmodule TicTacToe.Player.Strategy.Medium_Test do
   end
 
   defp next_move(cells) do
-    Player.Strategy.Medium.next_move(Board.new(cells), "O")
+    Player.Strategy.Medium.next_move(board_from(cells), "O")
   end
 
 end

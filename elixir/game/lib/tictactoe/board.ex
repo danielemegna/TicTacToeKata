@@ -5,16 +5,6 @@ defmodule TicTacToe.Board do
     %__MODULE__{}
   end
 
-  def new(values) do
-    occupied = values
-      |> Enum.with_index()
-      |> Enum.filter(fn {value,_}-> !is_integer(value) end)
-      |> Enum.map(fn {v,i}->{i,v} end)
-      |> Map.new
-
-    %__MODULE__{occupied: occupied}
-  end
-
   def free?(board, index) do
     !Map.has_key?(board.occupied, index)
   end

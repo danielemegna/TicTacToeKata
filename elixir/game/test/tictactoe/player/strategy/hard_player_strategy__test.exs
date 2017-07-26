@@ -1,6 +1,6 @@
 defmodule TicTacToe.Player.Strategy.Hard_Test do
   use ExUnit.Case
-  alias TicTacToe.Board
+  import TestCommons
   alias TicTacToe.Player
 
   test "one move available" do
@@ -52,7 +52,7 @@ defmodule TicTacToe.Player.Strategy.Hard_Test do
   end
 
   defp next_move(board) do
-    Player.Strategy.Hard.next_move(Board.new(board), "O")
+    Player.Strategy.Hard.next_move(board_from(board), "O")
   end
 
 end

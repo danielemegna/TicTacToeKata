@@ -1,6 +1,7 @@
 defmodule TicTacToe.Player_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import TestCommons
   alias TicTacToe.{Player,Board}
 
   @stub_player %{
@@ -10,7 +11,7 @@ defmodule TicTacToe.Player_Test do
 
   test 'play function marks board with strategy next move' do
     board = Board.new
-    expected_board = Board.new [
+    expected_board = board_from [
        0 , 1 , 2,
        3 ,"S", 5,
        6 , 7 , 8
