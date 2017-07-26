@@ -112,4 +112,11 @@ defmodule TicTacToe.Board_Test do
     assert Board.row(board, 2) == [:empty,:empty,:empty]
   end
 
+  test 'get outbound row should raise an error' do
+    board = Board.new
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.row(board, 3)
+    end)
+  end
+
 end
