@@ -6,19 +6,18 @@ defmodule TicTacToe.Board do
   end
 
   def free?(board, index) do
-    at(board, index) == :empty
+    validate(board, index)
+    !Map.has_key?(board.occupied, index)
   end
 
   def mark(board, index, sign) do
+    validate(board, index)
     new_occupied = board.occupied |> Map.put(index, sign)
     %__MODULE__{size: board.size, occupied: new_occupied}
   end
 
   def at(board, index) do
-    unless(index >= 0 and index <= last_index(board)) do
-      raise(ArgumentError, "Out of board bound error")
-    end
-
+    validate(board, index)
     board.occupied[index] || :empty
   end
 
@@ -37,6 +36,12 @@ defmodule TicTacToe.Board do
           value = at(board, (board.size*row) + column)
           result ++ [value]
       end)
+  end
+
+  defp validate(board, index) do
+    unless(index >= 0 and index <= last_index(board)) do
+      raise(ArgumentError, "Out of board bound error")
+    end
   end
  
   defp last_index(board) do

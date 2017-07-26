@@ -32,6 +32,12 @@ defmodule TicTacToe.Board_Test do
     assert Board.free?(board, 1)
   end
 
+  test 'mark value at outbound index should raise an error' do
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.mark(Board.new, 14, "X")
+    end)
+  end
+
   test 'get value at index' do
     board = Board.new
     assert Board.at(board, 1) == :empty
