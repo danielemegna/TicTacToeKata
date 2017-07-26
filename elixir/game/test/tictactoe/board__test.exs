@@ -11,6 +11,15 @@ defmodule TicTacToe.Board_Test do
     assert Board.free?(board, 8)
   end
 
+  test 'check outbound index free should raise an error' do
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.free?(Board.new, 11)
+    end)
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.free?(Board.new, -2)
+    end)
+  end
+
   test 'mark board and check free result' do
     board = Board.new
 

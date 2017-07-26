@@ -6,7 +6,7 @@ defmodule TicTacToe.Board do
   end
 
   def free?(board, index) do
-    !Map.has_key?(board.occupied, index)
+    at(board, index) == :empty
   end
 
   def mark(board, index, sign) do
@@ -15,9 +15,9 @@ defmodule TicTacToe.Board do
   end
 
   def at(board, index) do
-    unless(index <= last_index(board), do:
+    unless(index >= 0 and index <= last_index(board)) do
       raise(ArgumentError, "Out of board bound error")
-    )
+    end
 
     board.occupied[index] || :empty
   end
