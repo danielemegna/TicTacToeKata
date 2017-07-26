@@ -26,6 +26,14 @@ defmodule TicTacToe.Board do
   def full?(board) do
     available_moves(board) |> Enum.count == 0
   end
+
+  def row(board, row) do
+    0..board.size-1
+      |> Enum.reduce([], fn(column, result) ->
+          value = at(board, (board.size*row) + column)
+          result ++ [value]
+      end)
+  end
  
   defp last_index(board) do
     round(board.size*board.size)-1
