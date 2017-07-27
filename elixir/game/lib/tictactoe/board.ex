@@ -33,16 +33,14 @@ defmodule TicTacToe.Board do
   def row(board, row) do
     0..board.size-1
       |> Enum.reduce([], fn(column, result) ->
-          value = at(board, (board.size*row) + column)
-          result ++ [value]
+          result ++ [at(board, (board.size*row) + column)]
       end)
   end
 
   def column(board, column) do
     0..board.size-1
       |> Enum.reduce([], fn(row, result) ->
-          value = at(board, (board.size*row) + column)
-          result ++ [value]
+          result ++ [at(board, (board.size*row) + column)]
       end)
   end
 
