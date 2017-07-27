@@ -91,17 +91,10 @@ defmodule TicTacToe.Board_Test do
     board = board_from [
       "X","O","X",
       "O", 4 ,"O",
-       6 ,"X", 8 ]
+       6 , 7 , 8 ]
 
     assert Board.row(board, 0) == ["X","O","X"]
     assert Board.row(board, 1) == ["O",:empty,"O"]
-    assert Board.row(board, 2) == [:empty,"X",:empty]
-
-    board = board_from [
-      "X", 1 , 2 ,
-      "X", 4 ,"X",
-       6 , 7 , 8 ]
-
     assert Board.row(board, 2) == [:empty,:empty,:empty]
   end
 
