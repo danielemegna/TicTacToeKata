@@ -11,15 +11,6 @@ defmodule TicTacToe.Board_Test do
     assert Board.free?(board, 8)
   end
 
-  test 'check outbound index free should raise an error' do
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.free?(Board.new, 11)
-    end)
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.free?(Board.new, -2)
-    end)
-  end
-
   test 'mark board and check free result' do
     board = Board.new
 
@@ -32,12 +23,6 @@ defmodule TicTacToe.Board_Test do
     assert Board.free?(board, 1)
   end
 
-  test 'mark value at outbound index should raise an error' do
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.mark(Board.new, 14, "X")
-    end)
-  end
-
   test 'get value at index' do
     board = Board.new
     assert Board.at(board, 1) == :empty
@@ -46,13 +31,6 @@ defmodule TicTacToe.Board_Test do
     board = Board.mark(board, 1, "X")
     assert Board.at(board, 1) == "X"
     assert Board.at(board, 4) == :empty
-  end
-
-  test 'get value at outbound index should raise an error' do
-    board = Board.new
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.at(board, 9)
-    end)
   end
 
   test 'empty board is not full' do
@@ -125,6 +103,28 @@ defmodule TicTacToe.Board_Test do
        6 , 7 , 8 ]
 
     assert Board.row(board, 2) == [:empty,:empty,:empty]
+  end
+
+  test 'check outbound index free should raise an error' do
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.free?(Board.new, 11)
+    end)
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.free?(Board.new, -2)
+    end)
+  end
+
+  test 'mark value at outbound index should raise an error' do
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.mark(Board.new, 14, "X")
+    end)
+  end
+
+  test 'get value at outbound index should raise an error' do
+    board = Board.new
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.at(board, 9)
+    end)
   end
 
   test 'get outbound row should raise an error' do
