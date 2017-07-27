@@ -1,8 +1,8 @@
 defmodule TicTacToe.Board do
   defstruct size: 3, occupied: %{}
 
-  def new do
-    %__MODULE__{}
+  def new(size \\ 3) do
+    %__MODULE__{size: size}
   end
 
   def free?(board, index) do
