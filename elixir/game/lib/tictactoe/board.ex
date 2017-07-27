@@ -38,6 +38,14 @@ defmodule TicTacToe.Board do
       end)
   end
 
+  def column(board, column) do
+    0..board.size-1
+      |> Enum.reduce([], fn(row, result) ->
+          value = at(board, (board.size*row) + column)
+          result ++ [value]
+      end)
+  end
+
   defp validate(board, index) do
     unless(index >= 0 and index <= last_index(board)) do
       raise(ArgumentError, "Out of board bound error")

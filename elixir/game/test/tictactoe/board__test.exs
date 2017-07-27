@@ -87,7 +87,7 @@ defmodule TicTacToe.Board_Test do
     assert Board.available_moves(board) == [4,6,8]
   end
 
-  test 'get row of a board' do
+  test 'get row' do
     board = board_from [
       "X","O","X",
       "O", 4 ,"O",
@@ -109,6 +109,31 @@ defmodule TicTacToe.Board_Test do
     assert Board.row(board, 0) == ["X",:empty,:empty,"O"]
     assert Board.row(board, 1) == [:empty,:empty,:empty,:empty]
     assert Board.row(board, 3) == [:empty,"X",:empty,"X"]
+  end
+
+  test 'get column' do
+    board = board_from [
+      "X", 1 , 2 ,
+      "O","X", 5 ,
+       6 ,"O", 8 ]
+
+    assert Board.column(board, 0) == ["X","O",:empty]
+    assert Board.column(board, 1) == [:empty,"X","O"]
+    assert Board.column(board, 2) == [:empty,:empty,:empty]
+  end
+
+  test 'get column of a 5x5 board' do
+    board = board_from [
+      "X" , 1  , 2  , "O", "O",
+       5  , 6  , 7  , 8  , "X",
+       10 , 11 , 12 , 13 , "X",
+       15 , "X", 17 , "X", "O",
+      "O" , 21 , 22 , 23 , "O",
+    ]
+
+    assert Board.column(board, 0) == ["X",:empty,:empty,:empty,"O"]
+    assert Board.column(board, 2) == [:empty,:empty,:empty,:empty,:empty]
+    assert Board.column(board, 4) == ["O","X","X","O","O"]
   end
 
   test 'check outbound index free should raise an error' do
