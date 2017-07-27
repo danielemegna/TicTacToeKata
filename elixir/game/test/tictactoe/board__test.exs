@@ -99,11 +99,12 @@ defmodule TicTacToe.Board_Test do
   end
   
   test 'get row of a 4x4 board' do
-    board = Board.new(4)
-      |> Board.mark(0, "X")
-      |> Board.mark(3, "O")
-      |> Board.mark(13, "X")
-      |> Board.mark(15, "X")
+    board = board_from [
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]
 
     assert Board.row(board, 0) == ["X",:empty,:empty,"O"]
     assert Board.row(board, 1) == [:empty,:empty,:empty,:empty]

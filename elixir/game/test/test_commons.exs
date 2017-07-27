@@ -20,10 +20,11 @@ defmodule TestCommons do
   end
 
   def board_from(list) do
+    size = round(:math.sqrt(Enum.count(list)))
     list
       |> Enum.with_index
       |> Enum.filter(fn({sign,_}) -> !is_integer(sign) end)
-      |> Enum.reduce(Board.new, fn({sign,index}, board) ->
+      |> Enum.reduce(Board.new(size), fn({sign,index}, board) ->
           Board.mark(board, index, sign)
         end)
   end
