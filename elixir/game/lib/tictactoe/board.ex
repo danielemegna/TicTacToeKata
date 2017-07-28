@@ -21,6 +21,10 @@ defmodule TicTacToe.Board do
     board.occupied[index] || :empty
   end
 
+  def at(board, row, column) do
+    at(board, (board.size*row) + column)
+  end
+
   def available_moves(board) do
     Enum.to_list 0..last_index(board)
       |> Enum.filter(&(free?(board, &1)))
@@ -31,17 +35,15 @@ defmodule TicTacToe.Board do
   end
 
   def row(board, row) do
-    0..board.size-1
-      |> Enum.reduce([], fn(column, result) ->
-          result ++ [at(board, (board.size*row) + column)]
-      end)
+    0..board.size-1 |> Enum.reduce([], fn(column, result) ->
+      result ++ [at(board, row, column)]
+    end)
   end
 
   def column(board, column) do
-    0..board.size-1
-      |> Enum.reduce([], fn(row, result) ->
-          result ++ [at(board, (board.size*row) + column)]
-      end)
+    0..board.size-1 |> Enum.reduce([], fn(row, result) ->
+      result ++ [at(board, row, column)]
+    end)
   end
 
   defp validate(board, index) do

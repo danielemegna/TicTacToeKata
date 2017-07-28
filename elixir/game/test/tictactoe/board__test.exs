@@ -33,6 +33,18 @@ defmodule TicTacToe.Board_Test do
     assert Board.at(board, 4) == :empty
   end
 
+  test 'get value at row-column coordinates' do
+    board = board_from [
+      "X", 1 ,"X",
+      "O", 4 , 5 ,
+       6 , 7 ,"O"]
+
+    assert Board.at(board, 0, 0) == "X"
+    assert Board.at(board, 0, 1) == :empty
+    assert Board.at(board, 1, 1) == :empty
+    assert Board.at(board, 2, 2) == "O"
+  end
+
   test 'empty board is not full' do
     assert Board.full?(Board.new) == false
   end
