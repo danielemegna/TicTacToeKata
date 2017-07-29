@@ -204,16 +204,14 @@ defmodule TicTacToe.Board_Test do
   end
 
   test 'get value at outbound index should raise an error' do
-    board = Board.new
     assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.at(board, 9)
+      Board.at(Board.new, 9)
     end)
   end
 
   test 'get outbound row should raise an error' do
-    board = Board.new
     assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.row(board, 3)
+      Board.row(Board.new, 3)
     end)
   end
 
