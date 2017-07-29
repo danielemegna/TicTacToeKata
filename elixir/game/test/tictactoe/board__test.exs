@@ -148,6 +148,46 @@ defmodule TicTacToe.Board_Test do
     assert Board.column(board, 4) == ["O","X","X","O","O"]
   end
 
+  test 'get down diagonal' do
+    board = board_from [
+      "X", 1 , 2 ,
+       3 ,"O", 5 ,
+      "O","X", 8 ]
+    assert Board.diagonal(board, 0, :down) == ["X","O",:empty]
+    assert Board.diagonal(board, 1, :down) == [:empty,"X"]
+    assert Board.diagonal(board, 2, :down) == ["O"]
+    
+    board = board_from [
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]
+    assert Board.diagonal(board, 0, :down) == ["X",:empty,:empty,"X"]
+    assert Board.diagonal(board, 2, :down) == [:empty,"X"]
+    assert Board.diagonal(board, 3, :down) == [:empty]
+  end
+
+  test 'get up diagonal' do
+    board = board_from [
+      "X", 1 , 2 ,
+       3 ,"O", 5 ,
+      "O","X", 8 ]
+    assert Board.diagonal(board, 0, :up) == ["X"]
+    assert Board.diagonal(board, 1, :up) == [:empty,:empty]
+    assert Board.diagonal(board, 2, :up) == ["O","O",:empty]
+
+    board = board_from [
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]
+    assert Board.diagonal(board, 0, :up) == ["X"]
+    assert Board.diagonal(board, 2, :up) == [:empty,:empty,:empty]
+    assert Board.diagonal(board, 3, :up) == [:empty,:empty,:empty,"O"]
+  end
+
   test 'check outbound index free should raise an error' do
     assert_raise(ArgumentError, "Out of board bound error", fn ->
       Board.free?(Board.new, 11)
@@ -174,6 +214,12 @@ defmodule TicTacToe.Board_Test do
     board = Board.new
     assert_raise(ArgumentError, "Out of board bound error", fn ->
       Board.row(board, 3)
+    end)
+  end
+
+  test 'get outbound diagonal should raise an error' do
+    assert_raise(ArgumentError, "Out of board bound error", fn ->
+      Board.diagonal(Board.new, -1, :down)
     end)
   end
 

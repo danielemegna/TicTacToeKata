@@ -46,6 +46,18 @@ defmodule TicTacToe.Board do
     end)
   end
 
+  def diagonal(board, diagonal, direction) when direction == :down do
+    diagonal..board.size-1 |> Enum.reduce([], fn(index, result) ->
+      result ++ [at(board, index, index-diagonal)]
+    end)
+  end
+
+  def diagonal(board, diagonal, direction) when direction == :up do
+    diagonal..0 |> Enum.reduce([], fn(index, result) ->
+      result ++ [at(board, index, diagonal-index)]
+    end)
+  end
+
   defp validate(board, index) do
     unless(index >= 0 and index <= last_index(board)) do
       raise(ArgumentError, "Out of board bound error")
