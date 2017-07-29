@@ -14,7 +14,7 @@ defmodule TicTacToe.Player.Strategy.Hard do
   defp minimax(board, my_sign) do
     board
       |> Board.available_moves
-      |> Enum.map(&({ &1, Minimax.value(&1, my_sign, board) }))
+      |> parallelmap(&({ &1, Minimax.value(&1, my_sign, board) }))
       |> Enum.max_by(fn({_,value}) -> value end)
       |> elem(0)
   end
@@ -25,6 +25,12 @@ defmodule TicTacToe.Player.Strategy.Hard do
 
   defp second_move?(board) do
     board |> Board.available_moves |> Enum.count == 8
+  end
+
+  defp parallelmap(collection, func, timeout \\ 20000) do
+    collection
+      |> Enum.map(&(Task.async(fn -> func.(&1) end)))
+      |> Enum.map(&(Task.await(&1, timeout)))
   end
 
 end
