@@ -1,9 +1,8 @@
 defmodule TicTacToe.Board do
   defstruct size: 3, occupied: %{}
 
-  def new(size \\ 3) do
-    %__MODULE__{size: size}
-  end
+  def new(), do: %__MODULE__{}
+  def new(size), do: %__MODULE__{size: size}
 
   def free?(board, index) do
     validate(board, index)
@@ -35,19 +34,19 @@ defmodule TicTacToe.Board do
   end
 
   def row(board, row) do
-    0..board.size-1 |> Enum.reduce([], fn(column, result) ->
+    0..bound(board) |> Enum.reduce([], fn(column, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
   def column(board, column) do
-    0..board.size-1 |> Enum.reduce([], fn(row, result) ->
+    0..bound(board) |> Enum.reduce([], fn(row, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
   def diagonal(board, diagonal, direction) when direction == :down do
-    diagonal..board.size-1 |> Enum.reduce([], fn(index, result) ->
+    diagonal..bound(board) |> Enum.reduce([], fn(index, result) ->
       result ++ [at(board, index, index-diagonal)]
     end)
   end
@@ -64,8 +63,7 @@ defmodule TicTacToe.Board do
     end
   end
  
-  defp last_index(board) do
-    round(board.size*board.size)-1
-  end
+  defp last_index(board), do: round(board.size*board.size)-1
+  defp bound(board), do: board.size-1
 
 end
