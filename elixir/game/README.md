@@ -78,7 +78,7 @@ Third iteration (code review)
 - [ ] Remove duplication of knowledge about the board dimension
   - [x] Re-design Board struct: infinite map and size as build param
   - [x] Change Referee win logic
-  - [ ] Change Human strategy move validation logic (use new Argument Error)
+  - [x] Change Human strategy move validation logic (use new Argument Error)
   - [ ] Change IO.print_board logic
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
 - [x] Remove from refree "announce_or" logic: keep game flow logic in Game module
