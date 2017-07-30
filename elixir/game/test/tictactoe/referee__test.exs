@@ -49,6 +49,29 @@ defmodule TicTacToe.Referee_Test do
        6,"X",8]) == {:no, :none}
   end
 
+  test "referee support boards with different sizes" do
+    assert evaluate_game_over([
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]) == {:no, :none}
+
+    assert evaluate_game_over([
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+      "O" ,"O", 10 , 11 ,
+       12 ,"X", "X", "X"
+    ]) == {:yes,"X"}
+
+    assert evaluate_game_over([
+      "X" , 1 ,"X" , 3 ,
+       4  , 5 ,"O" , 7 ,
+       8  ,"O", 10 ,11 ,
+      "O" ,"X", 14 ,"X"
+    ]) == {:yes,"O"}
+  end
+
   defp evaluate_game_over(cells) do
     board_from(cells) |> TicTacToe.Referee.game_over?
   end

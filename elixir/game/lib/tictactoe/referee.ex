@@ -8,36 +8,30 @@ defmodule TicTacToe.Referee do
   end
 
   defp winner(board) do
-    win_combinations = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
-    ]
-
-    win_combinations
-      |> signs_in_combinations(board)
-      |> keep_only_winner_signs
+    0..board.size-1
+      |> Enum.map(fn(i) -> [
+        Board.row(board,i) |> consecutive_occurrences,
+        Board.column(board,i) |> consecutive_occurrences,
+        Board.diagonal(board,i,:up) |> consecutive_occurrences,
+        Board.diagonal(board,i,:down) |> consecutive_occurrences
+      ] end)
+      |> List.flatten
+      |> Enum.filter(&(elem(&1,0) != :empty and elem(&1,1) >= 3))
       |> winner_sign
   end
 
-  defp signs_in_combinations(combinations, board) do
-    Enum.map(combinations, &(signs_in_combination(&1, board)))
-  end
-
-  defp signs_in_combination(combination, board) do
-    combination
-      |> Enum.map(&(Board.at(board, &1)))
-      |> Enum.uniq
-  end
-
-  defp keep_only_winner_signs(signs_in_combinations) do
-    signs_in_combinations
-      |> Enum.filter(&(Enum.count(&1) == 1 && List.first(&1) != :empty))
-      |> List.flatten
+  defp consecutive_occurrences(list) do
+    Enum.reduce(list, [], fn(value, result) ->
+      case result do
+        [{^value,n} | tail] -> [{value,n+1} | tail]
+        result -> [{value, 1} | result]
+      end
+    end)
+    |> Enum.reverse
   end
 
   defp winner_sign([]), do: :none
-  defp winner_sign([winner|_]), do: winner
+  defp winner_sign([{winner,_}|_]), do: winner
 
   defp end?(_, true), do: :yes
   defp end?(:none, _), do: :no
