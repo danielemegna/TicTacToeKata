@@ -21,14 +21,21 @@ defmodule TicTacToe.Referee_Test do
        6,  7 ,"O"]) == {:yes, "X"}
   end
 
-  test "O is the winner" do
+  test "O is the winner for complete column" do
+    assert evaluate_game_over([
+      "O","X","O",
+      "X","X","O",
+       6,  7 ,"O"]) == {:yes, "O"}
+  end
+
+  test "O is the winner for complete diagonal" do
     assert evaluate_game_over([
       "X","X","O",
       "X","O","X",
       "O", 7,  8]) == {:yes, "O"}
   end
 
-  test "X is the winner and board is full" do
+  test "winner with full board" do
     assert evaluate_game_over([
       "X","O","X",
       "O","X","O",
