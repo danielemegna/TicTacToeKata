@@ -8,16 +8,18 @@ defmodule TicTacToe.Referee do
   end
 
   defp winner(board) do
-    0..board.size-1
-      |> Enum.map(fn(i) -> [
-        Board.row(board,i) |> consecutive_occurrences,
-        Board.column(board,i) |> consecutive_occurrences,
-        Board.diagonal(board,i,:up) |> consecutive_occurrences,
-        Board.diagonal(board,i,:down) |> consecutive_occurrences
-      ] end)
-      |> List.flatten
-      |> Enum.filter(&(elem(&1,0) != :empty and elem(&1,1) >= 3))
+    consecutive_occurrences_in(board)
+      |> keep_only_winner_signs
       |> winner_sign
+  end
+
+  defp consecutive_occurrences_in(board) do
+    Enum.map(0..board.size-1, fn(i) -> [
+      Board.row(board,i)            |> consecutive_occurrences,
+      Board.column(board,i)         |> consecutive_occurrences,
+      Board.diagonal(board,i,:up)   |> consecutive_occurrences,
+      Board.diagonal(board,i,:down) |> consecutive_occurrences,
+    ] end) |> List.flatten
   end
 
   defp consecutive_occurrences(list) do
@@ -28,6 +30,11 @@ defmodule TicTacToe.Referee do
       end
     end)
     |> Enum.reverse
+  end
+
+  defp keep_only_winner_signs(consecutive_occurrences) do
+    consecutive_occurrences
+      |> Enum.filter(&(elem(&1,0) != :empty and elem(&1,1) >= 3))
   end
 
   defp winner_sign([]), do: :none
