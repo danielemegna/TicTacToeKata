@@ -76,8 +76,8 @@ Third iteration (code review)
 - [x] Specify Elixir supported version
 - [x] Remove IO dependecy from game logic modules
 - [ ] Remove duplication of knowledge about the board dimension
-  - [ ] Re-design Board struct: infinite map and size as build param
-  - [ ] Change Referee win logic
+  - [x] Re-design Board struct: infinite map and size as build param
+  - [x] Change Referee win logic
   - [ ] Change Human strategy move validation logic (use new Argument Error)
   - [ ] Change IO.print_board logic
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
