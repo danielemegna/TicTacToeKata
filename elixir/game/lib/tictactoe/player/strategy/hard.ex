@@ -7,11 +7,11 @@ defmodule TicTacToe.Player.Strategy.Hard do
       first_move?(board) -> 0
       second_move?(board) and Board.free?(board, 4) -> 4
       second_move?(board) and !Board.free?(board, 4) -> 0
-      true -> minimax(board, my_sign)
+      true -> choose(board, my_sign)
     end
   end
 
-  defp minimax(board, my_sign) do
+  defp choose(board, my_sign) do
     board
       |> Board.available_moves
       |> parallelmap(&({ &1, Minimax.value(&1, my_sign, board) }))
