@@ -30,19 +30,27 @@ defmodule TicTacToe.IOAdapter do
   end
 
   def print_board(board) do
-    "\n\n--------------\n\n" |> IO.write
-    "  #{board_cell_string(board, 0)} " |> IO.write
-    "  #{board_cell_string(board, 1)} " |> IO.write
-    "  #{board_cell_string(board, 2)} " |> IO.write
-    "\n ===+===+=== \n" |> IO.write
-    "  #{board_cell_string(board, 3)} " |> IO.write
-    "  #{board_cell_string(board, 4)} " |> IO.write
-    "  #{board_cell_string(board, 5)} " |> IO.write
-    "\n ===+===+=== \n" |> IO.write
-    "  #{board_cell_string(board, 6)} " |> IO.write
-    "  #{board_cell_string(board, 7)} " |> IO.write
-    "  #{board_cell_string(board, 8)} " |> IO.write
-    "\n\n--------------\n\n" |> IO.write
+    bound = board.size-1
+
+    border = 0..bound
+      |> Enum.map(fn(_) -> "---" end)
+      |> Enum.join("-")
+    border = "\n\n-" <> border <> "--\n\n"
+
+    row_separator = 0..bound
+      |> Enum.map(fn(_) -> "===" end)
+      |> Enum.join("+")
+    row_separator = "\n " <> row_separator <> " \n"
+
+    rows = 0..bound |> Enum.map(fn(row) ->
+      0..bound |> Enum.reduce("", fn(column, acc) ->
+          acc <> "  #{board_cell_string(board, column + (row*board.size))} "
+        end)
+      end)
+
+    border |> IO.write
+    rows |> Enum.join(row_separator) |> IO.write
+    border |> IO.write
 
     board
   end
