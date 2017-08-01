@@ -4,9 +4,9 @@ defmodule TicTacToe.Player.Strategy.Hard do
 
   def next_move(board, my_sign) do
     cond do
-      first_move?(board) -> 0
-      second_move?(board) and Board.free?(board, 4) -> 4
-      second_move?(board) and !Board.free?(board, 4) -> 0
+      first_3x3_move(board) -> 0
+      second_3x3_move(board) and Board.free?(board, 4) -> 4
+      second_3x3_move(board) and !Board.free?(board, 4) -> 0
       true -> choose(board, my_sign)
     end
   end
@@ -19,12 +19,14 @@ defmodule TicTacToe.Player.Strategy.Hard do
       |> elem(0)
   end
 
-  defp first_move?(board) do
-    board |> Board.available_moves |> Enum.count == 9
+  defp first_3x3_move(board) do
+    board.size == 3 and
+      Board.available_moves(board) |> Enum.count == 9
   end
 
-  defp second_move?(board) do
-    board |> Board.available_moves |> Enum.count == 8
+  defp second_3x3_move(board) do
+    board.size == 3 and
+      Board.available_moves(board) |> Enum.count == 8
   end
 
   defp parallelmap(collection, func, timeout \\ 20000) do
