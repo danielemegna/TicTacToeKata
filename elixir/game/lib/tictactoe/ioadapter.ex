@@ -71,17 +71,17 @@ defmodule TicTacToe.IOAdapter do
   defp row_string(board, row) do
     row = 0..board.size-1
       |> Enum.map(&(cell_string(board, row, &1)))
-      |> Enum.join("   ")
+      |> Enum.join("  ")
 
-    "  " <> row <> " "
+    "  " <> row
   end
 
   defp cell_string(board, row, column) do
     index = column + (row * board.size)
     case Board.at(board, index) do
-      :empty -> index
+      :empty -> to_string(index)
       value -> value
-    end
+    end |> String.pad_trailing(2)
   end
 
 end

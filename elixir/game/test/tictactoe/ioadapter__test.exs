@@ -44,6 +44,32 @@ defmodule TicTacToe.IOAdapter_Test do
     end) == expected
   end
 
+  test "print 4x4 board" do
+    board = board_from [
+      "X","X", 2 , 3 ,
+       4 ,"O", 6 , 7 ,
+      "X", 9 ,"O", 11,
+       12,"O","X", 15]
+
+    expected = "\n" <>
+      "\n------------------"<>
+      "\n"<>
+      "\n  X   X   2   3 "<>
+      "\n ===+===+===+=== "<>
+      "\n  4   O   6   7 "<>
+      "\n ===+===+===+=== "<>
+      "\n  X   9   O   11"<>
+      "\n ===+===+===+=== "<>
+      "\n  12  O   X   15"<>
+      "\n"<>
+      "\n------------------\n\n"
+
+    assert capture_io(fn ->
+      IOAdapter.print_board(board)
+    end) == expected
+    
+  end
+
   test 'print function returns given board' do
     capture_io(fn ->
       board = board_from [0,1,2,"X", 4,5,6,7,"O"]
