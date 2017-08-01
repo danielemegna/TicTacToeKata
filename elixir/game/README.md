@@ -80,6 +80,7 @@ Third iteration (code review)
   - [x] Change Referee win logic
   - [x] Change Human strategy move validation logic (use new Argument Error)
   - [ ] Change IO.print_board logic
+  - [ ] Change IO.next_move print logic
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
 - [x] Remove from refree "announce_or" logic: keep game flow logic in Game module
 - [x] Board.at should not return index when cell is not marked
