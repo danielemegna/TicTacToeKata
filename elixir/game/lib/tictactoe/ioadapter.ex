@@ -29,32 +29,6 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
-  def print_board(board) do
-    bound = board.size-1
-
-    border = 0..bound
-      |> Enum.map(fn(_) -> "---" end)
-      |> Enum.join("-")
-    border = "\n\n-" <> border <> "--\n\n"
-
-    row_separator = 0..bound
-      |> Enum.map(fn(_) -> "===" end)
-      |> Enum.join("+")
-    row_separator = "\n " <> row_separator <> " \n"
-
-    rows = 0..bound |> Enum.map(fn(row) ->
-      0..bound |> Enum.reduce("", fn(column, acc) ->
-          acc <> "  #{board_cell_string(board, column + (row*board.size))} "
-        end)
-      end)
-
-    border |> IO.write
-    rows |> Enum.join(row_separator) |> IO.write
-    border |> IO.write
-
-    board
-  end
-
   def cell_marked(sign, position), do:
     "'#{sign}' marked #{position} position" |> IO.puts
 
@@ -65,7 +39,45 @@ defmodule TicTacToe.IOAdapter do
   def tie_game, do: "Tie! Game Over" |> IO.puts
   def win_game(winner), do: "#{winner} wins! Game Over" |> IO.puts
 
-  defp board_cell_string(board, index) do
+  def print_board(board) do
+    border_for(board.size) <>
+    rows_string(board) <>
+    border_for(board.size) |> IO.write
+
+    board
+  end
+
+  defp border_for(size) do
+   border = List.duplicate("---", size)
+    |> Enum.join("-")
+    
+    "\n\n-" <> border <> "--\n\n"
+  end
+
+  defp rows_string(board) do
+    row_separator = row_separator_for(board.size)
+    0..board.size-1
+      |> Enum.map(&(row_string(board, &1)))
+      |> Enum.join(row_separator)
+  end
+
+  defp row_separator_for(size) do
+    row_separator = List.duplicate("===", size)
+      |> Enum.join("+")
+
+    "\n " <> row_separator <> " \n"
+  end
+
+  defp row_string(board, row) do
+    row = 0..board.size-1
+      |> Enum.map(&(cell_string(board, row, &1)))
+      |> Enum.join("   ")
+
+    "  " <> row <> " "
+  end
+
+  defp cell_string(board, row, column) do
+    index = column + (row * board.size)
     case Board.at(board, index) do
       :empty -> index
       value -> value
