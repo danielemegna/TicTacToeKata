@@ -23,6 +23,11 @@ defmodule TicTacToe.IOAdapter_Test do
   end
 
   test "print marked board" do
+    marked_board = board_from [
+      "X","X", 2 ,
+       3 ,"O", 5 ,
+      "X", 7 ,"O"]
+
     expected = "\n" <>
       "\n--------------"<>
       "\n"<>
@@ -33,11 +38,6 @@ defmodule TicTacToe.IOAdapter_Test do
       "\n  X   7   O "<>
       "\n"<>
       "\n--------------\n\n"
-
-    marked_board = board_from [
-      "X","X", 2 ,
-       3 ,"O", 5 ,
-      "X", 7 ,"O"]
 
     assert capture_io(fn ->
       IOAdapter.print_board(marked_board)
