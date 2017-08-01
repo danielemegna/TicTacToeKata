@@ -33,16 +33,16 @@ defmodule TicTacToe.IOAdapter do
     "\n--------------\n\n  " |> IO.write
     "#{board_cell_string(board, 0)}   " |> IO.write
     "#{board_cell_string(board, 1)}   " |> IO.write
-    "#{board_cell_string(board, 2)}" |> IO.write
+    "#{board_cell_string(board, 2)}   " |> IO.write
     "\n ===+===+=== \n  " |> IO.write
     "#{board_cell_string(board, 3)}   " |> IO.write
     "#{board_cell_string(board, 4)}   " |> IO.write
-    "#{board_cell_string(board, 5)}" |> IO.write
+    "#{board_cell_string(board, 5)}   " |> IO.write
     "\n ===+===+=== \n  " |> IO.write
     "#{board_cell_string(board, 6)}   " |> IO.write
     "#{board_cell_string(board, 7)}   " |> IO.write
-    "#{board_cell_string(board, 8)}\n" |> IO.write
-    "\n--------------\n\n" |> IO.write
+    "#{board_cell_string(board, 8)}   " |> IO.write
+    "\n\n--------------\n\n" |> IO.write
 
     board
   end
