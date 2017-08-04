@@ -5,8 +5,8 @@ defmodule TicTacToe.Referee do
 
   def game_over?(board) do
     winner = winner(board)
-    tie? = tie?(board)
-    { end?(winner, tie?), winner }
+    full? = full?(board)
+    { end?(winner, full?), winner }
   end
 
   defp winner(board) do
@@ -46,6 +46,6 @@ defmodule TicTacToe.Referee do
   defp end?(:none, _), do: :no
   defp end?(_, _), do: :yes
 
-  defp tie?(board), do: Board.full?(board)
+  defp full?(board), do: Board.full?(board)
 
 end
