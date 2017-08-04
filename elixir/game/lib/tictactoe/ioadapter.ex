@@ -22,9 +22,9 @@ defmodule TicTacToe.IOAdapter do
       |> Integer.parse
   end
 
-  def next_move?(sign) do
+  def next_move?(sign, last_index) do
     "'#{sign}' player, choose your next move!\n"<>
-    "Enter [0-8]>"
+    "Enter [0-#{last_index}]>"
       |> IO.gets
       |> Integer.parse
   end

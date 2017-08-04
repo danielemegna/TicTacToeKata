@@ -79,20 +79,24 @@ defmodule TicTacToe.IOAdapter_Test do
 
   test 'next_move should parse choosen index properly' do
     capture_io("4", fn ->
-      assert IOAdapter.next_move?("X") == {4, ""}
+      assert IOAdapter.next_move?("X", 8) == {4, ""}
     end)
   end
 
   test 'next_move should prints sign turn' do
     assert_contains capture_io("5", fn ->
-      IOAdapter.next_move?("X")
+      IOAdapter.next_move?("X", 8)
     end), "'X' player, choose your next move"
   end
 
   test 'next_move should prints indexes range' do
     assert_contains capture_io("7", fn ->
-      IOAdapter.next_move?("X")
+      IOAdapter.next_move?("X",8)
     end), "Enter [0-8]"
+
+    assert_contains capture_io("7", fn ->
+      IOAdapter.next_move?("X", 15)
+    end), "Enter [0-15]"
   end
 
 end

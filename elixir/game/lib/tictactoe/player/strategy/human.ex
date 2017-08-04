@@ -3,7 +3,8 @@ defmodule TicTacToe.Player.Strategy.Human do
   alias TicTacToe.IOAdapter
 
   def next_move(board, sign) do
-    IOAdapter.next_move?(sign) |> validate(board,sign)
+    IOAdapter.next_move?(sign, Board.last_index(board))
+      |> validate(board, sign)
   end
 
   defp validate({move, _}, board, sign) do
