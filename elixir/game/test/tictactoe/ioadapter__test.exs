@@ -72,7 +72,7 @@ defmodule TicTacToe.IOAdapter_Test do
 
   test 'print function returns given board' do
     capture_io(fn ->
-      board = board_from [0,1,2,"X", 4,5,6,7,"O"]
+      board = board_from [0,1,2,"X",4,5,6,7,"O"]
       assert IOAdapter.print_board(board) == board
     end)
   end
@@ -84,19 +84,25 @@ defmodule TicTacToe.IOAdapter_Test do
   end
 
   test 'next_move should prints sign turn' do
-    assert_contains capture_io("5", fn ->
-      IOAdapter.next_move?("X", 8)
-    end), "'X' player, choose your next move"
+    current_sign = "X"
+    output = next_move?(current_sign, 8)
+    assert_contains output, "'X' player, choose your next move"
   end
 
   test 'next_move should prints indexes range' do
-    assert_contains capture_io("7", fn ->
-      IOAdapter.next_move?("X",8)
-    end), "Enter [0-8]"
+    board_last_index = 8
+    output = next_move?("X", board_last_index)
+    assert_contains output, "Enter [0-8]"
 
-    assert_contains capture_io("7", fn ->
-      IOAdapter.next_move?("X", 15)
-    end), "Enter [0-15]"
+    board_last_index = 15
+    output = next_move?("X", board_last_index)
+    assert_contains output, "Enter [0-15]"
+  end
+
+  defp next_move?(current_sign, board_last_index) do
+    capture_io("42", fn ->
+      IOAdapter.next_move?(current_sign, board_last_index)
+    end)
   end
 
 end
