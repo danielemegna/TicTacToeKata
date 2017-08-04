@@ -75,13 +75,13 @@ Final improvements
 Third iteration (code review)
 - [x] Specify Elixir supported version
 - [x] Remove IO dependecy from game logic modules
-- [ ] Remove duplication of knowledge about the board dimension
+- [x] Remove duplication of knowledge about the board dimension
   - [x] Re-design Board struct: infinite map and size as build param
   - [x] Change Referee win logic
   - [x] Change Human strategy move validation logic (use new Argument Error)
   - [x] Change IO.print_board logic
   - [x] Change Hard strategy "first moves optimizations"
-  - [ ] Change IO.next_move print logic
+  - [x] Change IO.next_move print logic
 - [ ] Split PlayerFactory: separate IO user questions from players build logic
 - [x] Remove from refree "announce_or" logic: keep game flow logic in Game module
 - [x] Board.at should not return index when cell is not marked
