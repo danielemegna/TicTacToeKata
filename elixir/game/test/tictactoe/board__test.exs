@@ -194,6 +194,12 @@ defmodule TicTacToe.Board_Test do
     assert Board.last_index(Board.new(2)) == 3
   end
 
+  test 'get board side_bound' do
+    assert Board.side_bound(Board.new) == 2
+    assert Board.side_bound(Board.new(4)) == 3
+    assert Board.side_bound(Board.new(2)) == 1
+  end
+
   test 'check outbound index free should raise an error' do
     assert_raise(ArgumentError, "Out of board bound error", fn ->
       Board.free?(Board.new, 11)

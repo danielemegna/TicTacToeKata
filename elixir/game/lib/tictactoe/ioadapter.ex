@@ -56,7 +56,7 @@ defmodule TicTacToe.IOAdapter do
 
   defp rows_string(board) do
     row_separator = row_separator_for(board.size)
-    0..board.size-1
+    0..Board.side_bound(board)
       |> Enum.map(&(row_string(board, &1)))
       |> Enum.join(row_separator)
   end
@@ -69,7 +69,7 @@ defmodule TicTacToe.IOAdapter do
   end
 
   defp row_string(board, row) do
-    row = 0..board.size-1
+    row = 0..Board.side_bound(board)
       |> Enum.map(&(cell_string(board, row, &1)))
       |> Enum.join("  ")
 

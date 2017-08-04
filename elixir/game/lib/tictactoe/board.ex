@@ -34,19 +34,19 @@ defmodule TicTacToe.Board do
   end
 
   def row(board, row) do
-    0..bound(board) |> Enum.reduce([], fn(column, result) ->
+    0..side_bound(board) |> Enum.reduce([], fn(column, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
   def column(board, column) do
-    0..bound(board) |> Enum.reduce([], fn(row, result) ->
+    0..side_bound(board) |> Enum.reduce([], fn(row, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
   def diagonal(board, diagonal, direction) when direction == :down do
-    diagonal..bound(board) |> Enum.reduce([], fn(index, result) ->
+    diagonal..side_bound(board) |> Enum.reduce([], fn(index, result) ->
       result ++ [at(board, index, index-diagonal)]
     end)
   end
@@ -58,7 +58,7 @@ defmodule TicTacToe.Board do
   end
 
   def last_index(board), do: round(board.size*board.size)-1
-  defp bound(board), do: board.size-1
+  def side_bound(board), do: board.size-1
 
   defp validate(board, index) do
     unless(index >= 0 and index <= last_index(board)) do

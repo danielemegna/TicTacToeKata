@@ -14,7 +14,7 @@ defmodule TicTacToe.Referee do
   end
 
   defp consecutive_occurrences_in(board) do
-    Enum.map(0..board.size-1, fn(i) -> [
+    Enum.map(0..Board.side_bound(board), fn(i) -> [
       Board.row(board,i)            |> consecutive_occurrences,
       Board.column(board,i)         |> consecutive_occurrences,
       Board.diagonal(board,i,:up)   |> consecutive_occurrences,
