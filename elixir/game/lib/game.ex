@@ -1,8 +1,8 @@
 defmodule Game do
-  alias TicTacToe.{Board,Referee,Player,PlayerFactory,IOAdapter}
+  alias TicTacToe.{Board,Referee,Player,PlayerChooser,PlayerFactory,IOAdapter}
 
   def start_game do
-    players = PlayerFactory.pair
+    players = PlayerChooser.start |> PlayerFactory.build
 
     Board.new
       |> IOAdapter.print_board

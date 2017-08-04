@@ -1,9 +1,7 @@
 defmodule TicTacToe.PlayerFactory do
-  alias TicTacToe.{Player,PlayerChooser}
+  alias TicTacToe.Player
 
-  def pair, do: PlayerChooser.start |> build
-
-  defp build(players) do
+  def build(players) do
     players |> Enum.map(fn({sign,strategy}) ->
       %Player{ sign: sign, strategy: strategy_for(strategy) }
     end)
