@@ -57,13 +57,14 @@ defmodule TicTacToe.Board do
     end)
   end
 
+  def last_index(board), do: round(board.size*board.size)-1
+  defp bound(board), do: board.size-1
+
   defp validate(board, index) do
     unless(index >= 0 and index <= last_index(board)) do
       raise(ArgumentError, "Out of board bound error")
     end
   end
  
-  defp last_index(board), do: round(board.size*board.size)-1
-  defp bound(board), do: board.size-1
 
 end

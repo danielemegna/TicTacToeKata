@@ -188,6 +188,12 @@ defmodule TicTacToe.Board_Test do
     assert Board.diagonal(board, 3, :up) == [:empty,:empty,:empty,"O"]
   end
 
+  test 'get board last_index' do
+    assert Board.last_index(Board.new) == 8
+    assert Board.last_index(Board.new(4)) == 15
+    assert Board.last_index(Board.new(2)) == 3
+  end
+
   test 'check outbound index free should raise an error' do
     assert_raise(ArgumentError, "Out of board bound error", fn ->
       Board.free?(Board.new, 11)
