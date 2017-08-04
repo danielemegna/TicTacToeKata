@@ -1,6 +1,8 @@
 defmodule TicTacToe.Referee do
   alias TicTacToe.Board
 
+  @consecutive_occurrences_for_win 3
+
   def game_over?(board) do
     winner = winner(board)
     tie? = tie?(board)
@@ -23,18 +25,18 @@ defmodule TicTacToe.Referee do
   end
 
   defp consecutive_occurrences(list) do
-    Enum.reduce(list, [], fn(value, result) ->
+    Enum.reduce(list, [], fn(current, result) ->
       case result do
-        [{^value,n} | tail] -> [{value,n+1} | tail]
-        result -> [{value, 1} | result]
+        [{^current,n} | tail] -> [{current,n+1} | tail]
+        _ -> [{current, 1} | result]
       end
-    end)
-    |> Enum.reverse
+    end) |> Enum.reverse
   end
 
   defp keep_only_winner_signs(consecutive_occurrences) do
-    consecutive_occurrences
-      |> Enum.filter(&(elem(&1,0) != :empty and elem(&1,1) >= 3))
+    consecutive_occurrences |> Enum.filter(fn({value, count}) ->
+      value != :empty and count >= @consecutive_occurrences_for_win
+    end)
   end
 
   defp winner_sign([]), do: :none
