@@ -88,6 +88,14 @@ Third iteration (code review)
 - [ ] Mock Minimax module in Player.Strategy.Hard_Test ?
 - [ ] Mock IOAdapter where CaptureIO is used in tests ?
 
+Third iteration (second code review)
+- [ ] PlayerChooser and PlayerFactory could be turned into one thing: why have player chooser choose players, then the builder construct them?
+- [ ] The game flow depends on the Player to announce which cell was marked. This makes the Player dependent on the IOAdapter. It would be better if this responsibility was kept at Game level. This way you would also keep as many side effect as possible in one place (Game)
+- [ ] In the Player module the program announces which cell was marked before it was marked: swap lines 12 and 13?
+- [ ] Simplify Board DATA structure: you keep track of a) the size of the board and b) which cells are taken. It could be easier to work with a list that contains as many elements as there are cells, using a special flag for empty ones. This way you would know size (sqrt of the list length), as well as which cells are taken by who based on their position in the list. This might also simplify board functions as you are creating lists for these anyway.
+- [ ] Board.diagonal - not sure why you would want part of a diagonal rather than the whole thing? In general, the Board could be more encapsulated: clients of the board need to know to ask for row/column and which column; for diagonals they also have to specify which diagonal exactly. Because users of the board treat a row, column and diagonal as the same thing, you could simply have the Board expose a function `lines` that returns all of these, keeping any details inside the Board module.
+- [ ] PlayerChooser depends on ioAdapter, would be better if this dependency was inverted as a UI dependent on a core module is preferable to a core module dependent on UI
+
 ### Notes
 
 Docker dev-ready environment with code mounted as volume
