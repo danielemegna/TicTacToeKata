@@ -57,6 +57,15 @@ defmodule TicTacToe.Board do
     end)
   end
 
+  def lines(board) do
+    0..side_bound(board) |> Enum.reduce([], fn(index, result) ->
+      result ++ [
+        row(board, index), column(board, index),
+        diagonal(board, index, :up), diagonal(board, index, :down)
+      ]
+    end)
+  end
+
   def last_index(board), do: round(board.size*board.size)-1
   def side_bound(board), do: board.size-1
 

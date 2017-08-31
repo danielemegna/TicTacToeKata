@@ -188,6 +188,76 @@ defmodule TicTacToe.Board_Test do
     assert Board.diagonal(board, 3, :up) == [:empty,:empty,:empty,"O"]
   end
 
+  test 'lines contains rows' do
+    board = board_from [
+      "X","O","X",
+      "O", 4 ,"O",
+       6 , 7 , 8 ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X", "O", "X"])
+    assert Enum.member?(lines, [:empty,:empty,:empty])
+
+    board = board_from [
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X",:empty,:empty,"O"])
+  end
+
+  test 'lines contains columns' do
+    board = board_from [
+      "X", 1 , 2 ,
+      "O","X", 5 ,
+       6 ,"O", 8 ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X","O",:empty])
+    assert Enum.member?(lines, [:empty,"X","O"])
+    assert Enum.member?(lines, [:empty,:empty,:empty])
+
+    board = board_from [
+      "X" , 1  , 2  , "O", "O",
+       5  , 6  , 7  , 8  , "X",
+       10 , 11 , 12 , 13 , "X",
+       15 , "X", 17 , "X", "O",
+      "O" , 21 , 22 , 23 , "O",
+    ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X",:empty,:empty,:empty,"O"])
+    assert Enum.member?(lines, [:empty,:empty,:empty,:empty,:empty])
+    assert Enum.member?(lines, ["O","X","X","O","O"])
+  end
+
+  test 'lines contains diagonals' do
+    board = board_from [
+      "X", 1 , 2 ,
+       3 ,"O", 5 ,
+      "O","X", 8 ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X"])
+    assert Enum.member?(lines, [:empty,:empty])
+    assert Enum.member?(lines, ["O","O",:empty])
+    assert Enum.member?(lines, ["X","O",:empty])
+    assert Enum.member?(lines, [:empty,"X"])
+    assert Enum.member?(lines, ["O"])
+
+    board = board_from [
+      "X" , 1 , 2  , "O",
+       4  , 5 , 6  ,  7 ,
+       8  , 9 , 10 , 11 ,
+       12 ,"X", 14 , "X"
+    ]
+    lines = Board.lines(board)
+    assert Enum.member?(lines, ["X"])
+    assert Enum.member?(lines, [:empty,:empty,:empty])
+    assert Enum.member?(lines, [:empty,:empty,:empty,"O"])
+    assert Enum.member?(lines, ["X",:empty,:empty,"X"])
+    assert Enum.member?(lines, [:empty,"X"])
+    assert Enum.member?(lines, [:empty])
+  end
+
   test 'get board last_index' do
     assert Board.last_index(Board.new) == 8
     assert Board.last_index(Board.new(4)) == 15
