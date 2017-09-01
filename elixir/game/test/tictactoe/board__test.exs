@@ -99,95 +99,6 @@ defmodule TicTacToe.Board_Test do
     assert Board.available_moves(board) == [4,6,8]
   end
 
-  test 'get row' do
-    board = board_from [
-      "X","O","X",
-      "O", 4 ,"O",
-       6 , 7 , 8 ]
-
-    assert Board.row(board, 0) == ["X","O","X"]
-    assert Board.row(board, 1) == ["O",:empty,"O"]
-    assert Board.row(board, 2) == [:empty,:empty,:empty]
-  end
-  
-  test 'get row of a 4x4 board' do
-    board = board_from [
-      "X" , 1 , 2  , "O",
-       4  , 5 , 6  ,  7 ,
-       8  , 9 , 10 , 11 ,
-       12 ,"X", 14 , "X"
-    ]
-
-    assert Board.row(board, 0) == ["X",:empty,:empty,"O"]
-    assert Board.row(board, 1) == [:empty,:empty,:empty,:empty]
-    assert Board.row(board, 3) == [:empty,"X",:empty,"X"]
-  end
-
-  test 'get column' do
-    board = board_from [
-      "X", 1 , 2 ,
-      "O","X", 5 ,
-       6 ,"O", 8 ]
-
-    assert Board.column(board, 0) == ["X","O",:empty]
-    assert Board.column(board, 1) == [:empty,"X","O"]
-    assert Board.column(board, 2) == [:empty,:empty,:empty]
-  end
-
-  test 'get column of a 5x5 board' do
-    board = board_from [
-      "X" , 1  , 2  , "O", "O",
-       5  , 6  , 7  , 8  , "X",
-       10 , 11 , 12 , 13 , "X",
-       15 , "X", 17 , "X", "O",
-      "O" , 21 , 22 , 23 , "O",
-    ]
-
-    assert Board.column(board, 0) == ["X",:empty,:empty,:empty,"O"]
-    assert Board.column(board, 2) == [:empty,:empty,:empty,:empty,:empty]
-    assert Board.column(board, 4) == ["O","X","X","O","O"]
-  end
-
-  test 'get down diagonal' do
-    board = board_from [
-      "X", 1 , 2 ,
-       3 ,"O", 5 ,
-      "O","X", 8 ]
-    assert Board.diagonal(board, 0, :down) == ["X","O",:empty]
-    assert Board.diagonal(board, 1, :down) == [:empty,"X"]
-    assert Board.diagonal(board, 2, :down) == ["O"]
-    
-    board = board_from [
-      "X" , 1 , 2  , "O",
-       4  , 5 , 6  ,  7 ,
-       8  , 9 , 10 , 11 ,
-       12 ,"X", 14 , "X"
-    ]
-    assert Board.diagonal(board, 0, :down) == ["X",:empty,:empty,"X"]
-    assert Board.diagonal(board, 2, :down) == [:empty,"X"]
-    assert Board.diagonal(board, 3, :down) == [:empty]
-  end
-
-  test 'get up diagonal' do
-    board = board_from [
-      "X", 1 , 2 ,
-       3 ,"O", 5 ,
-      "O","X", 8 ]
-    assert Board.diagonal(board, 0, :up) == ["X"]
-    assert Board.diagonal(board, 1, :up) == [:empty,:empty]
-    assert Board.diagonal(board, 2, :up) == ["O","O",:empty]
-
-    board = board_from [
-      "X" , 1 , 2  , "O",
-       4  , 5 , 6  ,  7 ,
-       8  , 9 , 10 , 11 ,
-       12 ,"X", 14 , "X"
-    ]
-    assert Board.diagonal(board, 0, :up) == ["X"]
-    assert Board.diagonal(board, 2, :up) == [:empty,:empty,:empty]
-    assert Board.diagonal(board, 3, :up) == [:empty,:empty,:empty,"O"]
-  end
-
   test 'lines contains rows' do
     board = board_from [
       "X","O","X",
@@ -288,18 +199,6 @@ defmodule TicTacToe.Board_Test do
   test 'get value at outbound index should raise an error' do
     assert_raise(ArgumentError, "Out of board bound error", fn ->
       Board.at(Board.new, 9)
-    end)
-  end
-
-  test 'get outbound row should raise an error' do
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.row(Board.new, 3)
-    end)
-  end
-
-  test 'get outbound diagonal should raise an error' do
-    assert_raise(ArgumentError, "Out of board bound error", fn ->
-      Board.diagonal(Board.new, -1, :down)
     end)
   end
 

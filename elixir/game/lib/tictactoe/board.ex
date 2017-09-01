@@ -33,36 +33,38 @@ defmodule TicTacToe.Board do
     available_moves(board) |> Enum.count == 0
   end
 
-  def row(board, row) do
+  def lines(board) do
+    0..side_bound(board) |> Enum.reduce([], fn(index, result) ->
+      result ++ [
+        row(board, index),
+        column(board, index),
+        diagonal(board, index, :up),
+        diagonal(board, index, :down)
+      ]
+    end)
+  end
+
+  defp row(board, row) do
     0..side_bound(board) |> Enum.reduce([], fn(column, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
-  def column(board, column) do
+  defp column(board, column) do
     0..side_bound(board) |> Enum.reduce([], fn(row, result) ->
       result ++ [at(board, row, column)]
     end)
   end
 
-  def diagonal(board, diagonal, direction) when direction == :down do
+  defp diagonal(board, diagonal, direction) when direction == :down do
     diagonal..side_bound(board) |> Enum.reduce([], fn(index, result) ->
       result ++ [at(board, index, index-diagonal)]
     end)
   end
 
-  def diagonal(board, diagonal, direction) when direction == :up do
+  defp diagonal(board, diagonal, direction) when direction == :up do
     diagonal..0 |> Enum.reduce([], fn(index, result) ->
       result ++ [at(board, index, diagonal-index)]
-    end)
-  end
-
-  def lines(board) do
-    0..side_bound(board) |> Enum.reduce([], fn(index, result) ->
-      result ++ [
-        row(board, index), column(board, index),
-        diagonal(board, index, :up), diagonal(board, index, :down)
-      ]
     end)
   end
 
