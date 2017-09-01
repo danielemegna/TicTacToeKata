@@ -16,16 +16,13 @@ defmodule TicTacToe.Referee do
   end
 
   defp consecutive_occurrences_in(board) do
-    Enum.map(0..Board.side_bound(board), fn(i) -> [
-      Board.row(board,i)            |> consecutive_occurrences,
-      Board.column(board,i)         |> consecutive_occurrences,
-      Board.diagonal(board,i,:up)   |> consecutive_occurrences,
-      Board.diagonal(board,i,:down) |> consecutive_occurrences,
-    ] end) |> List.flatten
+    Board.lines(board)
+      |> Enum.map(&(consecutive_occurrences(&1)))
+      |> List.flatten
   end
 
-  defp consecutive_occurrences(list) do
-    Enum.reduce(list, [], fn(current, result) ->
+  defp consecutive_occurrences(line) do
+    Enum.reduce(line, [], fn(current, result) ->
       case result do
         [{^current,n} | tail] -> [{current,n+1} | tail]
         _ -> [{current, 1} | result]
